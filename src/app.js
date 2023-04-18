@@ -1,5 +1,5 @@
-const cors = require('cors');
-const express = require('express');
+import cors from 'cors';
+import express from 'express';
 
 const app = express();
 
@@ -8,4 +8,4 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('views')); //
 
-module.exports = { app };
+export { app }
