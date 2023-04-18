@@ -1,0 +1,26 @@
+@import url("https://font.elice.io/EliceDigitalCoding.css");
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+html {
+	--main-color: #7353ea;
+  --sub-1-color: #e9e1ff;
+  --sub-2-color: #524fa1;
+  --title-font: 'Elice Digital Coding', 'monospace';
+  --main-font: 'Nanum Gothic', sans-serif;
+}
+
+/* RESET CSS : Start */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+/* RESET CSS : End */
+
