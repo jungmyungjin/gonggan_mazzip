@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공간맛집</title>
-  <link rel="stylesheet" href="../common/common.css">
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>공간맛집</title>
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="login.css" />
+    <script src="login.js" defer></script>
+  </head>
+  <body>
+    <form>
+      <div class="logo">
+        <a href="#">
+        <img src="https://github.com/Returndusk/CodingTest/blob/main/logo.png?raw=true" id="logo" alt="Logo" />
+        </a>
+      </div>
+        <input class="email" id="email" name="email" type="email" position="top" placeholder="이메일">
+      </div>
+      <input type="password" id="password" name="password" placeholder="비밀번호" required />
+      <div class="error_Area">
+        <div id="error_message"></div>
+      </div>
+      <button type="submit" id="login_btn">로그인</button>
+      <button type="button" id="signup_link_btn">회원가입</button>
+    </form>
+  </body>
 </html>
