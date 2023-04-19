@@ -9,8 +9,9 @@ class UserService {
 
   async addUser(userInfo) {
     const { email, name, password } = userInfo;
+    console.log(email);
 
-    const user = await this.userModel.findByEmail({ email });
+    const user = await this.userModel.findByEmail(email);
     if (user) {
       throw new Error(
         "이 이메일은 현재 사용중입니다. 다른 이메일을 입력해 주세요."
@@ -18,15 +19,14 @@ class UserService {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUserInfo = { name, email, password: hashedPassword };
+    const newUserInfo = { email, name, password: hashedPassword };
     const createdNewUser = await this.userModel.create(newUserInfo);
     return createdNewUser;
   }
 
   async getUserToken(loginUserInfo) {
     const { email, password } = loginUserInfo;
-
-    const user = await this.userModel.findByEmail({ email });
+    const user = await this.userModel.findByEmail(email);
     if (!user) {
       throw new Error("로그인 정보가 맞지 않습니다. 다시 한 번 확인해 주세요.");
     }
@@ -39,11 +39,6 @@ class UserService {
     const secretKey = process.env.JWT_SECRET_KEY;
     const token = jwt.sign({ email, role: user.role }, secretKey);
     return token;
-  }
-
-  async getUsersInfo() {
-    const users = await this.userModel.findAll();
-    return users;
   }
 }
 

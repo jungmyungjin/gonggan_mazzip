@@ -9,10 +9,7 @@
       "address1": "서울특별시 성동구 성수동2가 280",
       "address2": "2층 엘리스 Lab"
     },
-
-    "role": "basic-user",
-    "createdAt": "2022-11-03T14:02:04.292Z",
-    "updatedAt": "2022-11-03T14:02:04.292Z"
+    "role": "basic-user"
   },
   {
     "email": "elice@test.com",
@@ -24,9 +21,6 @@
       "address1": "부산광역시 해운대구 우동 1475",
       "address2": "센텀벤처타운"
     },
-
-    "role": "admin",
-    "createdAt": "2022-11-03T14:02:04.292Z",
-    "updatedAt": "2022-11-03T14:02:04.292Z"
+    "role": "admin"
   }
 ]

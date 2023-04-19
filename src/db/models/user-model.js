@@ -1,5 +1,6 @@
 import { model } from "mongoose";
 import { UserSchema } from "../schemas/user-schema";
+const sampleData = require("../sampleData/sampleUser.json");
 
 const User = model("users", UserSchema);
 
