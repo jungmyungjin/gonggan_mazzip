@@ -1,0 +1,32 @@
+[
+  {
+    "email": "seongsu@test.com",
+    "name": "김성수",
+    "password": "seongsu1",
+    "phoneNumber": "010-1234-5678",
+    "address": {
+      "postalCode": "04799",
+      "address1": "서울특별시 성동구 성수동2가 280",
+      "address2": "2층 엘리스 Lab"
+    },
+
+    "role": "basic-user",
+    "createdAt": "2022-11-03T14:02:04.292Z",
+    "updatedAt": "2022-11-03T14:02:04.292Z"
+  },
+  {
+    "email": "elice@test.com",
+    "name": "안리수",
+    "password": "elice1",
+    "phoneNumber": "010-9876-5432",
+    "address": {
+      "postalCode": "48059",
+      "address1": "부산광역시 해운대구 우동 1475",
+      "address2": "센텀벤처타운"
+    },
+
+    "role": "admin",
+    "createdAt": "2022-11-03T14:02:04.292Z",
+    "updatedAt": "2022-11-03T14:02:04.292Z"
+  }
+]
