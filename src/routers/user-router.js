@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { loginRequired } from "../middlewares";
 import { userService } from "../services";
+import asyncHandler from "../middlewares/async-handler";
 
 const userRouter = Router();
 const requestHandler = require("../middlewares/async-handler");
@@ -20,9 +21,61 @@ userRouter.post(
   requestHandler(async (req, res, next) => {
     const { email, password } = req.body;
 
+    // 혹시 DB에 user정보가 하나도 없다면 dummy user 데이터 입력 <- 테스트코드라 추후 지울 예정
+    const users = await userService.getUsersData();
+    if (!users || users.length < 1) {
+      let userId = [];
+      for (let i = 0; i < sampleUser.length; i++) {
+        userId = await userService.addUser(sampleUser[i]);
+      }
+    }
+
     const loginResult = await userService.getUserToken({ email, password });
-    console.log("loginResult:", loginResult);
     res.status(201).json(loginResult);
+  })
+);
+
+userRouter.get(
+  "/user",
+  loginRequired,
+  asyncHandler(async (req, res, next) => {
+    console.log(1);
+    const userId = req.currentUserId;
+    const user = await userService.getUserData(userId);
+    console.log("user:", user);
+    res.status(201).json(user);
+  })
+);
+
+userRouter.patch(
+  "/user/:email",
+  loginRequired,
+  requestHandler(async (req, res, next) => {
+    const email = req.params.email;
+    const { phoneNumber, address, currentPassword, password, role } = req.body;
+
+    const toUpdate = {
+      ...(phoneNumber && { phoneNumber }),
+      ...(address && { address }),
+      ...(password && { password }),
+      ...(role && { role }),
+    };
+
+    const updateUserInfo = await userService.setUser(
+      { email, currentPassword },
+      toUpdate
+    );
+    res.status(201).json(updateUserInfo);
+  })
+);
+
+userRouter.delete(
+  "/userDelete/:email",
+  loginRequired,
+  requestHandler(async (req, res, next) => {
+    const { email } = req.params;
+    const deletedResult = await userService.deleteUser(email);
+    res.status(201).json(deletedResult);
   })
 );
 

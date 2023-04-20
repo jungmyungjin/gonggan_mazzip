@@ -10,6 +10,11 @@ export class UserModel {
     return user;
   }
 
+  async findById(userId) {
+    const user = await User.findOne({ _id: userId });
+    return user;
+  }
+
   async findAll() {
     const users = await User.find({});
     return users;
