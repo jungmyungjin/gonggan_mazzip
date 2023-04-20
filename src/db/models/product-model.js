@@ -36,9 +36,15 @@ class ProductModel {
   }
 
   // async read(query) {
-  async read() {
-    const product = await this.model.find({});
-    return product;
+
+  async read(query) {
+    let resultProducts = [];
+    if (query) {
+      return (resultProducts = await this.model.find(query));
+    }
+
+    resultProducts = await this.model.find({});
+    return resultProducts;
   }
 
   // TODO: 관리자 페이지 추가 후 사용 예정

@@ -8,8 +8,14 @@ productRouter.get(
   "/products",
   requestHandler(async (req, res, next) => {
     {
-      const allProducts = await productService.getProductAll();
-      res.status(200).json(allProducts);
+      let resultProductList = [];
+      const { category } = req.query;
+      if (category) {
+        resultProductList = await productService.getProductByCategory(category);
+      } else {
+        resultProductList = await productService.getProductAll(category);
+      }
+      res.status(200).json(resultProductList);
     }
   })
 );

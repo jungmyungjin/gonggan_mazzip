@@ -5,10 +5,17 @@ class ProductService {
     this.productModel = productModel;
   }
 
-  async getProductAll(productInfo) {
-    console.log("getProductALL");
+  async getProductAll() {
     const allProductList = await this.productModel.read();
     return allProductList;
+  }
+
+  async getProductByCategory(category) {
+    const filteredProductList = await this.productModel.read({
+      category: category,
+    });
+
+    return filteredProductList;
   }
 }
 
