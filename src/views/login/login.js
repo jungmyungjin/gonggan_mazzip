@@ -1,4 +1,4 @@
-const url = '서버 API 주소';
+const url = '/api/login';
 const emailInput = document.querySelector('#email');
 const psInput = document.querySelector('#password');
 const loginBtn = document.querySelector('#login_btn');
