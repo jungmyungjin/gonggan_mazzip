@@ -1,3 +1,4 @@
+import { Quantity } from "../utils.js";
 const productEl = document.querySelector(".product__container");
 const productNameEl = productEl.querySelector("#productName");
 const companyEl = productEl.querySelector("#company");
@@ -6,6 +7,9 @@ const priceEl = productEl.querySelector("#price");
 const quantityEl = productEl.querySelector("#quantity");
 const categoryEl = productEl.querySelector("#category");
 const totalPriceEl = productEl.querySelector("#totalPrice");
+
+const minusBtn = productEl.querySelector("#minusBtn");
+const plusBtn = productEl.querySelector("#plusBtn");
 
 async function renderData() {
   const product = await getProduct();
@@ -42,3 +46,11 @@ async function getProduct() {
 }
 
 await renderData();
+
+const quantity = new Quantity({
+  quantityEl,
+  priceEl,
+  totalPriceEl,
+});
+minusBtn.addEventListener("click", () => quantity.change(-1));
+plusBtn.addEventListener("click", () => quantity.change(1));
