@@ -13,6 +13,7 @@ const loginFunc = async (e) => {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       },
       body: JSON.stringify({
         email: emailInput.value,
@@ -20,9 +21,9 @@ const loginFunc = async (e) => {
       }),
     });
     const data = await response.json();
-    if (data.success) {
-      Cookies.set('token', data.data.token);
-      window.location.href = '../main/main.index';
+    if (data) {
+      sessionStorage.setItem('token', data);
+      window.location.href = '/';
     } else {
       throw new Error('로그인 실패했습니다.');
     }
