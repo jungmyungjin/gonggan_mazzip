@@ -1,17 +1,41 @@
-const form = document.querySelector('form');
-const emailInput = document.querySelector('#email');
-const nameInput = document.querySelector('#name');
-const passwordInput = document.querySelector('#password');
-const confirmPasswordInput = document.querySelector('#confirm_password');
-const phoneInput = document.querySelector('#phone');
 const postalCodeInput = document.querySelector('#postalCode');
-const searchAddressButton = document.querySelector('#searchAddressButton');
+const searchAddressBtn = document.querySelector('#searchAddressButton');
 const address1Input = document.querySelector('#address1');
 const address2Input = document.querySelector('#address2');
-const modalAddress = document.querySelector('#modal-address');
-const popupWrap = document.querySelector('#popup-wrap');
+const submitError = document.querySelector('#submit_errMessage');
+const phoneNumber = document.getElementById('phone');
 
-// 주소찾기 버튼 API 기능
+function autoHyphen(element) {
+  // 입력된 값을 받아옵니다.
+  let value = element.value.replace(/-/g, '');
+
+  // 입력된 값이 최대 입력 값 이상인 경우, 초과 부분을 잘라냅니다.
+  const maxLength = 13;
+  if (value.length > maxLength) {
+    value = value.slice(0, maxLength);
+  }
+
+  // 정규식으로 하이픈을 붙여줍니다.
+  let newValue = '';
+  const pattern = /^(\d{1,3})?([-\s])?(\d{1,4})?([-\s])?(\d{1,4})?/;
+  const matches = value.match(pattern);
+  if (matches) {
+    const groups = matches.slice(1).filter((match) => match);
+    if (groups[0] && groups[0].length === 3) {
+      groups[0] += '-';
+    }
+    if (groups[2] && groups[2].length === 4) {
+      groups[2] += '-';
+    }
+    newValue = groups.join('');
+  }
+
+  // 입력 필드에 값을 설정합니다.
+  element.value = newValue;
+}
+autoHyphen(phoneNumber);
+
+// 주소찾기 버튼 구현 함수
 function searchAddress() {
   new daum.Postcode({
     oncomplete: function (data) {
@@ -47,8 +71,6 @@ function searchAddress() {
 }
 
 // 주소찾기 버튼에 click 이벤트 리스너 등록
-document
-  .getElementById('searchAddressButton')
-  .addEventListener('click', function () {
-    searchAddress();
-  });
+searchAddressBtn.addEventListener('click', function () {
+  searchAddress();
+});
