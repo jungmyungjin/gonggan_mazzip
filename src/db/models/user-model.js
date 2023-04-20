@@ -11,7 +11,7 @@ export class UserModel {
   }
 
   async findById(userId) {
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findById(userId);
     return user;
   }
 
@@ -25,15 +25,15 @@ export class UserModel {
     return createdNewUser;
   }
 
-  async update({ email, update }) {
-    const updateUser = await User.findOneAndUpdate(email, update, {
-      new: true,
-    });
+  async update({ userId, update }) {
+    const filter = { _id: userId };
+    const option = { new: true };
+    const updateUser = await User.findOneAndUpdate(filter, update, option);
     return updateUser;
   }
 
-  async delete(email) {
-    const deleteUserResult = await User.deleteOne({ email });
+  async delete(userId) {
+    const deleteUserResult = await User.findByIdAndDelete(userId);
     return deleteUserResult;
   }
 }
