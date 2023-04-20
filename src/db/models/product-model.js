@@ -35,7 +35,35 @@ class ProductModel {
     });
   }
 
-  // TODO: api CURD 관련 모델 추가
+  // async read(query) {
+
+  async read(query) {
+    let resultProducts = [];
+    if (query) {
+      return (resultProducts = await this.model.find(query));
+    }
+
+    resultProducts = await this.model.find({});
+    return resultProducts;
+  }
+
+  // TODO: 관리자 페이지 추가 후 사용 예정
+  async create(query) {
+    const createdNewUser = await this.model.create(query);
+    return createdNewUser;
+  }
+
+  async update({ filter, update }) {
+    const updateProduct = await this.model.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    return updateProduct;
+  }
+
+  async delete(filter) {
+    const deleteProduct = await this.model.deleteOne({ filter });
+    return deleteProduct;
+  }
 }
 
 const productModel = new ProductModel();
