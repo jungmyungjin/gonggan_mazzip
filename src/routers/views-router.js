@@ -4,8 +4,13 @@ import path from "path";
 const viewsRouter = express.Router();
 
 viewsRouter.use("/", serveStatic("main"));
-viewsRouter.use("/register", serveStatic("register"));
 viewsRouter.use("/login", serveStatic("login"));
+viewsRouter.use("/register", serveStatic("register"));
+viewsRouter.use("/product", serveStatic("product"));
+viewsRouter.use("/cart", serveStatic("cart"));
+viewsRouter.use("/mypage-info", serveStatic("mypage-info"));
+viewsRouter.use("/mypage-order", serveStatic("mypage-order"));
+viewsRouter.use("/order", serveStatic("order"));
 
 viewsRouter.use("/", serveStatic(""));
 
