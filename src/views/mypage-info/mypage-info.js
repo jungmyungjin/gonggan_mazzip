@@ -1,6 +1,6 @@
-import getUserInfo from './mypage-info_getUserInfo';
-import updateUser from './mypage-info_updateUser';
-import deleteUser from './mypage-info-userDelete';
+import getUserInfo from './mypage-info_getUserInfo.js';
+import updateUser from './mypage-info_updateUser.js';
+import deleteUser from './mypage-info-userDelete.js';
 
 const emailInput = document.getElementById('email');
 const nameInput = document.getElementById('name');
