@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { userModel } from "../db";
+import passport from "passport";
 
 class UserService {
   constructor(userModel) {
@@ -35,8 +36,8 @@ class UserService {
     }
 
     const secretKey = process.env.JWT_SECRET_KEY;
-    const token = jwt.sign({ userId: user._id, role: user.role }, secretKey);
-
+    const token = jwt.sign({ email, role: user.role }, secretKey);
+    console.log("token:", token);
     return token;
   }
 
@@ -54,8 +55,8 @@ class UserService {
     return users;
   }
 
-  async setUser({ userId, currentPassword }, toUpdate) {
-    let user = await this.userModel.findById(userId);
+  async setUser({ email, currentPassword }, toUpdate) {
+    let user = await this.userModel.findByEmail(email);
     if (!user) {
       throw new Error("가입 내역이 없습니다. 다시 한 번 확인해 주세요.");
     }
@@ -64,7 +65,7 @@ class UserService {
     if (currentPassword) {
       const correctPasswordHash = user.password;
       const isPasswordCorrect = await bcrypt.compare(
-        currentPassword,
+        password,
         correctPasswordHash
       );
       if (!isPasswordCorrect) {
@@ -79,12 +80,12 @@ class UserService {
         toUpdate.password = newPasswordHash;
       }
 
-      user = await this.userModel.update({ userId, update: toUpdate });
+      user = await this.userModel.update({ email, update: toUpdate });
 
       return user;
     } else {
       user = await this.userModel.update({
-        userId,
+        email,
         update: toUpdate,
       });
 
@@ -92,9 +93,9 @@ class UserService {
     }
   }
 
-  async deleteUser(userId) {
-    const deletedUser = await this.userModel.delete(userId);
-    if (!deletedUser) {
+  async deleteUser(email) {
+    const deletedCount = await this.userModel.deleteUser(email);
+    if (deletedCount < 1) {
       throw new Error(`${userId} 사용자 탈퇴 처리에 실패하였습니다.`);
     }
 

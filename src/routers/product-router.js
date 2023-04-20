@@ -20,4 +20,18 @@ productRouter.get(
   })
 );
 
+productRouter.get(
+  "/products/:productId",
+  requestHandler(async (req, res, next) => {
+    {
+      let resultProductDetail = {};
+      const productId = req.params.productId;
+      if (productId) {
+        resultProductDetail = await productService.getProductInfo(productId);
+      }
+      res.status(200).json(resultProductDetail);
+    }
+  })
+);
+
 export { productRouter };
