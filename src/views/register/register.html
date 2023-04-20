@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../common.css" />
     <link rel="stylesheet" href="register.css" />
     <script src="register.js" defer></script>
+    <script src="registerAjaxService.js" defer></script>
+    <script src="regPassCheck.js" defer></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   </head>
   <body>
@@ -34,9 +36,16 @@
           required
         />
       </div>
+      <div id="errorMessage"></div>
       <div>
         <label for="phone">휴대폰 번호</label>
-        <input type="tel" id="phone" name="phone" />
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          pattern="[0-9]*"
+          maxlength="11"
+        />
       </div>
 
       <div class="field is-horizontal">
@@ -101,14 +110,11 @@
           </div>
         </div>
       </div>
-      <div class="modal-address" id="modal-address">
-        <div id="popup-wrap">
-          <!-- 우편번호 API가 띄워질 공간 -->
-        </div>
-      </div>
-
       <div>
         <input type="submit" value="가입하기" />
+      </div>
+      <div class="error_Area">
+        <div id="submit_errMessage"></div>
       </div>
     </form>
   </body>
