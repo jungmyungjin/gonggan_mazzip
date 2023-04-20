@@ -1,4 +1,4 @@
-const url = '서버 URL 주소'; // 임시 서버 주소
+const url = '/api/register';
 const errMessage = document.getElementById('submit_errMessage');
 
 // 회원가입 기능 구현
