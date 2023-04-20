@@ -5,6 +5,13 @@ class ProductService {
     this.productModel = productModel;
   }
 
+  async getProductInfo(productId) {
+    const productInfo = await this.productModel.fineOne({
+      _id: productId,
+    });
+    return productInfo;
+  }
+
   async getProductAll() {
     const allProductList = await this.productModel.read();
     return allProductList;

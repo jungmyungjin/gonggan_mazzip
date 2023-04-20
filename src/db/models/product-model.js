@@ -7,8 +7,8 @@ class ProductModel {
     this.model = mongoose.model("Product", ProductSchema);
   }
 
-  async fineOne() {
-    const product = await this.model.findOne({});
+  async fineOne(query) {
+    const product = await this.model.findOne(query);
     return product;
   }
 
