@@ -5,7 +5,6 @@ const viewsRouter = express.Router();
 
 viewsRouter.use("/", serveStatic("main"));
 viewsRouter.use("/login", serveStatic("login"));
-viewsRouter.use("/user", serveStatic("mypage-info"));
 viewsRouter.use("/register", serveStatic("register"));
 viewsRouter.use("/product", serveStatic("product"));
 viewsRouter.use("/cart", serveStatic("cart"));
