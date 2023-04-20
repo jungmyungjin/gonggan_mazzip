@@ -10,14 +10,8 @@ const sampleUser = require("../db/sampleData/sampleUser.json");
 userRouter.post(
   "/register",
   requestHandler(async (req, res, next) => {
-    const { name, email, password, phoneNumber, address } = req.body;
-    const newUser = await userService.addUser({
-      name,
-      email,
-      password,
-      phoneNumber,
-      address,
-    });
+    const { name, email, password } = req.body;
+    const newUser = await userService.addUser({ name, email, password });
     res.status(201).json(newUser);
   })
 );
@@ -45,18 +39,21 @@ userRouter.get(
   "/user",
   loginRequired,
   asyncHandler(async (req, res, next) => {
+    console.log(1);
     const userId = req.currentUserId;
     const user = await userService.getUserData(userId);
+    console.log("user:", user);
     res.status(201).json(user);
   })
 );
 
 userRouter.patch(
-  "/userUpdate",
+  "/user/:email",
   loginRequired,
   requestHandler(async (req, res, next) => {
-    const userId = req.currentUserId;
+    const email = req.params.email;
     const { phoneNumber, address, currentPassword, password, role } = req.body;
+
     const toUpdate = {
       ...(phoneNumber && { phoneNumber }),
       ...(address && { address }),
@@ -65,20 +62,19 @@ userRouter.patch(
     };
 
     const updateUserInfo = await userService.setUser(
-      { userId, currentPassword },
+      { email, currentPassword },
       toUpdate
     );
-
     res.status(201).json(updateUserInfo);
   })
 );
 
 userRouter.delete(
-  "/userDelete",
+  "/userDelete/:email",
   loginRequired,
   requestHandler(async (req, res, next) => {
-    const userId = req.currentUserId;
-    const deletedResult = await userService.deleteUser(userId);
+    const { email } = req.params;
+    const deletedResult = await userService.deleteUser(email);
     res.status(201).json(deletedResult);
   })
 );
