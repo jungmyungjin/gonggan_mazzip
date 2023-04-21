@@ -5,7 +5,7 @@ import requestHandler from "../middlewares/async-handler";
 const productRouter = Router();
 
 productRouter.get(
-  "/products",
+  "/",
   requestHandler(async (req, res, next) => {
     {
       let resultProductList = [];
@@ -28,7 +28,7 @@ productRouter.get(
 );
 
 productRouter.get(
-  "/products/:productId",
+  "/:productId",
   requestHandler(async (req, res, next) => {
     {
       let resultProductDetail = {};
@@ -44,7 +44,7 @@ productRouter.get(
 // POST /products/productIds
 // Request body: {productId:['<id1>', '<id2>', '<id3>', ...]}
 productRouter.post(
-  "/products/productIds",
+  "/productIds",
   requestHandler(async (req, res, next) => {
     {
       let resultProductList = [];
