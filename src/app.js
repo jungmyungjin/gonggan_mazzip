@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import { productRouter, userRouter, viewsRouter } from "./routers";
+import { productRouter, userRouter, viewsRouter, orderRouter } from "./routers";
 import { errorHandler } from "./middlewares";
 
 const app = express();
@@ -12,8 +12,9 @@ app.use(express.static("views")); //
 
 app.use(viewsRouter);
 
-app.use("/api", userRouter);
-app.use("/api", productRouter);
+app.use("/api/user", userRouter);
+app.use("/api/product", productRouter);
+app.use("/api/order", orderRouter);
 
 app.use(errorHandler);
 
