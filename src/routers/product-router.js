@@ -9,11 +9,18 @@ productRouter.get(
   requestHandler(async (req, res, next) => {
     {
       let resultProductList = [];
-      const { category } = req.query;
+      const { category, page, perPage } = req.query;
       if (category) {
-        resultProductList = await productService.getProductByCategory(category);
+        resultProductList = await productService.getProductByCategory({
+          category,
+          page,
+          perPage,
+        });
       } else {
-        resultProductList = await productService.getProductAll(category);
+        resultProductList = await productService.getProductAll({
+          page,
+          perPage,
+        });
       }
       res.status(200).json(resultProductList);
     }
