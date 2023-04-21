@@ -24,6 +24,13 @@ class ProductService {
 
     return filteredProductList;
   }
+
+  async getProductByProductIds(productIds) {
+    const filteredProductList = await this.productModel.read({
+      productId: { $in: productIds },
+    });
+    return filteredProductList;
+  }
 }
 
 const productService = new ProductService(productModel);

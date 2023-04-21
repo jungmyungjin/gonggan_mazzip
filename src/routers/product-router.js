@@ -34,4 +34,22 @@ productRouter.get(
   })
 );
 
+// POST /products/productIds
+// Request body: {productId:['<id1>', '<id2>', '<id3>', ...]}
+productRouter.post(
+  "/products/productIds",
+  requestHandler(async (req, res, next) => {
+    {
+      let resultProductList = [];
+      const productIds = req.body.productIds;
+      if (productIds) {
+        resultProductList = await productService.getProductByProductIds(
+          productIds
+        );
+      }
+      res.status(200).json(resultProductList);
+    }
+  })
+);
+
 export { productRouter };
