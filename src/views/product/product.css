@@ -64,7 +64,7 @@ main.product__container {
   margin-bottom: 10px;
 }
 
-.product__price #price {
+.product__price .price {
   font-size: 35px;
   margin-right: 5px;
 }
@@ -104,7 +104,7 @@ main.product__container {
   cursor: pointer;
 }
 
-.product__total .product__quantity #quantity {
+.product__total .product__quantity .quantity {
   display: inline-flex;
   justify-content: center;
   min-width: 30px;
@@ -118,7 +118,7 @@ main.product__container {
   color: #333;
 }
 
-.product__total .total__price #totalPrice {
+.product__total .total__price .totalPrice {
   font-size: 30px;
   margin-left: 20px;
   margin-right: 3px;
@@ -142,14 +142,14 @@ main.product__container {
   transition: all 0.3s;
 }
 
-.product__purchase #cartBtn {
+.product__purchase .cartBtn {
   margin-right: 20px;
   background-color: #fff;
   color: var(--main-color);
 }
 
-.product__purchase #cartBtn:hover,
-.product__purchase #buyBtn:hover {
+.product__purchase .cartBtn:hover,
+.product__purchase .buyBtn:hover {
   background-color: var(--sub-2-color);
   border-color: var(--sub-2-color);
   color: #fff;
