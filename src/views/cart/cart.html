@@ -1,13 +1,78 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공간맛집</title>
-  <link rel="stylesheet" href="../common/common.css">
-</head>
-<body>
-  
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>공간 맛집</title>
+    <link rel="stylesheet" href="cart.css" />
+    <link rel="stylesheet" href="../common.css" />
+    <script src="cart.js" type="module" defer></script>
+    <script src="../common.js" type="module" defer></script>
+  </head>
+  <body>
+    <main>
+      <ul class="product-list">
+        <li class="select-all">
+          <!-- 장바구니에 담긴 상품 모음 -->
+          <label class="checkbox" for="allSelectCheckbox">
+            <input type="checkbox" id="allSelectCheckbox" />
+            <span>모두선택</span>
+          </label>
+        </li>
+        <!-- 장바구니에 담긴 상품들이 출력(임시 데이터) -->
+        <!-- <li class="product-item">
+          <div class="product-checkbox">
+            <input type="checkbox" name="" id="" />
+          </div>
+          <div class="product-image"></div>
+          <div class="product-detail">
+            <div class="product-company">삼성전자</div>
+            <div class="product-name">비스포크</div>
+            <div class="product-price">1,490,000</div>
+            <div class="product-quantity">
+              <button type="button" id="minusBtn">-</button>
+              <span id="quantity">1</span>
+              <button type="button" id="plusBtn">+</button>
+            </div>
+            <div class="product-total-price">1,490,000</div>
+          </div>
+          <span class="close-button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="48"
+              viewBox="0 96 960 960"
+              width="48"
+            >
+              <path
+                d="m249 849-42-42 231-231-231-231 42-42 231 231 231-231 42 42-231 231 231 231-42 42-231-231-231 231Z"
+              />
+            </svg>
+          </span>
+        </li> -->
+      </ul>
+
+      <!-- 선택한 상품 총 요약 -->
+      <div class="cart-summary">
+        <div class="order-summary">
+          <div class="order-info">
+            <div class="info">
+              <p>상품금액</p>
+              <p id="productsTotal">10000000원</p>
+            </div>
+            <div class="info">
+              <p>배송비</p>
+              <p id="deliveryFee">무료배송</p>
+            </div>
+          </div>
+          <div class="total">
+            <p class="total-label">총 결제금액</p>
+            <p class="total-price" id="orderTotal">10000000원</p>
+          </div>
+          <div class="purchase">
+            <button class="button is-info" id="purchaseButton">구매하기</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
