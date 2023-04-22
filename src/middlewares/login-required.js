@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 
 function loginRequired(req, res, next) {
   const userToken = req.headers["authorization"]?.split(" ")[1] ?? "null";
-  console.log("login 미들웨어 userToken:", userToken);
 
   if (!userToken || userToken === "null") {
     console.log("서비스 사용 요청이 있습니다.하지만, Authorization 토큰: 없음");
@@ -17,13 +16,10 @@ function loginRequired(req, res, next) {
 
   try {
     const secretKey = process.env.JWT_SECRET_KEY;
-    console.log("login 미들웨어 secretKey:", secretKey);
     const jwtDecoded = jwt.verify(userToken, secretKey);
-    console.log("login 미들웨어 jwtDecoded:", jwtDecoded);
 
     const { userId } = jwtDecoded;
     req.currentUserId = userId;
-    console.log("login 미들웨어 userId:", userId);
 
     next();
   } catch (error) {

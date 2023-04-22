@@ -5,8 +5,9 @@ class OrderService {
     this.orderModel = orderModel;
   }
 
-  async addOrder(orderInfo) {
-    const createdNewOrder = await this.orderModel.create(orderInfo);
+  async addOrder(userId, orderInfo) {
+    const newOrderInfo = { userId, ...orderInfo };
+    const createdNewOrder = await this.orderModel.create(newOrderInfo);
     return createdNewOrder;
   }
 
