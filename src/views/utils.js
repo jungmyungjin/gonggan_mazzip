@@ -6,7 +6,7 @@ export class Quantity {
     this.quantityEl = quantityEl;
     this.totalPriceEl = totalPriceEl;
     this.price = Number(priceEl.innerText.replaceAll(",", ""));
-    this.quantity = 1;
+    this.quantity = Number(quantityEl.innerText);
     this.totalPrice = this.quantity * this.price;
   }
 
