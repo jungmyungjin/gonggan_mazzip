@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="./order.css" />
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer src="../common.js"></script>
+    <script defer src="./order.js"></script>
   </head>
   <body>
     <div class="order__container">
@@ -51,9 +52,20 @@
                       type="text"
                       name="receiverAddress"
                       id="receiverAddress"
-                      title="address1"
+                      title="postalCode"
+                      readonly
                     />
-                    <button>주소찾기</button>
+                    <button type="button" id="searchAddressBtn">
+                      주소찾기
+                    </button>
+                  </li>
+                  <li>
+                    <input
+                      type="text"
+                      name="receiverAddress"
+                      title="address1"
+                      readonly
+                    />
                   </li>
                   <li>
                     <input
@@ -62,18 +74,11 @@
                       title="address2"
                     />
                   </li>
-                  <li>
-                    <input
-                      type="text"
-                      name="receiverAddress"
-                      title="address3"
-                    />
-                  </li>
                 </ul>
               </li>
               <li>
-                <label for="">요청사항</label>
-                <input type="text" name="" id="" />
+                <label for="request">요청사항</label>
+                <input type="text" name="request" id="request" />
               </li>
             </ul>
           </div>
