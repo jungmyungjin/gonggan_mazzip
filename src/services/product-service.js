@@ -7,8 +7,14 @@ class ProductService {
 
   async getProductInfo(productId) {
     const productInfo = await this.productModel.model.findOne({
-      _id: productId,
+      productId: productId,
     });
+    if (!productInfo) {
+      throw new Error(
+        "해당 상품이 존재하지 않습니다. 다시 한 번 확인해 주세요."
+      );
+    }
+
     return productInfo;
   }
 
