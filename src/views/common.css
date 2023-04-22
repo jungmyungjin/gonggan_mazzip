@@ -62,6 +62,7 @@ a {
   color: #333;
 }
 
+.header__container > header > #gnb__category > li.on a,
 .header__container > header > #gnb__category > li > a:hover {
   color: var(--main-color);
 }

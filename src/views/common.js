@@ -1,9 +1,11 @@
 function createHeader() {
+  const params = new URL(document.location).searchParams;
+  const category = params.get("category");
   const template = `
   <div class="header__container">
     <header>
       <h1>
-        <a href="#">
+        <a href="/">
           <img
             src="https://github.com/Returndusk/CodingTest/blob/main/logo.png?raw=true"
             alt="공간맛집 로고"
@@ -11,32 +13,33 @@ function createHeader() {
         </a>
       </h1>
       <ul id="gnb__category">
-        <li>
-          <a href="#">가구</a>
+        <li ${category === "furniture" ? 'class="on"' : ""}>
+          <a href="/?category=furniture">가구</a>
         </li>
-        <li>
-          <a href="#">패브릭</a>
+        <li ${category === "fabric" ? 'class="on"' : ""}>
+          <a href="/?category=fabric">패브릭</a>
         </li>
-        <li>
-          <a href="#">가전</a>
+        <li ${category === "electronic" ? 'class="on"' : ""}>
+          <a href="/?category=electronic">가전</a>
         </li>
-        <li>
-          <a href="#">주방용품</a>
+        <li ${category === "cooking" ? 'class="on"' : ""}>
+          <a href="/?category=cooking">주방용품</a>
         </li>
-        <li>
-          <a href="#">조명</a>
+        <li ${category === "lightings" ? 'class="on"' : ""}>
+          <a href="/?category=lightings">조명</a>
         </li>
       </ul>
       <nav>
         <ul id="gnb__user">
-          <li><a href="#">로그인</a></li>
-          <li><a href="#">회원가입</a></li>
-          <li><a href="#">장바구니</a></li>
+          <li><a href="/login">로그인</a></li>
+          <li><a href="/register">회원가입</a></li>
+          <li><a href="/cart">장바구니</a></li>
         </ul>
       </nav>
     </header>
   </div>
   `;
+
   document.body.insertAdjacentHTML("afterbegin", template);
 }
 
@@ -63,4 +66,4 @@ function renderDefault() {
   }
 }
 
-window.addEventListener("load", renderDefault);
+window.addEventListener("DOMContentLoaded", renderDefault);
