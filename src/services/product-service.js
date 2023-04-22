@@ -6,7 +6,7 @@ class ProductService {
   }
 
   async getProductInfo(productId) {
-    const productInfo = await this.productModel.model.fineOne({
+    const productInfo = await this.productModel.model.findOne({
       _id: productId,
     });
     return productInfo;
