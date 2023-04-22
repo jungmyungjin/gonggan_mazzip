@@ -1,4 +1,5 @@
 import { orderItemModel } from "../db/models/order-item-model";
+import { productService } from "./product-service";
 
 class OrderItemService {
   constructor(orderItemModel) {
@@ -8,6 +9,7 @@ class OrderItemService {
   // Product stock에 구입한 개수만큼 -처리 해야함
   async addItem(orderItemInfo) {
     const createNewOrderItem = await this.orderItemModel.create(orderItemInfo);
+    productService.decreaseProductStock(orderItemId, toUpdate);
     return createNewOrderItem;
   }
 
@@ -44,6 +46,7 @@ class OrderItemService {
       orderItemId,
       update: toUpdate,
     });
+    productService.increaseProductStock(orderItemId, toUpdate);
     return updatedOrderItem;
   }
 

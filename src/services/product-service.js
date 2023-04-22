@@ -56,6 +56,24 @@ class ProductService {
     });
     return filteredProductList;
   }
+
+  async increaseProductStock(productId, quantity) {
+    const product = await this.productModel.model.findOne({ productId });
+    if (!product) {
+      throw new Error("Product not found");
+    }
+    product.stock += parseInt(quantity);
+    await product.save();
+  }
+
+  async decreaseProductStock(productId, quantity) {
+    const product = await this.productModel.model.findOne({ productId });
+    if (!product) {
+      throw new Error("Product not found");
+    }
+    product.stock -= parseInt(quantity);
+    await product.save();
+  }
 }
 
 const productService = new ProductService(productModel);
