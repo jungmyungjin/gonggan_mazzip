@@ -1,4 +1,4 @@
-const url = '/api/user/register';
+const url = '/api/users/register';
 const errMessage = document.getElementById('submit_errMessage');
 
 // 회원가입 기능 구현

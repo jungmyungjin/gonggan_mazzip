@@ -1,7 +1,14 @@
 import { Schema } from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
 const UserSchema = new Schema(
   {
+    _id: {
+      type: String,
+      default: () => {
+        return uuidv4();
+      },
+    },
     email: {
       type: String,
       required: true,

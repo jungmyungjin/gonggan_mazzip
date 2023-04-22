@@ -1,6 +1,12 @@
 import cors from "cors";
 import express from "express";
-import { productRouter, userRouter, viewsRouter, orderRouter } from "./routers";
+import {
+  productRouter,
+  userRouter,
+  viewsRouter,
+  orderRouter,
+  orderItemRouter,
+} from "./routers";
 import { errorHandler } from "./middlewares";
 
 const app = express();
@@ -15,6 +21,7 @@ app.use(viewsRouter);
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
+app.use("/api/orderItems", orderItemRouter);
 
 app.use(errorHandler);
 
