@@ -1,6 +1,6 @@
 const deleteUser = async (userInfo) => {
   try {
-    const response = await fetch(`/api/userDelete/${email}`, {
+    const response = await fetch('/api/user/delete', {
       method: 'DELETE',
     });
 
