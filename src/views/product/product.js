@@ -1,4 +1,4 @@
-import { Quantity } from "../utils.js";
+import { Quantity } from "/utils.js";
 const productEl = document.querySelector(".product__container");
 const productNameEl = productEl.querySelector("#productName");
 const companyEl = productEl.querySelector("#company");
@@ -13,12 +13,12 @@ const plusBtn = productEl.querySelector("#plusBtn");
 
 async function renderData() {
   const product = await getProduct();
-  productNameEl.innerText = product.productName;
-  companyEl.innerText = product.company;
-  descriptionEl.innerText = product.description;
-  priceEl.innerText = product.price.toLocaleString();
-  categoryEl.innerText = product.category;
-  totalPriceEl.innerText = priceEl.innerText;
+  if (productNameEl) productNameEl.innerText = product.productName;
+  if (companyEl) companyEl.innerText = product.company;
+  if (descriptionEl) descriptionEl.innerText = product.description;
+  if (priceEl) priceEl.innerText = product.price.toLocaleString();
+  if (categoryEl) categoryEl.innerText = product.category;
+  if (totalPriceEl) totalPriceEl.innerText = priceEl.innerText;
 }
 
 async function getProduct() {

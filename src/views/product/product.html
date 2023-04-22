@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>공간맛집</title>
-    <link rel="stylesheet" href="../common.css" />
-    <link rel="stylesheet" href="./product.css" />
-    <script type="module" defer src="../common.js"></script>
-    <script type="module" defer src="./product.js"></script>
+    <link rel="stylesheet" href="/common.css" />
+    <link rel="stylesheet" href="/product/product.css" />
+    <script type="module" defer src="/common.js"></script>
+    <script type="module" defer src="/product/product.js"></script>
   </head>
   <body>
     <main class="product__container">
@@ -16,30 +16,34 @@
       <div class="product__detail">
         <p class="product__category">
           카테고리 >
-          <a href="#" id="category"></a>
+          <a href="#" class="category" id="category"></a>
         </p>
-        <p class="product__name" id="productName"></p>
-        <span class="product__company" id="company"></span>
-        <p class="product__description" id="description"></p>
-        <p class="product__price"><span id="price"></span>원</p>
+        <p class="product__name" class="productName" id="productName"></p>
+        <span class="product__company" class="company" id="company"></span>
+        <p
+          class="product__description"
+          class="description"
+          id="description"
+        ></p>
+        <p class="product__price"><span class="price" id="price"></span>원</p>
         <p class="delivery__cost">
           <span>배송</span>
           <span>무료배송</span>
         </p>
         <div class="product__total">
           <div class="product__quantity">
-            <button type="button" id="minusBtn">-</button>
+            <button type="button" class="minusBtn" id="minusBtn">-</button>
             <span id="quantity">1</span>
-            <button type="button" id="plusBtn">+</button>
+            <button type="button" class="plusBtn" id="plusBtn">+</button>
           </div>
           <div class="total__price">
             <span>총 주문 금액</span>
-            <span id="totalPrice"></span>원
+            <span class="totalPrice" id="totalPrice"></span>원
           </div>
         </div>
         <div class="product__purchase">
-          <button id="cartBtn">장바구니</button>
-          <button id="buyBtn">바로구매</button>
+          <button class="cartBtn" id="cartBtn">장바구니</button>
+          <button class="buyBtn" id="buyBtn">바로구매</button>
         </div>
       </div>
     </main>
