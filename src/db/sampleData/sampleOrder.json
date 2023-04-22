@@ -1,0 +1,54 @@
+[
+  {
+    "receiver": {
+      "receiverName": "김성수",
+      "receiverPhoneNumber": "010-1234-5678",
+      "postalCode": "04799",
+      "address1": "서울특별시 성동구 성수동2가 280",
+      "address2": "2층 엘리스 Lab"
+    },
+    "requestMessage": "문 앞에 놓고 가주세요.",
+    "orderStatus": "결제 완료"
+  },
+  {
+    "receiver": {
+      "receiverName": "홍길동",
+      "receiverPhoneNumber": "010-4567-1234",
+      "postalCode": "04799",
+      "address1": "서울특별시 성동구 성수동2가 280",
+      "address2": "2층 엘리스 Lab"
+    },
+    "orderStatus": "결제 완료"
+  },
+  {
+    "receiver": {
+      "receiverName": "김성수",
+      "receiverPhoneNumber": "010-4567-1234",
+      "postalCode": "04799",
+      "address1": "서울특별시 성동구 성수동2가 280",
+      "address2": "2층 엘리스 Lab"
+    },
+    "orderStatus": "배송 중"
+  },
+  {
+    "receiver": {
+      "receiverName": "안리수",
+      "receiverPhoneNumber": "010-9876-5432",
+      "postalCode": "48059",
+      "address1": "부산광역시 해운대구 우동 1475",
+      "address2": "센텀벤처타운"
+    },
+    "requestMessage": "소화기 앞에 놓고 가주세요.",
+    "orderStatus": "상품 준비 중"
+  },
+  {
+    "receiver": {
+      "receiverName": "강감찬",
+      "receiverPhoneNumber": "010-9876-5432",
+      "postalCode": "48059",
+      "address1": "부산광역시 해운대구 우동 1475",
+      "address2": "센텀벤처타운"
+    },
+    "orderStatus": "배송 완료"
+  }
+]

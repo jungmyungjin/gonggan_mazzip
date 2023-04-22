@@ -3,19 +3,21 @@ import { v4 as uuidv4 } from "uuid";
 
 const OrderItemSchema = new Schema(
   {
+    _id: {
+      type: String,
+      default: () => {
+        return uuidv4();
+      },
+    },
     orderId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: "orders",
       required: true,
-    },
-    orderItemId: {
-      type: String,
-      required: true,
-      default: uuidv4(),
+      unique: false,
     },
     productId: {
-      type: Schema.Types.ObjectId,
-      ref: "proucts",
+      type: String,
+      ref: "products",
       required: true,
     },
     quantity: {

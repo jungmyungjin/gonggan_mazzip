@@ -1,10 +1,13 @@
 import { Schema } from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
 const ProductSchema = new Schema(
   {
-    productId: {
+    _id: {
       type: String,
-      required: true,
+      default: () => {
+        return uuidv4();
+      },
     },
     productName: {
       type: String,
