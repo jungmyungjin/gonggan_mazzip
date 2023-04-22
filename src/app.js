@@ -12,9 +12,9 @@ app.use(express.static("views")); //
 
 app.use(viewsRouter);
 
-app.use("/api/user", userRouter);
+app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
-app.use("/api/order", orderRouter);
+app.use("/api/orders", orderRouter);
 
 app.use(errorHandler);
 
