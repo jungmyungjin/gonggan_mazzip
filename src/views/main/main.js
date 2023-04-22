@@ -36,7 +36,7 @@ async function renderData() {
       </a>
       <div class="product__detail">
         <h3 class="product__title">
-          <a href="/product/${product.productId}">
+          <a href="/products/detail?productId=${product.productId}">
             ${product.productName}
           </a>
         </h3>
