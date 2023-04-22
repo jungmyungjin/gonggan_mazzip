@@ -1,5 +1,5 @@
 async function updateUser(userInfo, updateData) {
-  const url = `/api/user/update`;
+  const url = `/api/user/udate`;
   try {
     const response = await fetch(url, {
       method: 'PATCH',
