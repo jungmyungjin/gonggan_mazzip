@@ -4,12 +4,11 @@ import { userService } from "../services";
 import asyncHandler from "../middlewares/async-handler";
 
 const userRouter = Router();
-const requestHandler = require("../middlewares/async-handler");
 const sampleUser = require("../db/sampleData/sampleUser.json");
 
 userRouter.post(
   "/register",
-  requestHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     const { name, email, password, phoneNumber, address } = req.body;
     const newUser = await userService.addUser({
       name,
@@ -24,7 +23,7 @@ userRouter.post(
 
 userRouter.post(
   "/login",
-  requestHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
 
     // 혹시 DB에 user정보가 하나도 없다면 dummy user 데이터 입력 <- 테스트코드라 추후 지울 예정
@@ -54,7 +53,7 @@ userRouter.get(
 userRouter.patch(
   "/update",
   loginRequired,
-  requestHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     const userId = req.currentUserId;
     const { phoneNumber, address, currentPassword, password, role } = req.body;
     const toUpdate = {
@@ -76,7 +75,7 @@ userRouter.patch(
 userRouter.delete(
   "/delete",
   loginRequired,
-  requestHandler(async (req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     const userId = req.currentUserId;
     const deletedResult = await userService.deleteUser(userId);
     res.status(201).json(deletedResult);

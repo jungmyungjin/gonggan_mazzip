@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { userModel } from "../db";
-import passport from "passport";
 
 class UserService {
   constructor(userModel) {

@@ -1,6 +1,5 @@
 import { model } from "mongoose";
 import { OrderSchema } from "../schemas/order-schema";
-const sampleOrder = require("../sampleData/sampleOrder");
 
 const Order = model("orders", OrderSchema);
 
@@ -11,7 +10,7 @@ export class OrderModel {
   }
 
   async findByUserId(userId) {
-    const order = await Order.findById(userId);
+    const order = await Order.find({ userId });
     return order;
   }
 
@@ -24,13 +23,8 @@ export class OrderModel {
     const createdNewOrder = await Order.create(orderInfo);
     return createdNewOrder;
   }
-
-  async createDummyData() {
-    const dummyOrders = await this.create(sampleOrder);
-    return dummyOrders;
-    console.log("createDummyData dummyOrders:", dummyOrders);
-  }
 }
+
 const orderModel = new OrderModel();
 
 export { orderModel };
