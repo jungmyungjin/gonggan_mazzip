@@ -1,6 +1,7 @@
 import { Quantity } from "/utils.js";
 const productEl = document.querySelector(".product__container");
 const productNameEl = productEl.querySelector("#productName");
+const productImageEl = productEl.querySelector("#productImage");
 const companyEl = productEl.querySelector("#company");
 const descriptionEl = productEl.querySelector("#description");
 const priceEl = productEl.querySelector("#price");
@@ -11,38 +12,53 @@ const totalPriceEl = productEl.querySelector("#totalPrice");
 const minusBtn = productEl.querySelector("#minusBtn");
 const plusBtn = productEl.querySelector("#plusBtn");
 
+const CATEGORY = {
+  furniture: "가구",
+  fabric: "패브릭",
+  electronic: "가전",
+  cooking: "주방용품",
+  lightings: "조명",
+};
+
+async function getProduct() {
+  const params = new URL(document.location).searchParams;
+  const productId = params.get("productId");
+  const api = `/api/products/${productId}`;
+  try {
+    const response = await fetch(api);
+    const data = await response.json();
+
+    //존재하는 상품이 없을시
+    if (response.status === 400) {
+      alert(data.reason);
+      location.href = "/";
+    }
+
+    return data;
+  } catch (err) {
+    //api 연결 실패시
+    console.error(err.message);
+    alert("상품 불러오기에 실패하였습니다.");
+    location.href = "/";
+  }
+}
+
 async function renderData() {
   const product = await getProduct();
   if (productNameEl) productNameEl.innerText = product.productName;
+  if (productImageEl) {
+    const img = document.createElement("img");
+    img.src = product.imageUrl;
+    productImageEl.append(img);
+  }
   if (companyEl) companyEl.innerText = product.company;
   if (descriptionEl) descriptionEl.innerText = product.description;
   if (priceEl) priceEl.innerText = product.price.toLocaleString();
-  if (categoryEl) categoryEl.innerText = product.category;
-  if (totalPriceEl) totalPriceEl.innerText = priceEl.innerText;
-}
-
-async function getProduct() {
-  const api = null;
-  if (api) {
-    try {
-      const response = await fetch(api);
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      console.log(err);
-    }
+  if (categoryEl) {
+    categoryEl.innerText = CATEGORY[product.category];
+    categoryEl.href = `/?category=${product.category}`;
   }
-
-  //mock data
-  return {
-    productName: "비스포크 냉장고 코타 슬림 아이스메이커",
-    price: 1459000,
-    company: "삼성전자",
-    category: "가전",
-    description: `Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis
-    atque ea ullam sequi maxime qui. Accusamus blanditiis tempora ad
-    deleniti.`,
-  };
+  if (totalPriceEl) totalPriceEl.innerText = priceEl.innerText;
 }
 
 await renderData();
