@@ -1,4 +1,4 @@
-import { Quantity } from "../utils.js";
+import { Quantity } from "/utils.js";
 const productEl = document.querySelector(".product__container");
 const productNameEl = productEl.querySelector("#productName");
 const companyEl = productEl.querySelector("#company");
