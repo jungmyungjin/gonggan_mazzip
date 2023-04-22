@@ -1,0 +1,261 @@
+.order__container {
+  width: 1200px;
+  margin: 0 auto;
+  font-family: var(--main-font);
+  padding: 30px 50px 50px 50px;
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+main {
+  width: calc(70% - 50px);
+  margin-right: 50px;
+}
+
+main h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+main h3 {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--sub-2-color);
+  padding-bottom: 15px;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #ddd;
+}
+
+.orderer__info,
+.receiver__info,
+.order__info {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.orderer__info li {
+  height: 26px;
+}
+
+.orderer__info span {
+  font-size: 14px;
+  color: #333;
+}
+
+main ul {
+  padding: 20px 0px;
+}
+
+main li {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 35px;
+  padding: 10px 0px;
+}
+
+main label {
+  width: 80px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-right: 15px;
+}
+
+input {
+  width: 400px;
+  height: 35px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 0px 10px;
+  color: #333;
+  font-size: 16px;
+}
+
+.address__box {
+  height: auto;
+}
+
+.address__input {
+  display: flex;
+  width: calc(100% - 80px);
+  flex-direction: column;
+  padding: 0;
+}
+
+.address__input li:first-child input {
+  width: 290px;
+  margin-right: 10px;
+}
+
+.address__input li:first-child button {
+  width: 100px;
+  height: 35px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 0px;
+  color: #fff;
+  background-color: var(--main-color);
+}
+
+.address__box label {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  height: 35px;
+}
+
+.address__input input {
+  width: 400px;
+}
+
+.order__products {
+  width: 100%;
+}
+
+.order__products > li {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 180px;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+}
+
+.product__image {
+  width: 140px;
+  height: 100%;
+  background-color: pink;
+}
+
+.product__detail {
+  width: calc(100% - 140px);
+  height: 100%;
+  padding: 0 20px;
+}
+
+.product__detail li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+
+.product__detail li:nth-child(1) {
+  margin-bottom: 5px;
+}
+
+.product__detail li:nth-child(2) {
+  align-items: flex-start;
+  min-height: 40px;
+  margin-bottom: 10px;
+}
+
+.product__detail li:nth-child(3) {
+  margin-bottom: 10px;
+}
+
+.product__detail li:nth-child(4) {
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+
+.product__detail .company {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
+}
+
+.product__detail .productName {
+  font-size: 15px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.product__detail .quantity {
+  font-size: 12px;
+  color: #555;
+  font-weight: 600;
+}
+
+.product__detail .productPrice {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--sub-2-color);
+}
+
+.product__detail .productTotalPrice {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+aside {
+  width: 30%;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 25px;
+}
+
+aside h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.payment__info {
+  width: 100%;
+}
+
+.payment__info li {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  color: #888;
+}
+
+.payment__info li span {
+  color: #333;
+}
+
+.payment__info li:nth-child(2) {
+  padding: 10px 0px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.payment__info li:nth-child(3) {
+  margin-bottom: 20px;
+}
+
+aside button {
+  width: 100%;
+  height: 40px;
+  background-color: var(--sub-2-color);
+  border-radius: 5px;
+  border: 0;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+aside button:hover {
+  background-color: var(--main-color);
+}

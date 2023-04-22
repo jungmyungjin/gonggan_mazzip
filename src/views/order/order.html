@@ -1,13 +1,126 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>공간맛집</title>
-  <link rel="stylesheet" href="../common/common.css">
-</head>
-<body>
-  
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공간맛집</title>
+    <link rel="stylesheet" href="../common.css" />
+    <link rel="stylesheet" href="./order.css" />
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script defer src="../common.js"></script>
+  </head>
+  <body>
+    <div class="order__container">
+      <form>
+        <main>
+          <h2>주문/결제</h2>
+          <div class="orderer__info">
+            <h3>주문자</h3>
+            <ul>
+              <li>
+                <label for="ordererName">이름</label>
+                <span id="ordererName">김땡땡</span>
+              </li>
+              <li>
+                <label for="ordererEmail">이메일</label>
+                <span id="ordererEmail">newbie@interior.com</span>
+              </li>
+              <li>
+                <label for="ordererPhone">휴대전화</label>
+                <span id="ordererPhone">010-1234-1234</span>
+              </li>
+            </ul>
+          </div>
+          <div class="receiver__info">
+            <h3>배송지</h3>
+            <ul>
+              <li>
+                <label for="receiverName">받는 사람</label>
+                <input type="text" name="receiverName" id="receiverName" />
+              </li>
+              <li>
+                <label for="receiverPhone">연락처</label>
+                <input type="text" name="receiverPhone" id="receiverPhone" />
+              </li>
+              <li class="address__box">
+                <label for="receiverAddress">주소</label>
+                <ul class="address__input">
+                  <li>
+                    <input
+                      type="text"
+                      name="receiverAddress"
+                      id="receiverAddress"
+                      title="address1"
+                    />
+                    <button>주소찾기</button>
+                  </li>
+                  <li>
+                    <input
+                      type="text"
+                      name="receiverAddress"
+                      title="address2"
+                    />
+                  </li>
+                  <li>
+                    <input
+                      type="text"
+                      name="receiverAddress"
+                      title="address3"
+                    />
+                  </li>
+                </ul>
+              </li>
+              <li>
+                <label for="">요청사항</label>
+                <input type="text" name="" id="" />
+              </li>
+            </ul>
+          </div>
+          <div class="order__info">
+            <h3>주문 상품</h3>
+            <ul class="order__products">
+              <li>
+                <div class="product__image" id="productImg"></div>
+                <ul class="product__detail">
+                  <li>
+                    <span class="company">회사 이름</span>
+                  </li>
+                  <li>
+                    <a href="#" class="productName">상품 이름</a>
+                  </li>
+                  <li>
+                    <span class="productPrice">0원</span>
+                    <span class="quantity">1개</span>
+                  </li>
+                  <li>
+                    총 합계 금액
+                    <span class="productTotalPrice"> 0원</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </main>
+        <aside>
+          <h3>결제금액</h3>
+          <ul class="payment__info">
+            <li>
+              총 상품 금액
+              <span class="totalPrice">1,490,000원</span>
+            </li>
+            <li>
+              배송비
+              <span class="totalPrice">0원</span>
+            </li>
+            <li>
+              최종 결제 금액
+              <span class="totalPrice">1,490,000원</span>
+            </li>
+          </ul>
+          <button>결제하기</button>
+        </aside>
+      </form>
+    </div>
+  </body>
 </html>
