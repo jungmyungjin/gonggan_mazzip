@@ -27,7 +27,6 @@ orderRouter.post(
   loginRequired,
   asyncHandler(async (req, res, next) => {
     const userId = req.currentUserId;
-    console.log("/list/user userId:", userId);
     const userOrders = await orderService.getOrdersByUserId(userId);
 
     res.status(201).json(userOrders);
