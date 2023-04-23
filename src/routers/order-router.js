@@ -38,9 +38,26 @@ orderRouter.get(
     }
 
     const { page, perPage } = req.query;
-    const resultOrderList = await orderService({ page, perPage });
+    const resultOrderList = await userOrders.getOrderPage({ page, perPage });
 
-    res.status(201).json(userOrders, resultOrderList);
+    res.status(201).json(resultOrderList);
+  })
+);
+
+orderRouter.patch(
+  "/update",
+  loginRequired,
+  asyncHandler(async (req, res, next) => {
+    const { orderId, receiver, requestMessage, orderStatus } = req.body;
+
+    const toUpdate = {
+      ...(receiver && { receiver }),
+      ...(requestMessage && { requestMessage }),
+      ...(orderStatus && { orderStatus }),
+    };
+
+    const updateOrder = await orderService.setOrder(orderId, toUpdate);
+    res.status(201).json(updateOrder);
   })
 );
 
