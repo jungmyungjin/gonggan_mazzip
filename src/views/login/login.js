@@ -5,6 +5,18 @@ const loginBtn = document.querySelector('#login_btn');
 const signupBtn = document.querySelector('#signup_link_btn');
 const errorMessage = document.querySelector('#error_message');
 
+// 로그인 상태 확인 및 처리
+const checkLoginStatus = () => {
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    alert('이미 로그인 상태시네요^^');
+    window.location.href = '/';
+  }
+};
+
+// 페이지가 로드될 때 로그인 상태 확인
+checkLoginStatus();
+
 //로그인 버튼 기능 구현
 const loginFunc = async (e) => {
   e.preventDefault();
@@ -41,6 +53,5 @@ loginBtn.addEventListener('click', async (e) => {
 //회원가입 클릭시 회원가입페이지 이동
 signupBtn.addEventListener('click', (e) => {
   e.preventDefault();
-  window.location.href = '';
-  console.log('click');
+  window.location.href = '/register';
 });
