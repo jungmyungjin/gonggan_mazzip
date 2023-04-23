@@ -29,6 +29,10 @@ main {
   border: 1px solid #ddd;
 }
 
+.product-detail {
+  margin-left: 15px;
+}
+
 .product-checkbox {
   display: flex;
   align-items: center;
@@ -37,8 +41,10 @@ main {
 }
 
 .product-image {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+  background-position: center;
   background-color: aliceblue;
 }
 
