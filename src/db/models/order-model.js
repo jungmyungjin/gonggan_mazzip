@@ -23,6 +23,14 @@ export class OrderModel {
     const createdNewOrder = await Order.create(orderInfo);
     return createdNewOrder;
   }
+
+  async update({ orderId, update }) {
+    const filter = { _id: orderId };
+    const option = { new: true };
+    const updateOrder = await Order.findOneAndUpdate(filter, update, option);
+
+    return updateOrder;
+  }
 }
 
 const orderModel = new OrderModel();
