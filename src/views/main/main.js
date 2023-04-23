@@ -29,14 +29,14 @@ async function renderData() {
   const product = (product) => `
     <article>
       <a 
-        href="/products/detail?productId=${product.productId}"
+        href="/products/detail?productId=${product._id}"
         class="product__img" 
       >
         <img src="${product.imageUrl}" />
       </a>
       <div class="product__detail">
         <h3 class="product__title">
-          <a href="/products/detail?productId=${product.productId}">
+          <a href="/products/detail?productId=${product._id}">
             ${product.productName}
           </a>
         </h3>
