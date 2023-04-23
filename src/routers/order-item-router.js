@@ -9,13 +9,8 @@ orderItemRouter.post(
   "/create",
   loginRequired,
   asyncHandler(async (req, res, next) => {
-    const { orderId, productId, quantity, itemStatus } = req.body;
-    const newOrderItem = await orderItemService.addItem({
-      orderId,
-      productId,
-      quantity,
-      itemStatus,
-    });
+    const { items } = req.body;
+    const newOrderItem = await orderItemService.addItem(items);
     res.status(201).json(newOrderItem);
   })
 );
@@ -35,7 +30,19 @@ orderItemRouter.patch(
   "/update",
   loginRequired,
   asyncHandler(async (req, res, next) => {
-    const { productId } = req.body;
+    const { orderItemId, productId, quantity, itemStatus } = req.body;
+    const toUpdate = {
+      ...(quantity && { quantity }),
+      ...(itemStatus && { itemStatus }),
+    };
+
+    const updateOrderItem = await orderItemService.setItem(
+      orderItemId,
+      productId,
+      toUpdate
+    );
+
+    res.status(200).json(updateOrderItem);
   })
 );
 
