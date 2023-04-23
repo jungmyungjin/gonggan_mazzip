@@ -10,10 +10,12 @@ function validateProductListRequest(req, res, next) {
         .json({ message: "존재하지 않는 카테고리 입니다." });
     }
   }
-  if (isNaN(parseInt(page)) || isNaN(parseInt(perPage))) {
-    return res
-      .status(400)
-      .json({ message: "페이지 및 페이지 크기는 숫자 여야 합니다." });
+  if ((page, perPage)) {
+    if (isNaN(parseInt(page)) || isNaN(parseInt(perPage))) {
+      return res
+        .status(400)
+        .json({ message: "페이지 및 페이지 크기는 숫자 여야 합니다." });
+    }
   }
   next();
 }
