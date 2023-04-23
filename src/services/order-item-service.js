@@ -17,7 +17,7 @@ class OrderItemService {
     const productId = createNewOrderItem.map((val) => val.productId);
     const quantity = createNewOrderItem.map((val) => val.quantity);
 
-    productService.decreaseProductStock(productId, quantity);
+    productService.decreaseProductsStock(items);
     return createNewOrderItem;
   }
 
