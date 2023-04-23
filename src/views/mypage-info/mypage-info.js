@@ -1,11 +1,11 @@
-import updateUser from '/mypage-info/mypage-info_updateUser.js';
-import deleteUser from '/mypage-info/mypage-info-userDelete.js';
+import { searchAddress } from '/mypage-info/mypage-info_daumAPI.js';
+import { getUserInfo } from '/mypage-info/mypage-info_getUserInfo.js';
 
 const emailInput = document.getElementById('email');
 const nameInput = document.getElementById('name');
-const passwordInput = document.getElementById('password');
-const newPasswordInput = document.getElementById('new_password');
-const confirmNewPasswordInput = document.getElementById('confirm_new_password');
+const currentPassword = document.getElementById('currentPassword');
+const password = document.getElementById('password');
+const confirmPassword = document.getElementById('confirm_password');
 const phoneInput = document.getElementById('phone');
 const postalCode = document.getElementById('postalCode');
 const address1Input = document.getElementById('address1');
@@ -16,10 +16,9 @@ const form = document.querySelector('form');
 const userDeleteButton = document.getElementById('userDelete');
 const searchAddressBtn = document.querySelector('#searchAddressButton');
 
-let userInfo;
-
 // 페이지가 로드되면 유저 정보 받기
 window.addEventListener('load', async () => {
+  let userInfo;
   // 토큰 여부를 확인해서 로그인 상태를 확인
   const isLoggedIn = sessionStorage.getItem('token') !== null;
   if (!isLoggedIn) {
@@ -30,15 +29,7 @@ window.addEventListener('load', async () => {
 
   // 로그인 상태인 경우
   try {
-    const response = await fetch('/api/users/info', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-      credentials: 'include',
-    });
-    const data = await response.json();
+    const data = await getUserInfo();
 
     // 각각의 input 창에 데이터 출력
     emailInput.value = data.email || '';
@@ -51,137 +42,86 @@ window.addEventListener('load', async () => {
     userInfo = data;
   } catch (error) {
     console.error(error);
-    alert('회원정보를 가져오는 중 오류가 발생했습니다.');
+    alert(error.message);
     window.location.href = '/';
   }
 });
 
-// 폼 제출 이벤트
+// 회원 정보 수정 폼 제출 이벤트 리스너 등록
 form.addEventListener('submit', async (event) => {
-  event.preventDefault(); // 폼 제출 막기
+  event.preventDefault();
 
-  const currentPassword = passwordInput.value;
-  const newPassword = newPasswordInput.value;
-  const confirmNewPassword = confirmNewPasswordInput.value;
-  const phone = phoneInput.value;
-  const address1 = address1Input.value;
-  const address2 = address2Input.value;
+  // 입력 값 검증
+  if (!currentPassword.value) {
+    alert('회원 정보를 수정하려면 현재 비밀번호를 입력해주세요.');
+    return;
+  }
 
-  let errorMessage = '';
+  if (password.value && password.value !== confirmPassword.value) {
+    errorMessageDiv.textContent =
+      '변경 비밀번호와 확인 값이 일치하지 않습니다.';
+    return;
+  }
 
-  // 변경된 정보를 저장할 객체
-  const updateData = {};
+  // 서버에 입력값 전송
+  const updateData = {
+    phoneNumber: phoneInput.value,
+    address: {
+      postalCode: postalCode.value,
+      address1: address1Input.value,
+      address2: address2Input.value,
+    },
+    currentPassword: currentPassword.value,
+    password: password.value,
+  };
 
-  // 비밀번호 변경을 위한 값 입력 확인
-  if (
-    newPassword !== '' ||
-    confirmNewPassword !== '' ||
-    currentPassword !== ''
-  ) {
-    // 원래 비밀번호 확인
-    const passwordCheckResponse = await fetch('/api/users/update', {
-      method: 'POST',
+  try {
+    const response = await fetch('/api/users/update', {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       },
-      body: JSON.stringify({ password: currentPassword }),
-      credentials: 'include',
+      body: JSON.stringify(updateData),
     });
 
-    if (!passwordCheckResponse.ok) {
-      errorMessage = '현재 비밀번호가 일치하지 않습니다.';
-    } else if (
-      newPassword === '' ||
-      confirmNewPassword === '' ||
-      currentPassword === ''
-    ) {
-      errorMessage =
-        '비밀번호를 변경하기 위해서는 모든 비밀번호 값을 입력해야 합니다.';
-    } else if (newPassword !== confirmNewPassword) {
-      errorMessage =
-        '변경 비밀번호와 변경 비밀번호 확인 값이 일치하지 않습니다.';
+    if (!response.ok) {
+      alert('비밀번호가 일치하지 않습니다! 다시 확인 해주세요!!');
     } else {
-      // 변경된 비밀번호를 updateData 객체에 추가
-      updateData.currentPassword = currentPassword;
-      updateData.password = newPassword;
-    }
-  }
+      const updatedUserInfo = await response.json();
 
-  // 휴대폰 번호와 주소 값이 변경되었는지 확인하고, 변경된 경우 updateData 객체에 추가
-  if (phone !== userInfo.phone) {
-    updateData.phone = phone;
-  }
-  if (address1 !== userInfo.address1 || address2 !== userInfo.address2) {
-    updateData.address = { address1, address2 };
-  }
-
-  // 유저 정보가 변경되었으면 서버에 업데이트
-  if (Object.keys(updateData).length > 0) {
-    try {
-      await updateUser(userInfo, updateData);
-      alert('유저 정보가 변경되었습니다.');
+      alert('회원 정보가 수정되었습니다.');
       window.location.reload();
-    } catch (error) {
-      errorMessage = error.message;
     }
+  } catch (error) {
+    submitErrorMessageDiv.textContent = error.message;
   }
-
-  if (errorMessage !== '') {
-    errorMessageDiv.innerHTML = `<p>${errorMessage}</p>`;
-  } else {
-    errorMessageDiv.innerHTML = '';
-  }
-
-  submitErrorMessageDiv.innerHTML = '';
 });
 
-// userDeleteButton 클릭 시 deleteUser 함수 실행
 userDeleteButton.addEventListener('click', async () => {
-  const confirmDelete = confirm('정말 회원 탈퇴를 하시겠습니까?');
+  try {
+    // API 호출하여 회원 정보 삭제
+    const response = await fetch('/api/users/delete', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+      },
+      credentials: 'include',
+    });
+    const data = await response.json();
 
-  if (confirmDelete) {
-    await deleteUser(userInfo); // 서버에서 유저 정보 삭제
-    alert('회원 탈퇴가 완료되었습니다.');
-    window.location.href = '/'; // 메인 페이지로 이동
+    // 세션 스토리지에 저장되어 있는 로그인 토큰 삭제
+    sessionStorage.removeItem('token');
+    alert('회원 탈퇴가 성공적으로 이루어졌습니다.');
+
+    // 메인 페이지로 이동
+    window.location.href = '/';
+  } catch (error) {
+    // 에러 메시지 출력
+    throw new Error('회원 정보 삭제 중 오류가 발생했습니다.');
   }
 });
-
-// 주소찾기 버튼 구현 함수
-function searchAddress() {
-  const postalCodeInput = document.getElementById('postalCode');
-  new daum.Postcode({
-    oncomplete: function (data) {
-      let addr = '';
-      let extraAddr = '';
-
-      if (data.userSelectedType === 'R') {
-        addr = data.roadAddress;
-      } else {
-        addr = data.jibunAddress;
-      }
-
-      if (data.userSelectedType === 'R') {
-        if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-          extraAddr += data.bname;
-        }
-        if (data.buildingName !== '' && data.apartment === 'Y') {
-          extraAddr +=
-            extraAddr !== '' ? ', ' + data.buildingName : data.buildingName;
-        }
-        if (extraAddr !== '') {
-          extraAddr = ' (' + extraAddr + ')';
-        }
-      } else {
-      }
-
-      postalCodeInput.value = data.zonecode;
-      address1Input.value = `${addr} ${extraAddr}`;
-      address2Input.placeholder = '상세 주소를 입력해 주세요.';
-      address2Input.focus();
-    },
-  }).open();
-}
 
 // 주소찾기 버튼에 click 이벤트 리스너 등록
 searchAddressBtn.addEventListener('click', function () {
