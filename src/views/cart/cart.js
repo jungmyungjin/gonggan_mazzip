@@ -1,33 +1,33 @@
 const productList = document.querySelector('.product-list');
+const purchaseButton = document.querySelector('#purchaseButton');
 
-// 데이터 가져와서 HTML에 뿌려주기
-fetch('dummy.json')
-  .then((response) => response.json())
-  .then((data) => {
-    // 상품 총액 계산
-    function calculateTotal() {
-      const checkboxes = document.querySelectorAll(
-        '.product-item input[type="checkbox"]'
-      );
-      const totalEl = document.querySelector('#productsTotal');
-      const orderEl = document.querySelector('#orderTotal');
+// 로컬 스토리지에서 데이터 가져오기
+const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
 
-      let total = 0;
+// 상품 총액 계산
+function calculateTotal() {
+  const checkboxes = document.querySelectorAll(
+    '.product-item input[type="checkbox"]'
+  );
+  const totalEl = document.querySelector('#productsTotal');
+  const orderEl = document.querySelector('#orderTotal');
 
-      checkboxes.forEach((checkbox, index) => {
-        if (checkbox.checked) {
-          const item = data[index];
-          total += item.price * item.quantity;
-        }
-      });
+  let total = 0;
 
-      totalEl.textContent = `${total.toLocaleString()}원`;
-      orderEl.textContent = `${total.toLocaleString()}원`;
+  checkboxes.forEach((checkbox, index) => {
+    if (checkbox.checked) {
+      const item = cartItems[index]; // 이 부분을 수정했습니다.
+      total += item.price * item.quantity;
     }
+  });
 
-    const productHtml = data
-      .map((item) => {
-        return `
+  totalEl.textContent = `${total.toLocaleString()}원`;
+  orderEl.textContent = `${total.toLocaleString()}원`;
+}
+
+const productHtml = cartItems
+  .map((item) => {
+    return `
         <li class="product-item">
           <div class="product-checkbox">
             <input type="checkbox" name="" id="" checked />
@@ -55,66 +55,96 @@ fetch('dummy.json')
           </span>
         </li>
       `;
-      })
-      .join('');
+  })
+  .join('');
 
-    // 생성한 HTML 코드를 productList에 삽입
-    productList.innerHTML += productHtml;
+// 생성한 HTML 코드를 productList에 삽입
+productList.innerHTML += productHtml;
 
-    document.querySelectorAll('.product-item').forEach((item, index) => {
-      const minusBtn = item.querySelector('.minusBtn');
-      const plusBtn = item.querySelector('.plusBtn');
-      const quantityEl = item.querySelector('.quantity');
-      const priceEl = item.querySelector('.product-price');
-      const totalPriceEl = item.querySelector('.product-total-price');
+document.querySelectorAll('.product-item').forEach((item, index) => {
+  const minusBtn = item.querySelector('.minusBtn');
+  const plusBtn = item.querySelector('.plusBtn');
+  const quantityEl = item.querySelector('.quantity');
+  const priceEl = item.querySelector('.product-price');
+  const totalPriceEl = item.querySelector('.product-total-price');
 
-      const changeQuantity = (num) => {
-        const currentQuantity = Number(quantityEl.innerText);
-        const currentPrice = parseInt(priceEl.innerText.replaceAll(',', ''));
+  const changeQuantity = (num) => {
+    const currentQuantity = Number(quantityEl.innerText);
+    const currentPrice = parseInt(priceEl.innerText.replaceAll(',', ''));
 
-        if (currentQuantity + num > 0) {
-          const newQuantity = currentQuantity + num;
-          quantityEl.innerText = newQuantity;
+    if (currentQuantity + num > 0) {
+      const newQuantity = currentQuantity + num;
+      quantityEl.innerText = newQuantity;
 
-          const newTotalPrice = newQuantity * currentPrice;
-          totalPriceEl.innerText = newTotalPrice.toLocaleString();
+      const newTotalPrice = newQuantity * currentPrice;
+      totalPriceEl.innerText = newTotalPrice.toLocaleString();
 
-          data[index].quantity = newQuantity;
-          data[index].totalPrice = newTotalPrice;
-        }
-      };
+      cartItems[index].quantity = newQuantity;
+      cartItems[index].totalPrice = newTotalPrice;
+    }
+  };
 
-      minusBtn.addEventListener('click', () => {
-        changeQuantity(-1);
-        calculateTotal();
-      });
-      plusBtn.addEventListener('click', () => {
-        changeQuantity(1);
-        calculateTotal();
-      });
-
-      // 모두 선택 체크박스 기능 연동
-      const productList = document.querySelector('.product-list');
-      productList.addEventListener('change', (event) => {
-        if (event.target.id === 'allSelectCheckbox') {
-          const checkboxes = document.querySelectorAll(
-            '.product-checkbox input[type="checkbox"]'
-          );
-          checkboxes.forEach((checkbox) => {
-            checkbox.checked = event.target.checked;
-          });
-        } else {
-          const allCheckbox = document.querySelector('#allSelectCheckbox');
-          const checkboxes = document.querySelectorAll(
-            '.product-checkbox input[type="checkbox"]'
-          );
-          const isCheckedAll = [...checkboxes].every(
-            (checkbox) => checkbox.checked
-          );
-          allCheckbox.checked = isCheckedAll;
-        }
-        calculateTotal();
-      });
-    });
+  minusBtn.addEventListener('click', () => {
+    changeQuantity(-1);
     calculateTotal();
   });
+  plusBtn.addEventListener('click', () => {
+    changeQuantity(1);
+    calculateTotal();
+  });
+
+  // 모두 선택 체크박스 기능 연동
+  const productList = document.querySelector('.product-list');
+  productList.addEventListener('change', (event) => {
+    if (event.target.id === 'allSelectCheckbox') {
+      const checkboxes = document.querySelectorAll(
+        '.product-checkbox input[type="checkbox"]'
+      );
+      checkboxes.forEach((checkbox) => {
+        checkbox.checked = event.target.checked;
+      });
+    } else {
+      const allCheckbox = document.querySelector('#allSelectCheckbox');
+      const checkboxes = document.querySelectorAll(
+        '.product-checkbox input[type="checkbox"]'
+      );
+      const isCheckedAll = [...checkboxes].every(
+        (checkbox) => checkbox.checked
+      );
+      allCheckbox.checked = isCheckedAll;
+    }
+    calculateTotal();
+  });
+});
+// 삭제 버튼 이벤트 추가
+document.querySelectorAll('.product-item').forEach((item, index) => {
+  const closeButton = item.querySelector('.close-button');
+
+  closeButton.addEventListener('click', () => {
+    // 상품 삭제
+    productList.removeChild(item);
+    cartItems.splice(index, 1);
+
+    // 로컬 스토리지 업데이트
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+    // 총액 계산
+    calculateTotal();
+  });
+});
+calculateTotal();
+
+purchaseButton.addEventListener('click', () => {
+  const checkedItems = cartItems.filter((item, index) => {
+    const checkbox = document.querySelectorAll(
+      '.product-item input[type="checkbox"]'
+    )[index];
+    return checkbox.checked;
+  });
+
+  // 로컬 스토리지에 체크된 상품들만 저장
+  localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
+
+  // 페이지 이동
+  history.pushState({ checkedItems }, '', '/order');
+});
