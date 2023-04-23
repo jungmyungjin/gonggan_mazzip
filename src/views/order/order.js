@@ -61,7 +61,7 @@ async function getUserInfo() {
     }
     return userInfo;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 }
 
@@ -193,7 +193,6 @@ async function createOrder() {
     }
 
     const orderResult = await response.json();
-    console.log(orderResult);
     const orderItemsResult = await createOrderItems(orderResult._id);
     completeOrder(orderItemsResult);
   } catch (err) {
