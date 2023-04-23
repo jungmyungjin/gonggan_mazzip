@@ -67,14 +67,23 @@ class ProductService {
     return filteredProductList;
   }
 
+  async increaseProductStock(productId, quantity) {
+    const product = await this.productModel.findById(productId);
+    if (!product) {
+      throw new Error("Product not found");
+    }
+    product.stock += parseInt(quantity);
+    await product.save();
+  }
+
   //productIds = [{productId: <productId>, quantity: <quantity>}, {productId: <productId>, quantity: <quantity>}, ...]
-  async increaseProductStock(productIds) {
+  async decreaseProductsStock(productIds) {
     const productObj = {};
-    for (const product of testArg) {
+    for (const product of productIds) {
+      productObj[product.productId] = parseInt(product.quantity);
       if (!product.productId || !parseInt(product.quantity)) {
         continue;
       }
-      productObj[product.productId] = parseInt(product.quantity);
     }
 
     const productList = await this.productModel.read({
@@ -88,20 +97,11 @@ class ProductService {
     const bulkUpdateOps = productList.map((product) => ({
       updateOne: {
         filter: { _id: product._id },
-        update: { $inc: { stock: productObj[product._id] } },
+        update: { $inc: { stock: -productObj[product._id] } },
       },
     }));
 
     await this.productModel.model.bulkWrite(bulkUpdateOps);
-  }
-
-  async decreaseProductStock(productId, quantity) {
-    const product = await this.productModel.findById(productId);
-    if (!product) {
-      throw new Error("Product not found");
-    }
-    product.stock -= parseInt(quantity);
-    await product.save();
   }
 }
 
