@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="/common.css" />
     <link rel="stylesheet" href="/mypage-info/mypage-info.css" />
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script type="module" src="/mypage-info//mypage-info.js" defer></script>
+    <script type="module" src="/mypage-info/mypage-info.js" defer></script>
     <script
       type="module"
-      src="/mypage-info//mypage-info_updateUser.js"
+      src="/mypage-info/mypage-info_daumAPI.js"
       defer
     ></script>
     <script
       type="module"
-      src="/mypage-info//mypage-info-userDelete.js"
+      src="/mypage-info/mypage-info_daumAPI.js"
       defer
     ></script>
   </head>
@@ -33,17 +33,17 @@
       </div>
       <div>
         <label for="password">현재 비밀번호</label>
-        <input type="password" id="password" name="password" />
+        <input type="password" id="currentPassword" name="password" />
       </div>
       <div>
         <label for="new_assword">변경 비밀번호</label>
-        <input type="password" id="new_password" name="password" />
+        <input type="password" id="password" name="password" />
       </div>
       <div>
         <label for="confirm_password">변경 비밀번호 확인</label>
         <input
           type="password"
-          id="confirm_new_password"
+          id="confirm_password"
           name="confirm_new_password"
         />
       </div>
