@@ -7,13 +7,13 @@ class ProductModel {
     this.model = mongoose.model("Product", ProductSchema);
   }
 
-  async findOne(query) {
-    const product = await this.model.findOne(query);
+  async findById(productId) {
+    const product = await this.model.findOne({ _id: productId });
     return product;
   }
 
   async createDummyData() {
-    this.findOne().then((product) => {
+    this.model.findOne().then((product) => {
       if (product) {
         console.log("🌿 몽고디비 더미데이터가 이미 존재합니다");
         console.log("🌿 몽고디비 더미데이터 생성 작업을 건너 뜁니다.");

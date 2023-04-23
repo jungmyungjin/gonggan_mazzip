@@ -6,9 +6,8 @@ class ProductService {
   }
 
   async getProductInfo(productId) {
-    const productInfo = await this.productModel.model.findOne({
-      _id: productId,
-    });
+    const productInfo = await this.productModel.findById(productId);
+
     if (!productInfo) {
       throw new Error(
         "해당 상품이 존재하지 않습니다. 다시 한 번 확인해 주세요."
@@ -32,7 +31,18 @@ class ProductService {
       .skip((currentPage - 1) * itemsPerPage)
       .limit(itemsPerPage)
       .exec();
-    return productPage;
+
+    // 전체 페이지 수 계산
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // 페이지네이션 정보와 함께 제품 목록 반환
+    return {
+      currentPage,
+      totalPages,
+      itemsPerPage,
+      totalItems,
+      productPage,
+    };
   }
 
   async getProductByCategory({ category, page = 1, perPage = 10 }) {
@@ -51,14 +61,14 @@ class ProductService {
   }
 
   async getProductByProductIds(productIds) {
-    const filteredProductList = await this.productModel.model.read({
-      productId: { $in: productIds },
+    const filteredProductList = await this.productModel.read({
+      _id: { $in: productIds },
     });
     return filteredProductList;
   }
 
   async increaseProductStock(productId, quantity) {
-    const product = await this.productModel.model.findOne({ productId });
+    const product = await this.productModel.findById(productId);
     if (!product) {
       throw new Error("Product not found");
     }
@@ -66,13 +76,32 @@ class ProductService {
     await product.save();
   }
 
-  async decreaseProductStock(productId, quantity) {
-    const product = await this.productModel.model.findOne({ productId });
-    if (!product) {
+  //productIds = [{productId: <productId>, quantity: <quantity>}, {productId: <productId>, quantity: <quantity>}, ...]
+  async decreaseProductsStock(productIds) {
+    const productObj = {};
+    for (const product of productIds) {
+      productObj[product.productId] = parseInt(product.quantity);
+      if (!product.productId || !parseInt(product.quantity)) {
+        continue;
+      }
+    }
+
+    const productList = await this.productModel.read({
+      _id: { $in: Object.keys(productObj) },
+    });
+
+    if (!productList?.length) {
       throw new Error("Product not found");
     }
-    product.stock -= parseInt(quantity);
-    await product.save();
+
+    const bulkUpdateOps = productList.map((product) => ({
+      updateOne: {
+        filter: { _id: product._id },
+        update: { $inc: { stock: -productObj[product._id] } },
+      },
+    }));
+
+    await this.productModel.model.bulkWrite(bulkUpdateOps);
   }
 }
 
