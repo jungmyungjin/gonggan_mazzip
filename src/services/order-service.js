@@ -40,6 +40,14 @@ class OrderService {
 
     return { orders, currentPage, itemsPerPage, totalPage };
   }
+
+  async setOrder(orderId, toUpdate) {
+    const updatedOrder = await this.orderModel.update({
+      orderId,
+      update: toUpdate,
+    });
+    return updatedOrder;
+  }
 }
 
 const orderService = new OrderService(orderModel);
