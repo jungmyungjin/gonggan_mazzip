@@ -5,12 +5,12 @@ const Order = model("orders", OrderSchema);
 
 export class OrderModel {
   async findById(orderId) {
-    const order = await Order.findOne({ orderId });
+    const order = await Order.find({ orderId });
     return order;
   }
 
   async findByUserId(userId) {
-    const order = await Order.find({ userId });
+    const order = await Order.find({ userId }).populate("userId");
     return order;
   }
 

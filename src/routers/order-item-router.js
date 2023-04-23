@@ -4,7 +4,6 @@ import { orderItemService } from "../services/order-item-service";
 import asyncHandler from "../middlewares/async-handler";
 
 const orderItemRouter = Router();
-const sampleOrderItem = require("../db/sampleData/sampleOrderItme.json");
 
 orderItemRouter.post(
   "/create",
@@ -25,11 +24,18 @@ orderItemRouter.post(
   "/list/order/",
   loginRequired,
   asyncHandler(async (req, res, next) => {
-    const { orderId, productId } = req.body;
-    console.log("orderId:", orderId, "productId:", productId);
+    const { orderId } = req.body;
     const orderItems = await orderItemService.getItemsByOrderId(orderId);
 
     res.status(200).json(orderItems);
+  })
+);
+
+orderItemRouter.patch(
+  "/update",
+  loginRequired,
+  asyncHandler(async (req, res, next) => {
+    const { productId } = req.body;
   })
 );
 

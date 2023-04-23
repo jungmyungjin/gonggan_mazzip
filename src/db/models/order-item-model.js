@@ -10,7 +10,10 @@ export class OrderItemModel {
   }
 
   async findAllByOrderId(orderId) {
-    const orderItems = await OrderItem.find({ orderId });
+    const orderItems = await OrderItem.find({ orderId }).populate([
+      "orderId",
+      "productId",
+    ]);
     return orderItems;
   }
 

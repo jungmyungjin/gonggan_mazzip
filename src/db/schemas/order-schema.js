@@ -1,16 +1,9 @@
 import { Schema } from "mongoose";
-import { v4 as uuidv4 } from "uuid";
 
 const OrderSchema = new Schema(
   {
-    _id: {
-      type: String,
-      default: () => {
-        return uuidv4();
-      },
-    },
     userId: {
-      type: String,
+      type: Schema.Types.ObjectId,
       ref: "users",
       required: true,
     },
