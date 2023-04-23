@@ -23,7 +23,7 @@ orderRouter.post(
   })
 );
 
-orderRouter.post(
+orderRouter.get(
   "/list/user",
   loginRequired,
   asyncHandler(async (req, res, next) => {
@@ -37,7 +37,10 @@ orderRouter.post(
       }
     }
 
-    res.status(201).json(userOrders);
+    const { page, perPage } = req.query;
+    const resultOrderList = await orderService({ page, perPage });
+
+    res.status(201).json(userOrders, resultOrderList);
   })
 );
 
