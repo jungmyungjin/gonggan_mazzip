@@ -17,6 +17,23 @@ class ProductService {
     return productInfo;
   }
 
+  async getProductList({ page = 1, perPage = 10, category = undefined }) {
+    let resultProductList = [];
+    if (category) {
+      resultProductList = await this.getProductByCategory({
+        category,
+        page,
+        perPage,
+      });
+    } else {
+      resultProductList = await this.getProductAll({
+        page,
+        perPage,
+      });
+    }
+    return resultProductList;
+  }
+
   async getProductAll({ page = 1, perPage = 10 }) {
     // 현재 페이지와 페이지당 제한 항목 수
     const currentPage = parseInt(page, 10) > 0 ? parseInt(page, 10) : 1;
