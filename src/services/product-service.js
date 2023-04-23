@@ -51,18 +51,37 @@ class ProductService {
 
   async getProductByProductIds(productIds) {
     const filteredProductList = await this.productModel.read({
-      productId: { $in: productIds },
+      _id: { $in: productIds },
     });
     return filteredProductList;
   }
 
-  async increaseProductStock(productId, quantity) {
-    const product = await this.productModel.findById(productId);
-    if (!product) {
+  //productIds = [{productId: <productId>, quantity: <quantity>}, {productId: <productId>, quantity: <quantity>}, ...]
+  async increaseProductStock(productIds) {
+    const productObj = {};
+    for (const product of testArg) {
+      if (!product.productId || !parseInt(product.quantity)) {
+        continue;
+      }
+      productObj[product.productId] = parseInt(product.quantity);
+    }
+
+    const productList = await this.productModel.read({
+      _id: { $in: Object.keys(productObj) },
+    });
+
+    if (!productList?.length) {
       throw new Error("Product not found");
     }
-    product.stock += parseInt(quantity);
-    await product.save();
+
+    const bulkUpdateOps = productList.map((product) => ({
+      updateOne: {
+        filter: { _id: product._id },
+        update: { $inc: { stock: productObj[product._id] } },
+      },
+    }));
+
+    await this.productModel.model.bulkWrite(bulkUpdateOps);
   }
 
   async decreaseProductStock(productId, quantity) {
