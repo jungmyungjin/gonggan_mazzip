@@ -32,17 +32,11 @@ class ProductService {
       .limit(itemsPerPage)
       .exec();
 
-    // 전체 페이지 수 계산
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    // 전체 페이지 수 계산 (현재 불필요 기능)
+    // const totalPages = Math.ceil(totalItems / itemsPerPage);
 
     // 페이지네이션 정보와 함께 제품 목록 반환
-    return {
-      currentPage,
-      totalPages,
-      itemsPerPage,
-      totalItems,
-      productPage,
-    };
+    return productPage;
   }
 
   async getProductByCategory({ category, page = 1, perPage = 10 }) {
