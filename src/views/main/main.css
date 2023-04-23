@@ -1,4 +1,5 @@
 .banner__container {
+  position: relative;
   width: 1200px;
   height: 450px;
   padding: 30px 0px;
@@ -6,13 +7,46 @@
   margin: 0 auto;
 }
 
-.banner__container .img {
+.banner__detail {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 60px);
+  padding: 60px;
+  box-sizing: border-box;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.01),
+    rgba(0, 0, 0, 0.3)
+  );
+  border-radius: 10px;
+  font-family: var(--title-font);
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.banner__detail h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.banner__detail p {
+  font-size: 26px;
+}
+
+.banner__image {
   width: 100%;
   height: 100%;
-  padding: 50px 0px;
-  box-sizing: border-box;
   border-radius: 10px;
-  background-color: coral;
+  background-image: url("https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-position: top;
+  background-size: cover;
 }
 
 .product__container {
@@ -38,21 +72,49 @@
 }
 
 .product__container article .product__img {
+  display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  background-color: lightcoral;
   border-radius: 10px;
-  margin-bottom: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.product__container article .product__img:hover img {
+  transform: scale(1.1);
+}
+
+.product__container article .product__img img {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s;
 }
 
 .product__container article h3.product__title {
-  font: 600 17px/1.2 var(--main-font);
-  color: #333;
   margin-bottom: 10px;
+}
+
+.product__container article h3.product__title a {
+  display: inline-block;
+  font: 600 14px/1.7 var(--main-font);
+  color: #333;
 }
 
 .product__container article p.product__price {
   font: 600 16px/1 var(--title-font);
   text-align: right;
   color: var(--sub-2-color);
+}
+
+.product__container p.errMsg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+  color: #333;
+  font-weight: 600;
+  font-family: var(--main-font);
+  font-size: 16px;
+  margin-bottom: 30px;
 }

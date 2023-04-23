@@ -10,8 +10,14 @@ main.product__container {
 .product__image {
   width: 500px;
   height: 500px;
-  background-color: darkkhaki;
+  background-color: lightgray;
   border-radius: 10px;
+  overflow: hidden;
+}
+
+.product__image img {
+  width: 100%;
+  height: 100%;
 }
 
 .product__detail {
@@ -133,7 +139,7 @@ main.product__container {
 .product__purchase button {
   width: calc(50% - 10px);
   height: 55px;
-  border: 1.5px solid var(--main-color);
+  border: 1.5px solid var(--sub-2-color);
   border-radius: 3px;
   font-size: 14px;
   font-weight: 600;
@@ -145,17 +151,17 @@ main.product__container {
 .product__purchase .cartBtn {
   margin-right: 20px;
   background-color: #fff;
-  color: var(--main-color);
+  color: var(--sub-2-color);
+}
+
+.product__purchase .buyBtn {
+  background-color: var(--sub-2-color);
+  color: #fff;
 }
 
 .product__purchase .cartBtn:hover,
 .product__purchase .buyBtn:hover {
-  background-color: var(--sub-2-color);
-  border-color: var(--sub-2-color);
-  color: #fff;
-}
-
-.product__purchase #buyBtn {
   background-color: var(--main-color);
+  border-color: var(--main-color);
   color: #fff;
 }

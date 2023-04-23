@@ -1,0 +1,54 @@
+[
+  [
+    {
+      "orderId": "4afd8756-ec1b-4d6a-a5f0-20f723b1400a",
+      "productId": "9b7392b7-ee35-4010-80f7-d2ac92e4576c",
+      "quantity": 3,
+      "itemStatus": "구매 완료"
+    },
+    {
+      "orderId": "4afd8756-ec1b-4d6a-a5f0-20f723b1400a",
+      "productId": "8121b87a-4db1-4811-b3c9-508942d0475e",
+      "quantity": 1,
+      "itemStatus": "구매 완료"
+    },
+    {
+      "orderId": "4afd8756-ec1b-4d6a-a5f0-20f723b1400a",
+      "productId": "e8c91a45-7bf1-42ca-ae80-efd6636e6658",
+      "quantity": 2,
+      "itemStatus": "취소 완료"
+    },
+    {
+      "orderId": "4afd8756-ec1b-4d6a-a5f0-20f723b1400a",
+      "productId": "f4a6a84e-7f6d-47af-b487-27ca89628635",
+      "quantity": 5,
+      "itemStatus": "구매 완료"
+    }
+  ],
+  [
+    {
+      "orderId": "0c696723-6177-44b2-b4e4-9a4876b591e2",
+      "productId": "9b7392b7-ee35-4010-80f7-d2ac92e4576c",
+      "quantity": 3,
+      "itemStatus": "구매 완료"
+    },
+    {
+      "orderId": "0c696723-6177-44b2-b4e4-9a4876b591e2",
+      "productId": "8121b87a-4db1-4811-b3c9-508942d0475e",
+      "quantity": 1,
+      "itemStatus": "구매 완료"
+    },
+    {
+      "orderId": "0c696723-6177-44b2-b4e4-9a4876b591e2",
+      "productId": "e8c91a45-7bf1-42ca-ae80-efd6636e6658",
+      "quantity": 2,
+      "itemStatus": "취소 완료"
+    },
+    {
+      "orderId": "0c696723-6177-44b2-b4e4-9a4876b591e2",
+      "productId": "f4a6a84e-7f6d-47af-b487-27ca89628635",
+      "quantity": 5,
+      "itemStatus": "구매 완료"
+    }
+  ]
+]

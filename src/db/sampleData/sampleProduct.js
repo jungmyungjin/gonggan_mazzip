@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 /*
 	- .js 파일로 작성
 		- json으로 하려면 fs모듈로 파일을 열고 map으로 일일이 추가해야하는데, 
@@ -8,7 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const products = [
   {
-    productId: uuidv4(),
     productName: "애슐리 원목 전신거울",
     company: "오굿즈",
     price: 33900,
@@ -19,7 +17,6 @@ const products = [
     description: "감성적인 인테리어의 완성, 모두가 사랑하는 엔틱 전신거울",
   },
   {
-    productId: uuidv4(),
     productName: "순수원목 선반장",
     company: "먼데이하우스",
     price: 10900,
@@ -31,7 +28,6 @@ const products = [
       "순수원목만을 사용하여 만든 선반장으로 먼데이하우스의 대표모델입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "에펠의자",
     company: "프리메이드",
     price: 29900,
@@ -43,7 +39,6 @@ const products = [
       "매끈한 라인의 편안한 디자인 체어, 이제 세련된 편안함에 앉아 보세요.",
   },
   {
-    productId: uuidv4(),
     productName: "LERSTA 플로어 장스탠드",
     company: "이케아",
     price: 31900,
@@ -54,7 +49,6 @@ const products = [
     description: "",
   },
   {
-    productId: uuidv4(),
     productName:
       "뮤즈 순면 고밀도 바이오워싱 호텔침구 알러지케어 차렵이불세트 ",
     company: "에이트룸",
@@ -67,7 +61,6 @@ const products = [
       "호텔에서 만났던 쾌적한 그 느낌 그대로 진짜 호텔 침구를 만나보세요.",
   },
   {
-    productId: uuidv4(),
     productName: "베가 폴라 투명 접이식의자",
     company: "영가구",
     price: 25600,
@@ -78,7 +71,6 @@ const products = [
     description: "폴딩체어의 새로운 패러다임 베가 플리아!",
   },
   {
-    productId: uuidv4(),
     productName: "링본 사이잘룩 러그 카페트",
     company: "스칸디앤홈",
     price: 7700,
@@ -89,7 +81,6 @@ const products = [
     description: "먼지없는 헤링본 사이잘룩 러그",
   },
   {
-    productId: uuidv4(),
     productName: "뉴오비큠 무선청소기",
     company: "뉴오비큠",
     price: 269000,
@@ -100,7 +91,6 @@ const products = [
     description: "보여주고 싶은 오브제 청소기 오비큡",
   },
   {
-    productId: uuidv4(),
     productName: "전기포트 속이 보이는 깨끗한 하티포트",
     company: "보아르",
     price: 37900,
@@ -111,7 +101,6 @@ const products = [
     description: "속이 보이는 깨끗한 하티포트로 산뜻한 하루",
   },
   {
-    productId: uuidv4(),
     productName: "노르딕감성 커피머신PCM-NF15",
     company: "플랜잇",
     price: 159000,
@@ -122,7 +111,6 @@ const products = [
     description: "북유럽 우드포인트 커피머신 노르딕",
   },
   {
-    productId: uuidv4(),
     productName: "터보 항공기 드라이기 MG1800 PLUS",
     company: "JMW",
     price: 59000,
@@ -134,7 +122,6 @@ const products = [
   },
   // 페이지네이션 테스트를 위한 대충만든 더미데이터
   {
-    productId: uuidv4(),
     productName: "벤티 인테리어 쇼파",
     company: "더디자인",
     price: 185000,
@@ -145,7 +132,6 @@ const products = [
       "감성적인 분위기를 연출하는 벤티 인테리어 쇼파입니다. 1인 가구에 적합합니다.",
   },
   {
-    productId: uuidv4(),
     productName: "아마론 LED 테이블 램프",
     company: "조명나라",
     price: 45000,
@@ -155,7 +141,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 아마론 LED 테이블 램프입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "스카이 스트라이프 커튼",
     company: "커튼코리아",
     price: 8900,
@@ -165,7 +150,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 스카이 스트라이프 커튼입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "라바 알루미늄 핸들 냄비세트",
     company: "쿡잇",
     price: 65000,
@@ -176,7 +160,6 @@ const products = [
       "감성적인 분위기를 연출하는 라바 알루미늄 핸들 냄비세트입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "스마트 에어컨",
     company: "에어컨마스터",
     price: 289000,
@@ -186,7 +169,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 스마트 에어컨입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "오로라 LED 스트링 라이트",
     company: "조명나라",
     price: 19000,
@@ -196,7 +178,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 오로라 LED 스트링 라이트입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "루미 LED 캔들",
     company: "캔들월드",
     price: 29000,
@@ -206,7 +187,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 루미 LED 캔들입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "데일리 블랙 에어프라이어",
     company: "요리요정",
     price: 78000,
@@ -216,7 +196,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 데일리 블랙 에어프라이어입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "크리스마스 리스",
     company: "인테리어플러스",
     price: 35000,
@@ -226,7 +205,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 크리스마스 리스입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "블라우 아이보리 화이트 러그",
     company: "커튼하우스",
     price: 69000,
@@ -237,7 +215,6 @@ const products = [
       "감성적인 분위기를 연출하는 블라우 아이보리 화이트 러그입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "리더 오븐",
     company: "밥그릇",
     price: 148000,
@@ -247,7 +224,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 리더 오븐입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "캔들조각형캔들",
     company: "향초나라",
     price: 29000,
@@ -257,7 +233,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 캔들조각형캔들입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "유리카라펫",
     company: "인테리어하우스",
     price: 58000,
@@ -267,7 +242,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 유리카라펫입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "디즈니 미니 가습기",
     company: "가습기마스터",
     price: 29000,
@@ -277,7 +251,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 디즈니 미니 가습기입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "루스 베이지 식탁",
     company: "모던하우스",
     price: 135000,
@@ -288,7 +261,6 @@ const products = [
       "감성적인 분위기를 연출하는 루스 베이지 식탁입니다. 1인 가구에 적합합니다.",
   },
   {
-    productId: uuidv4(),
     productName: "페페로니 피자 도우",
     company: "쿡잇",
     price: 7900,
@@ -298,7 +270,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 페페로니 피자 도우입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "오드리 이태리식 소파",
     company: "인테리어클래식",
     price: 279000,
@@ -308,7 +279,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 오드리 이태리식 소파입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "라이프 스탠드 램프",
     company: "조명마스터",
     price: 120000,
@@ -318,7 +288,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 라이프 스탠드 램프입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "자수 꽃무늬 쿠션커버",
     company: "인테리어플러스",
     price: 29000,
@@ -328,7 +297,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 자수 꽃무늬 쿠션커버입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "티파니 체크 러그",
     company: "커튼하우스",
     price: 89000,
@@ -338,7 +306,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 티파니 체크 러그입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "유리멀티팩",
     company: "에어컨마스터",
     price: 55000,
@@ -348,7 +315,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 유리멀티팩입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "레트로 팝콘기",
     company: "포플러",
     price: 69000,
@@ -358,7 +324,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 레트로 팝콘기입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "하우스 드레스",
     company: "인테리어하우스",
     price: 59000,
@@ -368,7 +333,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 하우스 드레스입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "브라운 화이트 유리 병",
     company: "요리요정",
     price: 15000,
@@ -378,7 +342,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 브라운 화이트 유리 병입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "크리스마스 별빛 조명",
     company: "조명하우스",
     price: 49000,
@@ -388,7 +351,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 크리스마스 별빛 조명입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "트루트리 인테리어 책장",
     company: "모던하우스",
     price: 189000,
@@ -398,7 +360,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 트루트리 인테리어 책장입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "블랙 그레이 모노크롬 쿠션커버",
     company: "인테리어플러스",
     price: 35000,
@@ -409,7 +370,6 @@ const products = [
       "감성적인 분위기를 연출하는 블랙 그레이 모노크롬 쿠션커버입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "허니 화이트 플라워 테이블 램프",
     company: "조명마스터",
     price: 79000,
@@ -420,7 +380,6 @@ const products = [
       "감성적인 분위기를 연출하는 허니 화이트 플라워 테이블 램프입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "트리플 크로스 소파",
     company: "모던하우스",
     price: 249000,
@@ -430,7 +389,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 트리플 크로스 소파입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "비바 파스타",
     company: "쿡잇",
     price: 10900,
@@ -440,7 +398,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 비바 파스타입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "디올 화이트 커튼",
     company: "커튼하우스",
     price: 149000,
@@ -450,7 +407,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 디올 화이트 커튼입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "블랙 화이트 유리잔",
     company: "요리요정",
     price: 12000,
@@ -460,7 +416,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 블랙 화이트 유리잔입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "베이직 블랙향초",
     company: "향초나라",
     price: 19000,
@@ -470,7 +425,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 베이직 블랙향초입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "하이바울 옷장",
     company: "인테리어클래식",
     price: 179000,
@@ -480,7 +434,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 하이바울 옷장입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "컬러풀 모던 쿠션커버",
     company: "인테리어플러스",
     price: 39000,
@@ -490,7 +443,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 컬러풀 모던 쿠션커버입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "바스크 6인용 식탁",
     company: "모던하우스",
     price: 198000,
@@ -500,7 +452,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 바스크 6인용 식탁입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "로즈마리 핸드워시",
     company: "바스앤바디웍스",
     price: 12000,
@@ -510,7 +461,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 로즈마리 핸드워시입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "비비드 그린 라탄 의자",
     company: "인테리어클래식",
     price: 159000,
@@ -520,7 +470,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 비비드 그린 라탄 의자입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "로즈 골드 유리 접시",
     company: "요리요정",
     price: 25000,
@@ -530,7 +479,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 로즈 골드 유리 접시입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "유니크한 레트로 플라워 벽시계",
     company: "조명하우스",
     price: 99000,
@@ -541,7 +489,6 @@ const products = [
       "감성적인 분위기를 연출하는 유니크한 레트로 플라워 벽시계입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "플라워 화이트 베개커버",
     company: "인테리어플러스",
     price: 29000,
@@ -551,7 +498,6 @@ const products = [
     description: "감성적인 분위기를 연출하는 플라워 화이트 베개커버입니다.",
   },
   {
-    productId: uuidv4(),
     productName: "어반 실버 책상등",
     company: "조명마스터",
     price: 89000,

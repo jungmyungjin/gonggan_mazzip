@@ -1,4 +1,4 @@
-const url = '/api/user/login';
+const url = '/api/users/login';
 const emailInput = document.querySelector('#email');
 const psInput = document.querySelector('#password');
 const loginBtn = document.querySelector('#login_btn');

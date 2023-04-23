@@ -1,4 +1,4 @@
-const url = '/api/user';
+const url = '/api/users';
 
 // 서버에서 유저 정보를 받아옴
 async function getUserInfo() {
