@@ -149,5 +149,5 @@ purchaseButton.addEventListener('click', () => {
   localStorage.setItem('checkedItems', JSON.stringify(checkedItems));
 
   // 페이지 이동
-  history.pushState({ checkedItems }, '', '/order');
+  window.location.href('/order');
 });

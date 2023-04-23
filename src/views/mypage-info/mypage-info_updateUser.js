@@ -5,6 +5,7 @@ async function updateUser(userInfo, updateData) {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
       },
       body: JSON.stringify(updateData),
     });

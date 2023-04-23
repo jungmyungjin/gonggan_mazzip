@@ -10,9 +10,11 @@ cartBtn.addEventListener('click', () => {
   );
   const quantityEl = document.querySelector('.product__quantity .quantity');
   const quantity = parseInt(quantityEl.innerText);
+  const params = new URL(document.location).searchParams;
+  const productId = params.get('productId');
 
   const cartItem = {
-    productId: new Date().getTime(),
+    productId,
     productName,
     company,
     price,
