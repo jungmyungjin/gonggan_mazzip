@@ -31,7 +31,18 @@ class ProductService {
       .skip((currentPage - 1) * itemsPerPage)
       .limit(itemsPerPage)
       .exec();
-    return productPage;
+
+    // 전체 페이지 수 계산
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // 페이지네이션 정보와 함께 제품 목록 반환
+    return {
+      currentPage,
+      totalPages,
+      itemsPerPage,
+      totalItems,
+      productPage,
+    };
   }
 
   async getProductByCategory({ category, page = 1, perPage = 10 }) {
@@ -59,7 +70,7 @@ class ProductService {
   //productIds = [{productId: <productId>, quantity: <quantity>}, {productId: <productId>, quantity: <quantity>}, ...]
   async increaseProductStock(productIds) {
     const productObj = {};
-    for (const product of productIds) {
+    for (const product of testArg) {
       if (!product.productId || !parseInt(product.quantity)) {
         continue;
       }
