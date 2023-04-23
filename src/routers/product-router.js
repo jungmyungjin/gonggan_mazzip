@@ -1,11 +1,13 @@
 import { Router } from "express";
 import { productService } from "../services/product-service";
 import requestHandler from "../middlewares/async-handler";
+import { validateProductListRequest } from "../middlewares";
 
 const productRouter = Router();
 
 productRouter.get(
   "/",
+  validateProductListRequest,
   requestHandler(async (req, res, next) => {
     {
       let resultProductList = [];
