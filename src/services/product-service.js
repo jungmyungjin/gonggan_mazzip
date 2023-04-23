@@ -7,7 +7,7 @@ class ProductService {
 
   async getProductInfo(productId) {
     const productInfo = await this.productModel.model.findOne({
-      productId: productId,
+      _id: productId,
     });
     if (!productInfo) {
       throw new Error(
