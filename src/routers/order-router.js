@@ -38,9 +38,11 @@ orderRouter.get(
     }
 
     const { page, perPage } = req.query;
-    const resultOrderList = await orderService({ page, perPage });
+    const resultOrderList = await userOrders.getOrderPage({ page, perPage });
 
-    res.status(201).json(userOrders, resultOrderList);
+    // const userOrderResult = { userOrders, resultOrderList };
+
+    res.status(201).json(resultOrderList);
   })
 );
 

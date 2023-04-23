@@ -30,13 +30,13 @@ class OrderService {
 
     // 페이지네이션을 적용한 데이터베이스 쿼리를 실행합니다.
     const orders = await this.orderModel
-      .find()
+      .find({})
       .sort({ createdAt: -1 })
-      .skip((currentPage - 1) * itemsPerPage)
+      .skip(itemsPerPage * (currentPage - 1))
       .limit(itemsPerPage)
       .exec();
 
-    const totalPage = Math.ceil(total / orders);
+    const totalPage = Math.ceil(total / itemsPerPage);
 
     return { orders, currentPage, itemsPerPage, totalPage };
   }
