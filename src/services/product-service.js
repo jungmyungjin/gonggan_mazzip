@@ -1,4 +1,5 @@
 import { productModel } from "../db";
+import { parsePaginationParameters } from "./utils";
 
 class ProductService {
   constructor() {
@@ -35,30 +36,32 @@ class ProductService {
   }
 
   async getProductAll({ page = 1, perPage = 10 }) {
-    // 현재 페이지와 페이지당 제한 항목 수
-    const currentPage = parseInt(page, 10) > 0 ? parseInt(page, 10) : 1;
-    const itemsPerPage = parseInt(perPage, 10) > 0 ? parseInt(perPage, 10) : 10;
+    const { currentPage, itemsPerPage } = parsePaginationParameters({
+      page,
+      perPage,
+    });
 
-    // 데이터베이스의 문서 수
-    const totalItems = await this.productModel.model.estimatedDocumentCount();
+    // 데이터베이스의 문서 수 (페이지네이션 정보 리턴 시 추가)
+    // const totalItems = await this.productModel.model.estimatedDocumentCount();
 
-    // 페이지네이션을 적용한 데이터베이스 쿼리를 실행합니다.
     const productPage = await this.productModel.model
       .find()
       .skip((currentPage - 1) * itemsPerPage)
       .limit(itemsPerPage)
       .exec();
 
-    // 전체 페이지 수 계산 (현재 불필요 기능)
+    // 전체 페이지 수 계산 (페이지네이션 정보 리턴 시 추가)
     // const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-    // 페이지네이션 정보와 함께 제품 목록 반환
     return productPage;
   }
 
   async getProductByCategory({ category, page = 1, perPage = 10 }) {
-    const currentPage = parseInt(page, 10) > 0 ? parseInt(page, 10) : 1;
-    const itemsPerPage = parseInt(perPage, 10) > 0 ? parseInt(perPage, 10) : 10;
+    // 현재 페이지와 페이지당 제한 항목 수
+    const { currentPage, itemsPerPage } = parsePaginationParameters({
+      page,
+      perPage,
+    });
 
     const filteredProductList = await this.productModel.model
       .find({
