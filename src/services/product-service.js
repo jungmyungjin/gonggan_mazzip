@@ -6,9 +6,8 @@ class ProductService {
   }
 
   async getProductInfo(productId) {
-    const productInfo = await this.productModel.model.findOne({
-      _id: productId,
-    });
+    const productInfo = await this.productModel.findById(productId);
+
     if (!productInfo) {
       throw new Error(
         "해당 상품이 존재하지 않습니다. 다시 한 번 확인해 주세요."
@@ -51,14 +50,14 @@ class ProductService {
   }
 
   async getProductByProductIds(productIds) {
-    const filteredProductList = await this.productModel.model.read({
+    const filteredProductList = await this.productModel.read({
       productId: { $in: productIds },
     });
     return filteredProductList;
   }
 
   async increaseProductStock(productId, quantity) {
-    const product = await this.productModel.model.findOne({ productId });
+    const product = await this.productModel.findById(productId);
     if (!product) {
       throw new Error("Product not found");
     }
@@ -67,7 +66,7 @@ class ProductService {
   }
 
   async decreaseProductStock(productId, quantity) {
-    const product = await this.productModel.model.findOne({ productId });
+    const product = await this.productModel.findById(productId);
     if (!product) {
       throw new Error("Product not found");
     }
