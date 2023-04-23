@@ -68,6 +68,7 @@ document.querySelectorAll('.product-item').forEach((item, index) => {
   const priceEl = item.querySelector('.product-price');
   const totalPriceEl = item.querySelector('.product-total-price');
 
+  // minusBtn, plusBtn 버튼 기능
   const changeQuantity = (num) => {
     const currentQuantity = Number(quantityEl.innerText);
     const currentPrice = parseInt(priceEl.innerText.replaceAll(',', ''));
@@ -81,6 +82,8 @@ document.querySelectorAll('.product-item').forEach((item, index) => {
 
       cartItems[index].quantity = newQuantity;
       cartItems[index].totalPrice = newTotalPrice;
+
+      localStorage.setItem('cartItems', JSON.stringify(cartItems)); // - + 눌렀을 때 로컬스토리지 수량 업데이트
     }
   };
 
