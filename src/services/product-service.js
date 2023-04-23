@@ -59,7 +59,7 @@ class ProductService {
   //productIds = [{productId: <productId>, quantity: <quantity>}, {productId: <productId>, quantity: <quantity>}, ...]
   async increaseProductStock(productIds) {
     const productObj = {};
-    for (const product of testArg) {
+    for (const product of productIds) {
       if (!product.productId || !parseInt(product.quantity)) {
         continue;
       }
