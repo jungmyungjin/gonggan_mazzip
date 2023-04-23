@@ -7,9 +7,17 @@ class OrderItemService {
   }
 
   // Product stock에 구입한 개수만큼 -처리 해야함
-  async addItem(orderItemInfo) {
-    const createNewOrderItem = await this.orderItemModel.create(orderItemInfo);
-    productService.decreaseProductStock(orderItemId, toUpdate);
+  async addItem(items) {
+    let orderItems = [];
+    for (let i = 0; i < items.length; i++) {
+      orderItems.push(items[i]);
+    }
+
+    const createNewOrderItem = await this.orderItemModel.create(orderItems);
+    const productId = createNewOrderItem.map((val) => val.productId);
+    const quantity = createNewOrderItem.map((val) => val.quantity);
+
+    productService.decreaseProductStock(productId, quantity);
     return createNewOrderItem;
   }
 
@@ -41,16 +49,14 @@ class OrderItemService {
 
   // 주문 취소 관리
   // Product stock에 구입한 개수만큼 +처리 해야함
-  async setItem(orderItemId, toUpdate) {
+  async setItem(orderItemId, productId, toUpdate) {
     const updatedOrderItem = await this.orderItemModel.update({
       orderItemId,
       update: toUpdate,
     });
-    productService.increaseProductStock(orderItemId, toUpdate);
+    productService.increaseProductStock(productId, toUpdate.quantity);
     return updatedOrderItem;
   }
-
-  async;
 }
 
 const orderItemService = new OrderItemService(orderItemModel);

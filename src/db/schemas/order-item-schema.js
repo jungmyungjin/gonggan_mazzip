@@ -2,13 +2,11 @@ import { Schema } from "mongoose";
 
 const OrderItemSchema = new Schema(
   {
-    orderId: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "orders",
-        required: true,
-      },
-    ],
+    orderId: {
+      type: Schema.Types.ObjectId,
+      ref: "orders",
+      required: true,
+    },
     productId: {
       type: Schema.Types.ObjectId,
       ref: "Product",
