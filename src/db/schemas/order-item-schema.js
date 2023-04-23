@@ -1,23 +1,17 @@
 import { Schema } from "mongoose";
-import { v4 as uuidv4 } from "uuid";
 
 const OrderItemSchema = new Schema(
   {
-    _id: {
-      type: String,
-      default: () => {
-        return uuidv4();
+    orderId: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "orders",
+        required: true,
       },
-    },
-    orderId: {
-      type: String,
-      ref: "orders",
-      required: true,
-      unique: false,
-    },
+    ],
     productId: {
-      type: String,
-      ref: "products",
+      type: Schema.Types.ObjectId,
+      ref: "Product",
       required: true,
     },
     quantity: {
