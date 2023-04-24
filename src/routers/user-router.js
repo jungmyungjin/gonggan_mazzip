@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginRequired } from "../middlewares";
+import { loginRequired, adminOnly } from "../middlewares";
 import { userService } from "../services";
 import asyncHandler from "../middlewares/async-handler";
 
@@ -79,6 +79,19 @@ userRouter.delete(
     const userId = req.currentUserId;
     const deletedResult = await userService.deleteUser(userId);
     res.status(201).json(deletedResult);
+  })
+);
+
+// 관리자가 모든 유저의 정보 조회 - 유저 이름, 이메일 별로 조회
+userRouter.get(
+  "/searchUser/:type",
+  adminOnly,
+  asyncHandler(async (req, res, next) => {
+    const { type } = req.params;
+    const { value } = req.query;
+
+    const users = await userService.getUsers(type, value);
+    res.status(201).json(users);
   })
 );
 

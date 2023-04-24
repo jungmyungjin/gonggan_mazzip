@@ -99,6 +99,22 @@ class UserService {
 
     return deletedUser;
   }
+
+  async getUsers(type, value) {
+    let usersInfo = await this.userModel.findByType(type, value);
+    if (!usersInfo) {
+      usersInfo = "없는 사용자 정보 입니다. 다시 한 번 확인해 주세요.";
+    }
+    return usersInfo;
+  }
+
+  async setUserAll(userId, toUpdate) {
+    const updatedAllUser = await this.userModel.update({
+      userId,
+      update: toUpdate,
+    });
+    return updatedAllUser;
+  }
 }
 
 const userService = new UserService(userModel);
