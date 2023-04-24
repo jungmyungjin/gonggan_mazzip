@@ -1,5 +1,6 @@
 const productList = document.querySelector('.product-list');
 const main = document.querySelector('main');
+const purchaseButton = document.querySelector('#purchaseButton');
 
 // 로컬 스토리지에서 데이터 가져오기
 const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
@@ -72,16 +73,12 @@ function showEmptyCartMessage() {
   });
 }
 
-let purchaseButton;
-
 if (cartItems.length === 0) {
   // 장바구니가 비어 있는 경우
   showEmptyCartMessage();
 } else {
   // 생성한 HTML 코드를 productList에 삽입
   productList.innerHTML += productHtml;
-
-  const purchaseButton = document.querySelector('#purchaseButton');
 
   document.querySelectorAll('.product-item').forEach((item, index) => {
     const minusBtn = item.querySelector('.minusBtn');
