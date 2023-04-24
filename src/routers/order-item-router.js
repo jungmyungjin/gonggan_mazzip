@@ -15,11 +15,11 @@ orderItemRouter.post(
   })
 );
 
-orderItemRouter.post(
-  "/list/order/",
+orderItemRouter.get(
+  "/list/order/:orderId",
   loginRequired,
   asyncHandler(async (req, res, next) => {
-    const { orderId } = req.body;
+    const { orderId } = req.params;
     const orderItems = await orderItemService.getItemsByOrderId(orderId);
 
     res.status(201).json(orderItems);

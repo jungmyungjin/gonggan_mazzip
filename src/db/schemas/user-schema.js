@@ -43,4 +43,6 @@ const UserSchema = new Schema(
   }
 );
 
+UserSchema.index({ email: "text", name: "text" });
+
 export { UserSchema };

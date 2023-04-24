@@ -1,5 +1,6 @@
 import { model } from "mongoose";
 import { UserSchema } from "../schemas/user-schema";
+import { use } from "passport";
 
 const User = model("users", UserSchema);
 
@@ -12,6 +13,16 @@ export class UserModel {
   async findById(userId) {
     const user = await User.findById(userId);
     return user;
+  }
+
+  async findByType(type, value) {
+    let users = "";
+    if (type === "name") {
+      users = await User.find({ name: new RegExp(value) }).sort({ name: 1 });
+    } else if (type === "email") {
+      users = await User.find({ email: new RegExp(value) }).sort({ email: 1 });
+    }
+    return users;
   }
 
   async findAll() {
