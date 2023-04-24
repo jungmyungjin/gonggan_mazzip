@@ -22,7 +22,7 @@ orderItemRouter.post(
     const { orderId } = req.body;
     const orderItems = await orderItemService.getItemsByOrderId(orderId);
 
-    res.status(200).json(orderItems);
+    res.status(201).json(orderItems);
   })
 );
 
@@ -42,7 +42,7 @@ orderItemRouter.patch(
       toUpdate
     );
 
-    res.status(200).json(updateOrderItem);
+    res.status(201).json(updateOrderItem);
   })
 );
 
