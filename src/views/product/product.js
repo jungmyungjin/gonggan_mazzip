@@ -16,7 +16,7 @@ const buyBtn = productEl.querySelector("#buyBtn");
 const CATEGORY = {
   furniture: "가구",
   fabric: "패브릭",
-  electronic: "가전",
+  electronics: "가전",
   cooking: "주방용품",
   lightings: "조명",
 };
