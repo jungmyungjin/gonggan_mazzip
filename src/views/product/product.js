@@ -31,15 +31,10 @@ async function getProduct() {
     const data = await response.json();
 
     //존재하는 상품이 없을시
-    if (response.status === 400) {
-      alert(data.reason);
-      location.href = "/";
-    }
-
+    if (!response.ok) throw new Error(data.reason);
     return data;
   } catch (err) {
-    //api 연결 실패시
-    console.error(err.message);
+    //console.error(err.message);
     alert("상품 불러오기에 실패하였습니다.");
     location.href = "/";
   }
