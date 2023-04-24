@@ -97,7 +97,7 @@ class UserService {
       throw new Error(`${userId} 사용자 탈퇴 처리에 실패하였습니다.`);
     }
 
-    return { result: "succress" };
+    return deletedUser;
   }
 }
 
