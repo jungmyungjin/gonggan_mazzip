@@ -57,6 +57,12 @@ form.addEventListener('submit', async (event) => {
     return;
   }
 
+  if (password.value.length < 4 || password.value.length > 16) {
+    errorMessageDiv.textContent =
+      '비밀번호는 4자리 이상 16자리 이하이어야 합니다.';
+    return;
+  }
+
   if (password.value && password.value !== confirmPassword.value) {
     errorMessageDiv.textContent =
       '변경 비밀번호와 확인 값이 일치하지 않습니다.';
