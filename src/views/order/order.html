@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/common.css" />
     <link rel="stylesheet" href="/order/order.css" />
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script defer src="/common.js"></script>
-    <script defer src="/order/order.js"></script>
+    <script type="module" defer src="/common.js"></script>
+    <script type="module" defer src="/order/order.js"></script>
   </head>
   <body>
     <div class="order__container">
@@ -21,15 +21,15 @@
             <ul>
               <li>
                 <label for="ordererName">이름</label>
-                <span id="ordererName">김땡땡</span>
+                <span id="ordererName"></span>
               </li>
               <li>
                 <label for="ordererEmail">이메일</label>
-                <span id="ordererEmail">newbie@interior.com</span>
+                <span id="ordererEmail"></span>
               </li>
               <li>
                 <label for="ordererPhone">휴대전화</label>
-                <span id="ordererPhone">010-1234-1234</span>
+                <span id="ordererPhone"></span>
               </li>
             </ul>
           </div>
@@ -84,27 +84,7 @@
           </div>
           <div class="order__info">
             <h3>주문 상품</h3>
-            <ul class="order__products">
-              <li>
-                <div class="product__image" id="productImg"></div>
-                <ul class="product__detail">
-                  <li>
-                    <span class="company">회사 이름</span>
-                  </li>
-                  <li>
-                    <a href="#" class="productName">상품 이름</a>
-                  </li>
-                  <li>
-                    <span class="productPrice">0원</span>
-                    <span class="quantity">1개</span>
-                  </li>
-                  <li>
-                    총 합계 금액
-                    <span class="productTotalPrice"> 0원</span>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+            <ul class="order__products"></ul>
           </div>
         </main>
         <aside>
@@ -112,18 +92,18 @@
           <ul class="payment__info">
             <li>
               총 상품 금액
-              <span class="totalPrice">1,490,000원</span>
-            </li>
-            <li>
-              배송비
               <span class="totalPrice">0원</span>
             </li>
             <li>
+              배송비
+              <span>0원</span>
+            </li>
+            <li>
               최종 결제 금액
-              <span class="totalPrice">1,490,000원</span>
+              <span class="totalPrice">0원</span>
             </li>
           </ul>
-          <button>결제하기</button>
+          <button id="payBtn" type="submit">결제하기</button>
         </aside>
       </form>
     </div>

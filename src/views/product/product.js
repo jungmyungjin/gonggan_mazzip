@@ -11,6 +11,7 @@ const totalPriceEl = productEl.querySelector("#totalPrice");
 
 const minusBtn = productEl.querySelector("#minusBtn");
 const plusBtn = productEl.querySelector("#plusBtn");
+const buyBtn = productEl.querySelector("#buyBtn");
 
 const CATEGORY = {
   furniture: "가구",
@@ -20,6 +21,7 @@ const CATEGORY = {
   lightings: "조명",
 };
 
+//상품 정보 불러오기
 async function getProduct() {
   const params = new URL(document.location).searchParams;
   const productId = params.get("productId");
@@ -59,14 +61,37 @@ async function renderData() {
     categoryEl.href = `/?category=${product.category}`;
   }
   if (totalPriceEl) totalPriceEl.innerText = priceEl.innerText;
+
+  addEventListeners();
+}
+
+function addEventListeners() {
+  //수량 변경
+  const quantity = new Quantity({
+    quantityEl,
+    priceEl,
+    totalPriceEl,
+  });
+  minusBtn.addEventListener("click", () => quantity.change(-1));
+  plusBtn.addEventListener("click", () => quantity.change(1));
+  buyBtn.addEventListener("click", moveToOrder);
+}
+
+//결제 페이지로 이동
+async function moveToOrder() {
+  const product = await getProduct();
+  const data = [
+    {
+      productId: product._id,
+      quantity: Number(quantityEl.innerText),
+      ...product,
+    },
+  ];
+  delete data._id;
+
+  //구매할 상품 정보 업데이트
+  localStorage.setItem("checkedItems", JSON.stringify(data));
+  location.href = "/order";
 }
 
 await renderData();
-
-const quantity = new Quantity({
-  quantityEl,
-  priceEl,
-  totalPriceEl,
-});
-minusBtn.addEventListener("click", () => quantity.change(-1));
-plusBtn.addEventListener("click", () => quantity.change(1));

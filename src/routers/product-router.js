@@ -1,27 +1,22 @@
 import { Router } from "express";
 import { productService } from "../services/product-service";
 import requestHandler from "../middlewares/async-handler";
+import { validateProductListRequest } from "../middlewares";
 
 const productRouter = Router();
 
 productRouter.get(
   "/",
+  validateProductListRequest,
   requestHandler(async (req, res, next) => {
     {
       let resultProductList = [];
       const { category, page, perPage } = req.query;
-      if (category) {
-        resultProductList = await productService.getProductByCategory({
-          category,
-          page,
-          perPage,
-        });
-      } else {
-        resultProductList = await productService.getProductAll({
-          page,
-          perPage,
-        });
-      }
+      resultProductList = await productService.getProductList({
+        category,
+        page,
+        perPage,
+      });
       res.status(200).json(resultProductList);
     }
   })

@@ -5,6 +5,18 @@ const address2Input = document.querySelector('#address2');
 const submitError = document.querySelector('#submit_errMessage');
 const phoneNumber = document.getElementById('phone');
 
+// 로그인 상태 확인 및 처리
+const checkLoginStatus = () => {
+  const token = sessionStorage.getItem('token');
+  if (token) {
+    alert('이미 로그인 상태시네요^^');
+    window.location.href = '/';
+  }
+};
+
+// 페이지가 로드될 때 로그인 상태 확인
+checkLoginStatus();
+
 function autoHyphen(element) {
   // 입력된 값을 받아옵니다.
   let value = element.value.replace(/-/g, '');

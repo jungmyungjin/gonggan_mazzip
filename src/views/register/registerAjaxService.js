@@ -51,12 +51,12 @@ function registerUser() {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
-      // 회원가입 성공 시 처리
+      alert('회원 가입에 성공하셨습니다! 환영합니다!');
+      window.location.href = '/';
     })
     .catch((error) => {
-      console.error(error);
       // 회원가입 실패 시 처리
+      console.error(error);
     });
 }
 

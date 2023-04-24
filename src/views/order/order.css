@@ -129,6 +129,7 @@ input {
   padding: 20px;
   box-sizing: border-box;
   border-radius: 3px;
+  margin-bottom: 20px;
   border: 1px solid #ddd;
 }
 
@@ -136,6 +137,19 @@ input {
   width: 140px;
   height: 100%;
   background-color: pink;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.product__image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.product__image img {
+  width: 100%;
+  height: 100%;
 }
 
 .product__detail {
