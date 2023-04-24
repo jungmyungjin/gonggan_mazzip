@@ -1,11 +1,17 @@
 const url = '/api/users/register';
-const errMessage = document.getElementById('submit_errMessage');
+
+// 비밀번호와 비밀번호 확인 값이 일치하는지 확인
+function checkPasswords(password, confirm_password) {
+  return password === confirm_password;
+}
 
 // 회원가입 기능 구현
 function registerUser() {
-  const email = document.getElementById('email').value;
+  const emailInput = document.querySelector('#email');
+  const email = emailInput.value;
   const name = document.getElementById('name').value;
   const password = document.getElementById('password').value;
+  const confirm_password = document.getElementById('confirm_password').value;
   const phoneNumber = document.getElementById('phone').value;
   const postalCode = document.getElementById('postalCode').value;
   const address1 = document.getElementById('address1').value;
@@ -22,8 +28,15 @@ function registerUser() {
     return;
   }
 
+  // 이메일 형식 확인
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+  if (!emailPattern.test(emailInput.value)) {
+    errMessage.innerHTML = '이메일 주소 형식이 맞지 않습니다.';
+    return;
+  }
+
   // 비밀번호와 비밀번호 확인 값이 일치하는지 확인
-  if (checkPasswords() === false) {
+  if (checkPasswords(password, confirm_password) === false) {
     errMessage.innerHTML = '비밀번호와 비밀번호 확인 값이 일치하지 않습니다.';
     return;
   }
@@ -49,14 +62,22 @@ function registerUser() {
     },
     body: JSON.stringify(user),
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((data) => {
+          throw new Error(data.reason);
+        });
+      }
+      return response.json();
+    })
     .then((data) => {
       alert('회원 가입에 성공하셨습니다! 환영합니다!');
       window.location.href = '/';
     })
     .catch((error) => {
       // 회원가입 실패 시 처리
-      console.error(error);
+      errMessage.innerHTML =
+        '중복된 이메일이 있습니다. 이메일을 수정해 주세요.';
     });
 }
 
