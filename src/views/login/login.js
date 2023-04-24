@@ -20,6 +20,20 @@ checkLoginStatus();
 //로그인 버튼 기능 구현
 const loginFunc = async (e) => {
   e.preventDefault();
+
+  //이메일 형식 확인
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+  if (!emailPattern.test(emailInput.value)) {
+    errorMessage.innerHTML = '이메일 주소 형식이 맞지 않습니다.';
+    return;
+  }
+
+  // 비밀번호 형식 확인
+  if (psInput.value.length < 4 || psInput.value.length > 16) {
+    errorMessage.innerHTML = '비밀번호는 4자리 이상 16자리 이하이어야 합니다.';
+    return;
+  }
+
   try {
     const response = await fetch(url, {
       method: 'POST',
@@ -40,7 +54,6 @@ const loginFunc = async (e) => {
       throw new Error('로그인 실패했습니다.');
     }
   } catch (error) {
-    console.error(error);
     errorMessage.innerHTML = '로그인에 실패했습니다.';
   }
 };
