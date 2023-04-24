@@ -55,8 +55,8 @@ const loginFunc = async (e) => {
       return;
     }
 
-    const token = await response.text();
-    sessionStorage.setItem('token', token);
+    const data = await response.json();
+    sessionStorage.setItem('token', data);
     window.location.href = '/';
   } catch (error) {
     errMessage.innerHTML = '로그인 과정에서 문제가 발생했습니다.';
