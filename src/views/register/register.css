@@ -1,50 +1,110 @@
+img {
+  padding-top: 10px;
+  display: block;
+  margin: 0 auto;
+  width: 150px;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
+  font-family: var(--main-font);
 }
 
 h1 {
+  padding-top: 100px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 20px;
   text-align: center;
-  margin-bottom: 30px;
 }
 
 form {
-  background-color: white;
+  width: 600px;
+  margin: 0 auto;
   padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  width: 500px;
+  box-sizing: border-box;
 }
 
-div {
-  margin-bottom: 15px;
+form > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 label {
-  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
   margin-bottom: 5px;
 }
 
-input[type='submit'] {
-  background-color: #4caf50;
-  color: white;
-  font-weight: bold;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+input {
+  height: 35px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 0px 10px;
+  color: #333;
+  font-size: 16px;
+}
+
+.field.is-horizontal {
+  display: flex;
+  align-items: center;
+}
+
+.field.is-horizontal .field-label {
+  width: 80px;
+}
+
+.field.is-horizontal .field-label.is-normal {
+  display: flex;
+  align-items: center;
+}
+
+.field.is-horizontal .field-body .field {
+  margin-right: 15px;
+}
+
+.field.is-horizontal .field-body .field:last-child {
+  margin-right: 0;
+}
+
+.field.is-horizontal .field-body .field.search {
+  display: flex;
+  align-items: center;
+}
+
+.field.is-horizontal .field-body .field.search input {
+  width: 290px;
+  margin-right: 10px;
+}
+
+.field.is-horizontal .field-body .field.search button {
+  width: 100px;
+  height: 35px;
+  font-size: 12px;
   cursor: pointer;
+  border-radius: 3px;
+  border: 0px;
+  color: #fff;
+  background-color: var(--main-color);
+}
+
+input[type='submit'] {
   width: 100%;
-  margin-top: 20px;
+  height: 40px;
+  background-color: var(--sub-2-color);
+  border-radius: 5px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 input[type='submit']:hover {
-  background-color: #45a049;
+  background-color: var(--main-color);
 }
 
 .error_Area {
@@ -52,25 +112,6 @@ input[type='submit']:hover {
 }
 
 #error_message {
+  font-size: 14px;
   color: red;
-  font-weight: bold;
-}
-
-.field.is-horizontal {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.field.is-horizontal .field-body {
-  flex-grow: 1;
-  margin-left: 10px;
-}
-
-.search {
-  display: flex;
-}
-
-.search button {
-  margin-left: 5px;
 }

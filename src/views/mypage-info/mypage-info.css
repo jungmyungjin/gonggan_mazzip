@@ -1,121 +1,92 @@
-input[readonly] {
-  background-color: #f7f7f7;
-  color: #555;
-  cursor: default;
-  padding: 0.5rem 0.8rem;
-}
-
+/* common.css */
 body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
-  background-color: #e9e1ff;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  font-family: 'Roboto', sans-serif;
   background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px #888888;
-  width: 400px;
-  max-width: 90%;
 }
 
 h1 {
-  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #444;
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-input[type='email'],
-input[type='text'],
-input[type='password'],
-input[type='tel'] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: none;
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 5px;
-  box-shadow: 0px 0px 5px #888888;
-  font-size: 16px;
-  outline: none;
+}
+
+form div {
+  margin-bottom: 1rem;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
-#searchAddressButton {
-  padding: 10px 20px;
-  background-color: #7353ea;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  width: 120px;
+input,
+input[type='tel'] {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-#userUpdate {
-  padding: 10px 20px;
-  background-color: #7353ea;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
+button {
   cursor: pointer;
-  margin-top: 10px;
-  width: 120px;
+  background-color: #4caf50;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
 
-#userDelete {
-  padding: 10px 20px;
-  background-color: #7353ea;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  width: 120px;
+button:hover {
+  background-color: #45a049;
 }
 
 .error_Area {
-  padding: 10px;
-}
-
-#error_message,
-#errorMessage,
-#submit_errMessage {
   color: red;
-}
-
-.field {
-  width: 100%;
+  margin-top: 0.5rem;
 }
 
 .field.is-horizontal {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
 }
 
-.field-body.search {
-  display: flex;
-  align-items: center;
-}
-
-.field-body .input {
-  width: 100%;
+.field-label.is-normal {
+  flex: 1;
 }
 
 .no-label {
+  visibility: hidden;
+}
+
+.field-body {
+  flex: 4;
+}
+
+.field-body .search {
+  display: flex;
+}
+
+.field-body .search .field {
+  flex: 4;
+}
+
+.field-body .search button {
   flex: 1;
+  margin-left: 1rem;
 }
