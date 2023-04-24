@@ -1,4 +1,6 @@
 import { orderModel } from "../db/models/order-model";
+import { parsePaginationParameters } from "./utils";
+const sampleOrder = require("../db/sampleData/sampleOrder.json");
 
 class OrderService {
   constructor(orderModel) {
@@ -20,25 +22,28 @@ class OrderService {
     return order;
   }
 
-  async getOrderPage({ page = 1, perPage = 10 }) {
+  async getOrderPage({ userId, page = 1, perPage = 10 }) {
+    const userOrders = await this.orderModel.findByUserId(userId);
+    // 혹시 DB에 order정보가 하나도 없다면 dummy 데이터 입력 <- 테스트코드라 추후 지울 예정
+    if (!userOrders || userOrders.length < 1) {
+      for (let i = 0; i < sampleOrder.length; i++) {
+        await orderService.addOrder(userId, sampleOrder[i]);
+      }
+    }
+
     // 현재 페이지와 페이지당 제한 항목 수
-    const currentPage = parseInt(page, 10) > 0 ? parseInt(page, 10) : 1;
-    const itemsPerPage = parseInt(perPage, 10) > 0 ? parseInt(perPage, 10) : 10;
+    const { currentPage, itemsPerPage } = parsePaginationParameters({
+      page,
+      perPage,
+    });
 
-    // 데이터베이스의 문서 수
-    const total = await this.orderModel.estimatedDocumentCount();
+    const orderPage = await this.orderModel.findPage(
+      userId,
+      currentPage,
+      itemsPerPage
+    );
 
-    // 페이지네이션을 적용한 데이터베이스 쿼리를 실행합니다.
-    const orders = await this.orderModel
-      .find({})
-      .sort({ createdAt: -1 })
-      .skip(itemsPerPage * (currentPage - 1))
-      .limit(itemsPerPage)
-      .exec();
-
-    const totalPage = Math.ceil(total / itemsPerPage);
-
-    return { orders, currentPage, itemsPerPage, totalPage };
+    return orderPage;
   }
 
   async setOrder(orderId, toUpdate) {
