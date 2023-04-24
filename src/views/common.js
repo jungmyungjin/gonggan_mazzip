@@ -107,7 +107,7 @@ function createHeader() {
           <li ${category === "fabric" ? 'class="on"' : ""}>
             <a href="/?category=fabric">패브릭</a>
           </li>
-          <li ${category === "electronic" ? 'class="on"' : ""}>
+          <li ${category === "electronics" ? 'class="on"' : ""}>
             <a href="/?category=electronics">가전</a>
           </li>
           <li ${category === "cooking" ? 'class="on"' : ""}>
