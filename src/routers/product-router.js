@@ -17,7 +17,7 @@ productRouter.get(
         page,
         perPage,
       });
-      res.status(200).json(resultProductList);
+      res.status(201).json(resultProductList);
     }
   })
 );
@@ -31,7 +31,7 @@ productRouter.get(
       if (productId) {
         resultProductDetail = await productService.getProductInfo(productId);
       }
-      res.status(200).json(resultProductDetail);
+      res.status(201).json(resultProductDetail);
     }
   })
 );
@@ -49,7 +49,7 @@ productRouter.post(
           productIds
         );
       }
-      res.status(200).json(resultProductList);
+      res.status(201).json(resultProductList);
     }
   })
 );
