@@ -14,6 +14,17 @@ export class OrderModel {
     return order;
   }
 
+  async findPage(userId, currentPage, itemsPerPage) {
+    const orderPage = await Order.find({ userId })
+      .populate("userId")
+      .sort({ createdAt: -1 })
+      .skip(itemsPerPage * (currentPage - 1))
+      .limit(itemsPerPage)
+      .exec();
+
+    return orderPage;
+  }
+
   async findAll() {
     const orders = await Order.find({});
     return orders;

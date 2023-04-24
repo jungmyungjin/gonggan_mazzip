@@ -4,7 +4,6 @@ import { orderService } from "../services/order-service";
 import asyncHandler from "../middlewares/async-handler";
 
 const orderRouter = Router();
-const sampleOrder = require("../db/sampleData/sampleOrder.json");
 
 orderRouter.post(
   "/create",
@@ -28,17 +27,12 @@ orderRouter.get(
   loginRequired,
   asyncHandler(async (req, res, next) => {
     const userId = req.currentUserId;
-    const userOrders = await orderService.getOrdersByUserId(userId);
-
-    // 혹시 DB에 order정보가 하나도 없다면 dummy 데이터 입력 <- 테스트코드라 추후 지울 예정
-    if (!userOrders || userOrders.length < 1) {
-      for (let i = 0; i < sampleOrder.length; i++) {
-        await orderService.addOrder(userId, sampleOrder[i]);
-      }
-    }
-
     const { page, perPage } = req.query;
-    const resultOrderList = await userOrders.getOrderPage({ page, perPage });
+    const resultOrderList = await orderService.getOrderPage({
+      userId,
+      page,
+      perPage,
+    });
 
     res.status(201).json(resultOrderList);
   })
