@@ -3,7 +3,7 @@ const emailInput = document.querySelector('#email');
 const psInput = document.querySelector('#password');
 const loginBtn = document.querySelector('#login_btn');
 const signupBtn = document.querySelector('#signup_link_btn');
-const errorMessage = document.querySelector('#error_message');
+const errMessage = document.querySelector('#error_message');
 
 // 로그인 상태 확인 및 처리
 const checkLoginStatus = () => {
@@ -21,8 +21,8 @@ checkLoginStatus();
 const loginFunc = async (e) => {
   e.preventDefault();
 
-  //이메일 형식 확인
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+  // 이메일 형식 확인
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!emailPattern.test(emailInput.value)) {
     errMessage.innerHTML = '이메일 주소 형식이 맞지 않습니다.';
     return;
@@ -38,23 +38,28 @@ const loginFunc = async (e) => {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: emailInput.value,
         password: psInput.value,
       }),
     });
-    const data = await response.json();
-    if (data) {
-      sessionStorage.setItem('token', data);
-      window.location.href = '/';
-    } else {
-      throw new Error('로그인 실패했습니다.');
+
+    if (!response.ok) {
+      if (response.status === 400) {
+        errMessage.innerHTML = '이메일이나 비밀번호가 일치하지 않습니다.';
+      } else {
+        errMessage.innerHTML = '로그인 실패했습니다.';
+      }
+      return;
     }
+
+    const token = await response.text();
+    sessionStorage.setItem('token', token);
+    window.location.href = '/';
   } catch (error) {
-    errMessage.innerHTML = '로그인에 실패했습니다.';
+    errMessage.innerHTML = '로그인 과정에서 문제가 발생했습니다.';
   }
 };
 

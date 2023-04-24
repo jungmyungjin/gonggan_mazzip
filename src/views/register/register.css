@@ -1,83 +1,76 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #e9e1ff;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px #888888;
-  width: 400px;
-  max-width: 90%;
+  padding: 0;
 }
 
 h1 {
-  margin-top: 50px;
-  margin-bottom: 30px;
   text-align: center;
+  margin-bottom: 30px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 10px;
+form {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  width: 500px;
+}
+
+div {
+  margin-bottom: 15px;
 }
 
 label {
-  font-size: 16px;
+  display: block;
   margin-bottom: 5px;
 }
 
-input[type='email'],
-input[type='text'],
-input[type='password'],
-input[type='tel'],
-input[type='search'] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px #888888;
-  font-size: 16px;
-  outline: none;
-}
-
-#postalCode {
-  cursor: pointer;
-}
-
-.submitButton {
-  padding: 10px 20px;
-  background-color: #7353ea;
+input[type='submit'] {
+  background-color: #4caf50;
   color: white;
+  font-weight: bold;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
   cursor: pointer;
-  margin-top: 10px;
   width: 100%;
+  margin-top: 20px;
 }
 
-input[type='email'][autocomplete='on'],
-input[type='text'][autocomplete='on'],
-input[type='password'][autocomplete='on'],
-input[type='tel'][autocomplete='on'],
-input[type='search'][autocomplete='on'] {
-  -webkit-autofill: auto-fill;
-  -webkit-box-shadow: 0 0 0 1000px #f5f5f5 inset;
+input[type='submit']:hover {
+  background-color: #45a049;
+}
+
+.error_Area {
+  margin-top: 10px;
+}
+
+#error_message {
+  color: red;
+  font-weight: bold;
+}
+
+.field.is-horizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.field.is-horizontal .field-body {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.search {
+  display: flex;
+}
+
+.search button {
+  margin-left: 5px;
 }
