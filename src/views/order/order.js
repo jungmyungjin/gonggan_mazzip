@@ -54,14 +54,15 @@ async function getUserInfo() {
         Authorization: `Bearer ${token}`,
       },
     });
-    const userInfo = await response.json();
-    if (response.status === 400 || response.status === 401) {
-      alert(userInfo.reason);
-      location.href = "/";
-    }
-    return userInfo;
+    const data = await response.json();
+
+    //비로그인 유저 차단
+    if (!response.ok) throw new Error(data.reason);
+    return data;
   } catch (err) {
-    console.error(err);
+    //console.error(err.message);
+    alert(err.message);
+    location.href = "/";
   }
 }
 
@@ -186,18 +187,12 @@ async function createOrder() {
       },
       body: JSONdata,
     });
-
-    if (response.status !== 201) {
-      alert(data.reason);
-      location.href = "/";
-    }
-
-    const orderResult = await response.json();
-    const orderItemsResult = await createOrderItems(orderResult._id);
-    completeOrder(orderItemsResult);
+    const orderData = await response.json();
+    if (!response.ok) throw new Error(orderData.reason);
+    const orderItemsData = await createOrderItems(orderData._id);
+    completeOrder(orderItemsData);
   } catch (err) {
-    //api 연결 실패시
-    console.error(err.message);
+    //console.error(err.message);
     alert("주문에 실패하였습니다.");
   }
 }
@@ -223,14 +218,9 @@ async function createOrderItems(orderId) {
     },
     body: JSONdata,
   });
-
-  if (response.status !== 201) {
-    alert(data.reason);
-    location.href = "/";
-  }
-
-  const orderItemsResult = await response.json();
-  return orderItemsResult;
+  const orderItemsData = await response.json();
+  if (!response.ok) throw new Error(orderItemsData.reason);
+  return orderItemsData;
 }
 
 async function handleSubmit(e) {
