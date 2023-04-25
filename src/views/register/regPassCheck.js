@@ -21,7 +21,7 @@ function checkPasswords() {
     messageDiv.innerText = '비밀번호가 일치하지 않습니다.';
   } else {
     messageDiv.innerText = '비밀번호가 일치합니다.';
-    passwordValidLength = true; // 추가
+    passwordValidLength = true;
   }
 }
 
