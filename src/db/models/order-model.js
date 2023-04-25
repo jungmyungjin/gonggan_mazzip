@@ -25,6 +25,42 @@ export class OrderModel {
     return orderPage;
   }
 
+  async findByType(type, value) {
+    let orders = {};
+    if (type === "name") {
+      orders = await Order.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "userId",
+          },
+        },
+        { $match: { userId: { $elemMatch: { name: new RegExp(value) } } } },
+        { $sort: { name: 1, created_at: -1 } },
+      ]);
+    } else if (type === "email") {
+      orders = await Order.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "userId",
+            foreignField: "_id",
+            as: "userId",
+          },
+        },
+        {
+          $match: {
+            userId: { $elemMatch: { email: { $regex: value, $options: "i" } } },
+          },
+        },
+        { $sort: { email: 1, created_at: -1 } },
+      ]);
+    }
+    return orders;
+  }
+
   async findAll() {
     const orders = await Order.find({});
     return orders;
@@ -41,6 +77,11 @@ export class OrderModel {
     const updateOrder = await Order.findOneAndUpdate(filter, update, option);
 
     return updateOrder;
+  }
+
+  async delete(orderId) {
+    const deleteOrderResult = await Order.findByIdAndDelete(orderId);
+    return deleteOrderResult;
   }
 }
 
