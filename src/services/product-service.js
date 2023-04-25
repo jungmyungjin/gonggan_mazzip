@@ -18,7 +18,7 @@ class ProductService {
     return productInfo;
   }
 
-  async getProductList({ page = 1, perPage = 10, category = undefined }) {
+  async getProductList({ page = 1, perPage = 100, category = undefined }) {
     let resultProductList = [];
     if (category) {
       resultProductList = await this.getProductByCategory({
@@ -35,7 +35,7 @@ class ProductService {
     return resultProductList;
   }
 
-  async getProductAll({ page = 1, perPage = 10 }) {
+  async getProductAll({ page = 1, perPage = 100 }) {
     const { currentPage, itemsPerPage } = parsePaginationParameters({
       page,
       perPage,
@@ -56,7 +56,7 @@ class ProductService {
     return productPage;
   }
 
-  async getProductByCategory({ category, page = 1, perPage = 10 }) {
+  async getProductByCategory({ category, page = 1, perPage = 100 }) {
     // 현재 페이지와 페이지당 제한 항목 수
     const { currentPage, itemsPerPage } = parsePaginationParameters({
       page,
