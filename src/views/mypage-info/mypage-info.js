@@ -106,27 +106,32 @@ form.addEventListener('submit', async (event) => {
 });
 
 userDeleteButton.addEventListener('click', async () => {
-  try {
-    // API 호출하여 회원 정보 삭제
-    const response = await fetch('/api/users/delete', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-      credentials: 'include',
-    });
-    const data = await response.json();
+  const confirmed = confirm('정말로 회원탈퇴를 하시겠습니까?'); // 확인 메시지 출력
 
-    // 세션 스토리지에 저장되어 있는 로그인 토큰 삭제
-    sessionStorage.removeItem('token');
-    alert('회원 탈퇴가 성공적으로 이루어졌습니다.');
+  if (confirmed) {
+    // 예 버튼 클릭 시
+    try {
+      // API 호출하여 회원 정보 삭제
+      const response = await fetch('/api/users/delete', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        },
+        credentials: 'include',
+      });
+      const data = await response.json();
 
-    // 메인 페이지로 이동
-    window.location.href = '/';
-  } catch (error) {
-    // 에러 메시지 출력
-    throw new Error('회원 정보 삭제 중 오류가 발생했습니다.');
+      // 세션 스토리지에 저장되어 있는 로그인 토큰 삭제
+      sessionStorage.removeItem('token');
+      alert('회원 탈퇴가 성공적으로 이루어졌습니다.');
+
+      // 메인 페이지로 이동
+      window.location.href = '/';
+    } catch (error) {
+      // 에러 메시지 출력
+      throw new Error('회원 정보 삭제 중 오류가 발생했습니다.');
+    }
   }
 });
 
