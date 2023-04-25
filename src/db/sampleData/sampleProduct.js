@@ -622,7 +622,8 @@ const products = [
     company: "닥터하우스",
     price: 57900,
     stock: 54,
-    imageUrl: "",
+    imageUrl:
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/166795117699169259.jpg?gif=1&w=512&h=512&c=c&webp=1",
     category: "cooking",
     description: "어디에 놓아도 자연스럽게 공간에 녹아드는 일상의 오브제",
   },
