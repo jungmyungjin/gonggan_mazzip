@@ -7,6 +7,7 @@ viewsRouter.use("/", serveStatic("main"));
 viewsRouter.use("/login", serveStatic("login"));
 viewsRouter.use("/register", serveStatic("register"));
 viewsRouter.use("/info", serveStatic("mypage-info"));
+viewsRouter.use("/myorder", serveStatic("mypage-order"));
 viewsRouter.use("/products/detail", serveStatic("product"));
 viewsRouter.use("/cart", serveStatic("cart"));
 viewsRouter.use("/order", serveStatic("order"));
