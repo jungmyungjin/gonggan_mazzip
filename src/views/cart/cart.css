@@ -3,6 +3,7 @@ main {
   margin: 0 auto;
   display: flex;
   padding: 50px 0px;
+  font-family: var(--main-font);
 }
 
 .product-list {
@@ -16,6 +17,9 @@ main {
   width: 100%;
   padding: 10px 0px;
   border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
 }
 
 .product-item {
@@ -52,6 +56,8 @@ main {
   width: 30%;
   height: 300px;
   border: 1px solid #ddd;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .close-button {
@@ -77,4 +83,57 @@ main {
   font-size: 20px;
   color: #888;
   cursor: pointer;
+}
+
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.order-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info,
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.total-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--main-color);
+}
+
+.purchase {
+  display: flex;
+  justify-content: center;
+}
+
+.button.is-info {
+  width: 100%;
+  height: 40px;
+  background-color: var(--main-color);
+  border-radius: 5px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.button.is-info:hover {
+  background-color: var(--sub-2-color);
 }
