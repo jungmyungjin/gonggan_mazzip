@@ -1,6 +1,5 @@
 import { orderModel } from "../db/models/order-model";
 import { parsePaginationParameters } from "./utils";
-const sampleOrder = require("../db/sampleData/sampleOrder.json");
 
 class OrderService {
   constructor(orderModel) {
@@ -23,14 +22,6 @@ class OrderService {
   }
 
   async getOrderPage({ userId, page = 1, perPage = 10 }) {
-    const userOrders = await this.orderModel.findByUserId(userId);
-    // 혹시 DB에 order정보가 하나도 없다면 dummy 데이터 입력 <- 테스트코드라 추후 지울 예정
-    if (!userOrders || userOrders.length < 1) {
-      for (let i = 0; i < sampleOrder.length; i++) {
-        await orderService.addOrder(userId, sampleOrder[i]);
-      }
-    }
-
     // 현재 페이지와 페이지당 제한 항목 수
     const { currentPage, itemsPerPage } = parsePaginationParameters({
       page,
@@ -52,6 +43,22 @@ class OrderService {
       update: toUpdate,
     });
     return updatedOrder;
+  }
+
+  async getOrders(type, value) {
+    const ordersInfo = await this.orderModel.findByType(type, value);
+    if (!ordersInfo) {
+      usersInfo = "없는 사용자 주문 정보 입니다. 다시 한 번 확인해 주세요.";
+    }
+    return ordersInfo;
+  }
+
+  async deleteOrder(orderId) {
+    const deletedOrder = await this.orderModel.delete(orderId);
+    if (!deletedOrder) {
+      throw new Error(`${orderId} 주문의 삭제 처리에 실패하였습니다.`);
+    }
+    return deletedOrder;
   }
 }
 
