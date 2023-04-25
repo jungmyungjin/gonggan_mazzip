@@ -7,22 +7,14 @@
     <title>공간맛집</title>
     <link rel="stylesheet" href="/common.css" />
     <link rel="stylesheet" href="/register/register.css" />
+    <script src="/common.js" defer></script>
     <script src="/register/register.js" defer></script>
     <script src="/register/registerAjaxService.js" defer></script>
     <script src="/register/regPassCheck.js" defer></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   </head>
   <body>
-    <div class="logo">
-      <a href="/">
-        <img
-          src="https://github.com/Returndusk/CodingTest/blob/main/logo.png?raw=true"
-          id="logo"
-          alt="Logo"
-        />
-      </a>
-    </div>
-    <h1>회원가입</h1>
+    <h2>회원가입</h2>
     <form>
       <div>
         <label for="email">이메일(아이디) *</label>
@@ -70,52 +62,31 @@
                 type="text"
                 placeholder="주소찾기를 클릭해 주세요."
                 readonly
-              />
+              /><button
+                class="button is-light is-hovered"
+                type="button"
+                id="searchAddressButton"
+              >
+                주소찾기
+              </button>
             </p>
           </div>
-          <div>
-            <button
-              class="button is-light is-hovered"
-              type="button"
-              id="searchAddressButton"
-            >
-              주소찾기
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal no-label"></div>
-        <div class="field-body">
-          <div class="field">
-            <p class="control">
-              <input
-                class="input"
-                id="address1"
-                type="text"
-                placeholder=""
-                autocomplete="on"
-                readonly
-              />
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="field is-horizontal">
-        <div class="field-label is-normal no-label"></div>
-        <div class="field-body">
-          <div class="field">
-            <p class="control">
-              <input
-                class="input"
-                id="address2"
-                type="text"
-                placeholder=""
-                autocomplete="on"
-              />
-            </p>
+          <div class="field2">
+            <input
+              class="input"
+              id="address1"
+              type="text"
+              placeholder=""
+              autocomplete="on"
+              readonly
+            />
+            <input
+              class="input"
+              id="address2"
+              type="text"
+              placeholder=""
+              autocomplete="on"
+            />
           </div>
         </div>
       </div>

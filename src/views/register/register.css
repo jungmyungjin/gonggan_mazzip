@@ -1,16 +1,5 @@
-img {
-  padding-top: 10px;
-  display: block;
-  margin: 0 auto;
-  width: 150px;
-}
-
-body {
-  font-family: var(--main-font);
-}
-
-h1 {
-  padding-top: 100px;
+h2 {
+  padding-top: 50px;
   font-size: 20px;
   font-weight: 800;
   color: #333;
@@ -39,61 +28,48 @@ label {
 }
 
 input {
+  width: 100%;
   height: 35px;
   border: 1px solid #ddd;
   border-radius: 3px;
   padding: 0px 10px;
   color: #333;
   font-size: 16px;
+  box-sizing: border-box;
 }
 
-.field.is-horizontal {
+.control {
   display: flex;
-  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.field.is-horizontal .field-label {
-  width: 80px;
-}
-
-.field.is-horizontal .field-label.is-normal {
-  display: flex;
-  align-items: center;
-}
-
-.field.is-horizontal .field-body .field {
-  margin-right: 15px;
-}
-
-.field.is-horizontal .field-body .field:last-child {
-  margin-right: 0;
-}
-
-.field.is-horizontal .field-body .field.search {
-  display: flex;
-  align-items: center;
-}
-
-.field.is-horizontal .field-body .field.search input {
-  width: 290px;
+#postalCode {
+  flex: 7;
   margin-right: 10px;
 }
 
-.field.is-horizontal .field-body .field.search button {
-  width: 100px;
+#searchAddressButton {
+  flex: 3;
   height: 35px;
-  font-size: 12px;
-  cursor: pointer;
-  border-radius: 3px;
-  border: 0px;
-  color: #fff;
   background-color: var(--main-color);
+  border-radius: 5px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.field2 input {
+  margin-bottom: 10px;
 }
 
 input[type='submit'] {
   width: 100%;
   height: 40px;
-  background-color: var(--sub-2-color);
+  background-color: var(--main-color);
   border-radius: 5px;
   border: 0;
   font-size: 14px;
@@ -104,7 +80,7 @@ input[type='submit'] {
 }
 
 input[type='submit']:hover {
-  background-color: var(--main-color);
+  background-color: var(--sub-2-color);
 }
 
 .error_Area {
@@ -114,4 +90,13 @@ input[type='submit']:hover {
 #error_message {
   font-size: 14px;
   color: red;
+}
+
+#pwerror {
+  font-size: 14px;
+  color: red;
+}
+#pwsame {
+  font-size: 14px;
+  color: blue;
 }
