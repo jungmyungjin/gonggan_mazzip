@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { productModel } from "../db";
 import { parsePaginationParameters } from "./utils";
 
@@ -116,6 +117,33 @@ class ProductService {
     }));
 
     await this.productModel.model.bulkWrite(bulkUpdateOps);
+  }
+
+  // 상품 생성
+  async createProducts(newProducts) {
+    const resultCreateProducts = await this.productModel.create(newProducts);
+    return resultCreateProducts;
+  }
+
+  // TODO :  상품 수정
+  async setProducts(setProducts) {
+    const bulkUpdateOps = setProducts.map(({ productId, ...update }) => ({
+      updateOne: {
+        filter: { _id: productId },
+        update: { $set: update },
+      },
+    }));
+    const resultSetProducts = await this.productModel.bulkWrite(bulkUpdateOps);
+    return resultSetProducts;
+  }
+
+  // TODO : 상품 삭제
+  async deleteProducts(productIds) {
+    const objIds = productIds.map((id) => new Types.ObjectId(id));
+    const resultDeleteProducts = await this.productModel.deleteMany({
+      _id: { $in: objIds },
+    });
+    return resultDeleteProducts;
   }
 }
 
