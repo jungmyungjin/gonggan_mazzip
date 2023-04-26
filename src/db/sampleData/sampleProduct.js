@@ -12,7 +12,7 @@ const products = [
     price: 33900,
     stock: 0,
     imageUrl:
-      "https://previews.dropbox.com/p/thumb/AB7jlQIIDotA-nO5iQVIawqiypBF_TkXMykMF16P5wvPvXPknYh4H67FOE2HstthuodEZFmd01CHPF68ZNDpwhJ_Mwlj23S1itnQz5o2FYBqGFEp0VylNUTmmpUVTBv8nbkciWsOE2OIcTc46DDLHox-W2WnUIlz6JJtzQEVUqjFIZKNdTuu87qPFghKJ8Z_tLE5VRPD6qbQDaQiJPKt8-aAgW8uaInOCYqrsKm2GqndxCfgtvydPtd255GfVJOPgK-Zr_tbYwdQvVFi6aMvpGfZcOu-PwvnNbbf5i7LJFueGRdUwgQAKhslXwaYpFxyXQBruzELTF0LSY-6Ji9UEuV0mgY4tEv-6aXNWl-hBJROhfTeHwZsSbEz4x8bJj0kNkY/p.jpeg",
+      "https://image.ohou.se/i/bucketplace-v2-development/uploads/productions/167825809918046066.jpg?gif=1&w=640&h=640&c=c&webp=1",
     category: "furniture",
     description: "감성적인 인테리어의 완성, 모두가 사랑하는 엔틱 전신거울",
   },
