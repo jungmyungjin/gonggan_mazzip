@@ -16,13 +16,9 @@ function validateProductListRequest(req, res, next) {
   next();
 }
 
-function validateCreateProducts(req, res, next) {
-  const newProducts = req.body.createProducts;
-  console.log("createProducts==================");
-
-  console.log(req.body);
-  console.log("createProducts==================");
-
+// 모든 스키마 타입이 존재하는지 체크
+function validateProductSchemaAllTypes(req, res, next) {
+  const newProducts = req.body.products;
   if (!Array.isArray(newProducts)) {
     throw new Error("createProducts는 Array 형식이여야 합니다." + newProducts);
   }
@@ -42,4 +38,36 @@ function validateCreateProducts(req, res, next) {
   next();
 }
 
-module.exports = { validateProductListRequest, validateCreateProducts };
+// 스키마 타입 중 존재하지 않는 타입이 있는지 체크
+function validateProductSchemaTypes(req, res, next) {
+  const newProducts = req.body.products;
+
+  if (!Array.isArray(newProducts)) {
+    throw new Error("createProducts는 Array 형식이여야 합니다." + newProducts);
+  }
+  for (let product of newProducts) {
+    for (let types in product) {
+      if (
+        !(
+          types === "productId" ||
+          types === "productName" ||
+          types === "company" ||
+          types === "price" ||
+          types === "stock" ||
+          types === "imageUrl" ||
+          types === "category" ||
+          types === "description"
+        )
+      ) {
+        throw new Error("존재하지 않는 상품 타입이 있습니다. " + types);
+      }
+    }
+  }
+  next();
+}
+
+module.exports = {
+  validateProductListRequest,
+  validateProductSchemaAllTypes,
+  validateProductSchemaTypes,
+};
