@@ -342,10 +342,20 @@ function renderTotal(orderId) {
   orderEl.insertAdjacentHTML("beforeend", totalTemplate(totalPrice));
 }
 
+function renderEmpty() {
+  const orderListEl = document.querySelector("#orderList");
+  const emptyTemplate = `
+    <article class="order empty">
+      주문 내역이 없습니다.
+    </article>
+  `;
+  orderListEl.insertAdjacentHTML("beforeend", emptyTemplate);
+}
+
 async function renderData() {
   const orders = await getOrders();
   if (orders.length === 0) {
-    alert("주문내역이 없습니다.");
+    renderEmpty();
   } else {
     renderOrders(orders);
     await orders.forEach(renderOrderItems);

@@ -33,6 +33,16 @@ main > h2 {
   margin-bottom: 30px;
 }
 
+.order.empty {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  color: #888;
+}
+
 .order__change {
   display: flex;
   justify-content: flex-end;
