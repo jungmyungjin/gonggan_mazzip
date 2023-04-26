@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { loginRequired } from "../middlewares";
+import { loginRequired, adminOnly } from "../middlewares";
 import { orderItemService } from "../services/order-item-service";
 import asyncHandler from "../middlewares/async-handler";
 
@@ -21,7 +21,6 @@ orderItemRouter.get(
   asyncHandler(async (req, res, next) => {
     const { orderId } = req.params;
     const orderItems = await orderItemService.getItemsByOrderId(orderId);
-
     res.status(201).json(orderItems);
   })
 );
@@ -43,6 +42,30 @@ orderItemRouter.patch(
     );
 
     res.status(201).json(updateOrderItem);
+  })
+);
+
+orderItemRouter.get(
+  "/searchOrderItem/:type",
+  adminOnly,
+  asyncHandler(async (req, res, next) => {
+    const { type } = req.params;
+    const { value } = req.query;
+
+    const orderItems = await orderItemService.getOrderItems(type, value);
+    res.status(201).json(orderItems);
+  })
+);
+
+orderItemRouter.delete(
+  "/delete/:orderItemId",
+  adminOnly,
+  asyncHandler(async (req, res, next) => {
+    const { orderItemId } = req.params;
+    const deletedOrderItem = await orderItemService.deleteOrderItem(
+      orderItemId
+    );
+    res.status(201).json(deletedOrderItem);
   })
 );
 
