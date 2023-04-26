@@ -77,11 +77,21 @@ async function renderUserData() {
   const ordererName = document.querySelector("#ordererName");
   const ordererEmail = document.querySelector("#ordererEmail");
   const ordererPhone = document.querySelector("#ordererPhone");
+  const receiverName = document.querySelector("#receiverName");
+  const receiverPhone = document.querySelector("#receiverPhone");
+  const postalCode = document.querySelector("input[title=postalCode]");
+  const address1 = document.querySelector("input[title=address1]");
+  const address2 = document.querySelector("input[title=address2]");
   const userInfo = await getUserInfo();
 
   if (ordererName) ordererName.innerText = userInfo.name;
   if (ordererEmail) ordererEmail.innerText = userInfo.email;
   if (ordererPhone) ordererPhone.innerText = userInfo.phoneNumber;
+  if (receiverName) receiverName.value = userInfo.name;
+  if (receiverPhone) receiverPhone.value = userInfo.phoneNumber;
+  if (postalCode) postalCode.value = userInfo.address.postalCode;
+  if (address1) address1.value = userInfo.address.address1;
+  if (address2) address2.value = userInfo.address.address2;
 }
 
 //총액 계산
