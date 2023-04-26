@@ -51,6 +51,7 @@ const orderTemplate = (order) => {
 };
 
 const orderItemTemplate = (orderItem, orderStatus) => {
+  console.log("template", orderItem);
   const {
     _id: orderItemId,
     productId: { _id: productId, imageUrl, company, productName, price },
@@ -170,17 +171,25 @@ async function getOrders() {
 }
 
 //주문 상품 불러오기 (API: orderItem)
-async function getOrderItems(orderId) {
-  const api = `/api/orderItems/list/order/${orderId}`;
+async function getOrderItems(orders) {
+  const apis = orders.map((order) => `/api/orderItems/list/order/${order._id}`);
   try {
-    const response = await fetch(api, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    const responses = await Promise.all(
+      apis.map((api) => {
+        return fetch(api, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      })
+    );
+    const orderItemsData = await Promise.all(
+      responses.map((res) => res.json())
+    );
+    responses.forEach((res) => {
+      if (!res.ok) throw new Error(orderData.reason);
     });
-    const orderItemsData = await response.json();
-    if (!response.ok) throw new Error(orderData.reason);
     return orderItemsData;
   } catch (err) {
     alert(err.message);
@@ -295,8 +304,8 @@ function renderOrders(orders) {
 }
 
 //주문 상품 렌더링
-async function renderOrderItems(order) {
-  const orderItems = await getOrderItems(order._id);
+function renderOrderItems(orderItems) {
+  const order = orderItems[0].orderId;
   const template = orderItems
     .map((item) => orderItemTemplate(item, order.orderStatus))
     .join("");
@@ -417,7 +426,8 @@ async function renderData() {
     renderEmpty();
   } else {
     renderOrders(orders);
-    await orders.forEach(renderOrderItems);
+    const orderItemsAll = await getOrderItems(orders);
+    orderItemsAll.forEach((orderItems) => renderOrderItems(orderItems));
   }
 }
 
