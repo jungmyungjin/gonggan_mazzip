@@ -80,6 +80,7 @@ a {
 }
 
 .header__container > header > nav > #gnb__user > li > a {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -96,6 +97,24 @@ a {
   margin-top: 2px;
 }
 
+.header__container > header > nav > #gnb__user li #cartItemQuantity {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  z-index: 10;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  font-size: 8px;
+  transform: scale(0.8);
+  font-family: "arial";
+  color: #fff;
+}
+
 .header__container > header > nav > #gnb__user svg {
   width: 25px;
   height: 25px;
@@ -107,9 +126,8 @@ a {
   top: 60px;
   right: 0px;
   z-index: 100;
-  padding: 15px;
-  width: 130px;
-  box-sizing: border-box;
+  min-width: 80px;
+  padding: 15px 25px;
   border: 1px solid #ddd;
   background-color: #fff;
   border-radius: 3px;
@@ -122,6 +140,13 @@ a {
   align-items: center;
   width: 100%;
   height: 30px;
+  font: 600 12px/1 var(--main-font);
+  color: #333;
+}
+
+.header__container > header > .dropdown__container li > span {
+  color: var(--sub-2-color);
+  font-weight: 800;
 }
 
 .header__container > header > .dropdown__container li a {

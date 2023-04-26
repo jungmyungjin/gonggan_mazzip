@@ -1,5 +1,6 @@
 let isDropdownOpen = false;
 let isLoggedIn = false;
+let username = "";
 
 //로그아웃
 function logout(e) {
@@ -27,7 +28,10 @@ async function checkLogin() {
         },
       });
       const userInfo = await response.json();
-      if (userInfo) isLoggedIn = true;
+      if (userInfo) {
+        isLoggedIn = true;
+        username = userInfo.name;
+      }
     } catch (err) {
       console.error(err);
     }
@@ -50,13 +54,18 @@ function openDropdown() {
         <ul>
         ${
           !isLoggedIn
-            ? `<li>
+            ? `
+            <li>
               <a href="/login">로그인</a>
             </li>
             <li>
               <a href="/register">회원가입</a>
             </li>`
-            : `<li>
+            : `
+            <li>
+              <span>${username}</span>님, 환영합니다!
+            </li>
+            <li>
               <a href="/info">마이페이지</a>
             </li>
             <li>
@@ -85,10 +94,19 @@ function setDropdown(e) {
   !isDropdownOpen ? openDropdown() : closeDropdown();
 }
 
+//장바구니 상품 개수 장바구니 아이콘에 반영
+export function updateCartQuantity(num) {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+  const cartQuantityEl = document.querySelector("#cartItemQuantity");
+  cartQuantityEl.innerText = cartItems.length;
+}
+
 //header 생성
 function createHeader() {
   const params = new URL(document.location).searchParams;
   const category = params.get("category");
+  const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+
   const template = `
     <div class="header__container">
       <header>
@@ -136,6 +154,9 @@ function createHeader() {
                 >
                   <path d="M220 976q-24 0-42-18t-18-42V396q0-24 18-42t42-18h110v-10q0-63 43.5-106.5T480 176q63 0 106.5 43.5T630 326v10h110q24 0 42 18t18 42v520q0 24-18 42t-42 18H220Zm0-60h520V396H630v90q0 12.75-8.675 21.375-8.676 8.625-21.5 8.625-12.825 0-21.325-8.625T570 486v-90H390v90q0 12.75-8.675 21.375-8.676 8.625-21.5 8.625-12.825 0-21.325-8.625T330 486v-90H220v520Zm170-580h180v-10q0-38-26-64t-64-26q-38 0-64 26t-26 64v10ZM220 916V396v520Z"/>
                 </svg>
+                <span id="cartItemQuantity">
+                  ${cartItems.length}
+                </span>
               </a>
             </li>
           </ul>
