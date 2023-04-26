@@ -162,9 +162,8 @@ if (cartItems.length === 0) {
       }
     });
   });
+  calculateTotal();
 }
-
-calculateTotal();
 
 purchaseButton.addEventListener('click', () => {
   const checkedItems = cartItems.filter((item, index) => {
