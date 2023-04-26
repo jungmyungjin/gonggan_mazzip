@@ -17,13 +17,13 @@ function calculateTotal() {
 
   checkboxes.forEach((checkbox, index) => {
     if (checkbox.checked) {
-      const item = cartItems[index]; // 이 부분을 수정했습니다.
+      const item = cartItems[index];
       total += item.price * item.quantity;
     }
   });
 
-  totalEl.textContent = `${total.toLocaleString()}원`;
-  orderEl.textContent = `${total.toLocaleString()}원`;
+  totalEl.textContent = `${total.toLocaleString()} 원`;
+  orderEl.textContent = `${total.toLocaleString()} 원`;
 }
 
 const productHtml = cartItems
@@ -39,7 +39,7 @@ const productHtml = cartItems
           <div class="product-detail">
             <div class="product-company">${item.company}</div>
             <div class="product-name">${item.productName}</div>
-            <div class="product-price">${item.price.toLocaleString()}</div>
+            <div class="product-price">${item.price.toLocaleString()} 원</div>
             <div class="product-quantity">
               <button type="button" class="minusBtn">-</button>
               <span class="quantity">${item.quantity}</span>
@@ -47,7 +47,7 @@ const productHtml = cartItems
             </div>
             <div class="product-total-price">${(
               item.price * item.quantity
-            ).toLocaleString()}</div>
+            ).toLocaleString()} 원</div>
           </div>
           <span class="close-button">
             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
@@ -97,7 +97,7 @@ if (cartItems.length === 0) {
         quantityEl.innerText = newQuantity;
 
         const newTotalPrice = newQuantity * currentPrice;
-        totalPriceEl.innerText = newTotalPrice.toLocaleString();
+        totalPriceEl.innerText = newTotalPrice.toLocaleString() + ' 원';
 
         cartItems[index].quantity = newQuantity;
         cartItems[index].totalPrice = newTotalPrice;
@@ -143,19 +143,22 @@ if (cartItems.length === 0) {
     const closeButton = item.querySelector('.close-button');
 
     closeButton.addEventListener('click', () => {
-      // 상품 삭제
-      productList.removeChild(item);
-      cartItems.splice(index, 1);
+      const confirmed = confirm('상품을 장바구니에서 삭제 하시겠어요?');
+      if (confirmed) {
+        // 상품 삭제
+        productList.removeChild(item);
+        cartItems.splice(index, 1);
 
-      // 로컬 스토리지 업데이트
-      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        // 로컬 스토리지 업데이트
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
-      // 총액 계산
-      calculateTotal();
+        // 총액 계산
+        calculateTotal();
 
-      // 로컬 스토리지가 비었을 경우 showEmptyCartMessage 함수 실행
-      if (cartItems.length === 0) {
-        showEmptyCartMessage();
+        // 로컬 스토리지가 비었을 경우 showEmptyCartMessage 함수 실행
+        if (cartItems.length === 0) {
+          showEmptyCartMessage();
+        }
       }
     });
   });

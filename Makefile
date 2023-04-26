@@ -5,6 +5,7 @@ OPT = -f $(YML_FILE)
 all: build_up
 
 init:
+	export JWT_SECRET_KEY=ggmz_jwt_secret_key
 	./deployment/tools/init.sh
 
 build_up: 

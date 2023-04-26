@@ -1,5 +1,6 @@
 [
   {
+    "userId": "",
     "receiver": {
       "receiverName": "김성수",
       "receiverPhoneNumber": "010-1234-5678",
@@ -11,6 +12,7 @@
     "orderStatus": "결제 완료"
   },
   {
+    "userId": "",
     "receiver": {
       "receiverName": "홍길동",
       "receiverPhoneNumber": "010-4567-1234",
@@ -21,6 +23,7 @@
     "orderStatus": "결제 완료"
   },
   {
+    "userId": "",
     "receiver": {
       "receiverName": "김성수",
       "receiverPhoneNumber": "010-4567-1234",
@@ -31,6 +34,7 @@
     "orderStatus": "배송 중"
   },
   {
+    "userId": "",
     "receiver": {
       "receiverName": "안리수",
       "receiverPhoneNumber": "010-9876-5432",
@@ -42,6 +46,7 @@
     "orderStatus": "상품 준비 중"
   },
   {
+    "userId": "",
     "receiver": {
       "receiverName": "강감찬",
       "receiverPhoneNumber": "010-9876-5432",
