@@ -57,6 +57,7 @@ async function getUserInfo() {
     const data = await response.json();
 
     //비로그인 유저 차단
+    if (response.status === 401) return (location.href = "/login");
     if (!response.ok) throw new Error(data.reason);
     return data;
   } catch (err) {
