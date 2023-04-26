@@ -1,3 +1,4 @@
+import { updateCartQuantity } from '/common.js';
 const productList = document.querySelector('.product-list');
 const main = document.querySelector('main');
 const purchaseButton = document.querySelector('#purchaseButton');
@@ -159,6 +160,9 @@ if (cartItems.length === 0) {
         if (cartItems.length === 0) {
           showEmptyCartMessage();
         }
+
+        //header의 장바구니 아이콘 개수 업데이트
+        updateCartQuantity();
       }
     });
   });

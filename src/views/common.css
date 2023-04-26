@@ -80,6 +80,7 @@ a {
 }
 
 .header__container > header > nav > #gnb__user > li > a {
+  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -94,6 +95,24 @@ a {
 
 .header__container > header > nav > #gnb__user li:first-child a {
   margin-top: 2px;
+}
+
+.header__container > header > nav > #gnb__user li #cartItemQuantity {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  z-index: 10;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  background-color: var(--main-color);
+  border-radius: 50%;
+  font-size: 8px;
+  transform: scale(0.8);
+  font-family: "arial";
+  color: #fff;
 }
 
 .header__container > header > nav > #gnb__user svg {

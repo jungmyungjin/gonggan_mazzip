@@ -1,3 +1,4 @@
+import { updateCartQuantity } from '/common.js';
 const cartBtn = document.querySelector('#cartBtn');
 
 cartBtn.addEventListener('click', () => {
@@ -36,4 +37,7 @@ cartBtn.addEventListener('click', () => {
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
 
   alert('장바구니에 상품이 추가되었습니다.');
+
+  //header의 장바구니 아이콘 개수 업데이트
+  updateCartQuantity();
 });
