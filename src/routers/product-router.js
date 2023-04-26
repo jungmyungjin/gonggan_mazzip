@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { productService } from "../services/product-service";
 import requestHandler from "../middlewares/async-handler";
-import { validateProductListRequest } from "../middlewares";
+import {
+  validateProductListRequest,
+  validateCreateProducts,
+} from "../middlewares";
 
 const productRouter = Router();
 
@@ -53,5 +56,39 @@ productRouter.post(
     }
   })
 );
+
+productRouter.post(
+  "/",
+  validateCreateProducts,
+  requestHandler(async (req, res, next) => {
+    {
+      const newProducts = req.body.createProducts;
+      const resultProducts = await productService.createProducts(newProducts);
+
+      console.log(resultProducts);
+      res.status(201).json(resultProducts);
+    }
+  })
+);
+
+// TODO : 상품 삭제
+// productRouter.delete(
+//   "/delete",
+//   requestHandler(async (req, res, next) => {
+//     {
+//       res.status(201).json(resultProductList);
+//     }
+//   })
+// );
+
+// TODO : 상품 수정
+// productRouter.patch(
+//   "/update",
+//   requestHandler(async (req, res, next) => {
+//     {
+//       res.status(201).json(resultProductList);
+//     }
+//   })
+// );
 
 export { productRouter };

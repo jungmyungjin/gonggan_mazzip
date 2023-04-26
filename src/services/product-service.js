@@ -117,6 +117,18 @@ class ProductService {
 
     await this.productModel.model.bulkWrite(bulkUpdateOps);
   }
+
+  // 상품 생성
+  async createProducts(newProducts) {
+    const resultCreateProducts = await this.productModel.create(newProducts);
+    return resultCreateProducts;
+  }
+
+  // TODO : 상품 삭제
+  // async deleteProducts() {}
+
+  // TODO :  상품 수정
+  // async setProducts() {}
 }
 
 const productService = new ProductService(productModel);
