@@ -124,11 +124,20 @@ class ProductService {
     return resultCreateProducts;
   }
 
+  // TODO :  상품 수정
+  async setProducts(setProducts) {
+    const bulkUpdateOps = setProducts.map(({ productId, ...update }) => ({
+      updateOne: {
+        filter: { _id: productId },
+        update: { $set: update },
+      },
+    }));
+    const resultSetProducts = await this.productModel.bulkWrite(bulkUpdateOps);
+    return resultSetProducts;
+  }
+
   // TODO : 상품 삭제
   // async deleteProducts() {}
-
-  // TODO :  상품 수정
-  // async setProducts() {}
 }
 
 const productService = new ProductService(productModel);

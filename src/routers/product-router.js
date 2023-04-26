@@ -3,7 +3,8 @@ import { productService } from "../services/product-service";
 import requestHandler from "../middlewares/async-handler";
 import {
   validateProductListRequest,
-  validateCreateProducts,
+  validateProductSchemaAllTypes,
+  validateProductSchemaTypes,
 } from "../middlewares";
 
 const productRouter = Router();
@@ -57,12 +58,13 @@ productRouter.post(
   })
 );
 
+// 상품 추가
 productRouter.post(
   "/",
-  validateCreateProducts,
+  validateProductSchemaAllTypes,
   requestHandler(async (req, res, next) => {
     {
-      const newProducts = req.body.createProducts;
+      const newProducts = req.body.products;
       const resultProducts = await productService.createProducts(newProducts);
 
       console.log(resultProducts);
@@ -82,13 +84,16 @@ productRouter.post(
 // );
 
 // TODO : 상품 수정
-// productRouter.patch(
-//   "/update",
-//   requestHandler(async (req, res, next) => {
-//     {
-//       res.status(201).json(resultProductList);
-//     }
-//   })
-// );
+productRouter.patch(
+  "/",
+  validateProductSchemaTypes,
+  requestHandler(async (req, res, next) => {
+    {
+      const setProducts = req.body.products;
+      const resultProducts = await productService.setProducts(setProducts);
+      res.status(201).json(resultProducts);
+    }
+  })
+);
 
 export { productRouter };
