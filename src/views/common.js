@@ -1,5 +1,6 @@
 let isDropdownOpen = false;
 let isLoggedIn = false;
+let username = "";
 
 //로그아웃
 function logout(e) {
@@ -27,7 +28,10 @@ async function checkLogin() {
         },
       });
       const userInfo = await response.json();
-      if (userInfo) isLoggedIn = true;
+      if (userInfo) {
+        isLoggedIn = true;
+        username = userInfo.name;
+      }
     } catch (err) {
       console.error(err);
     }
@@ -50,13 +54,18 @@ function openDropdown() {
         <ul>
         ${
           !isLoggedIn
-            ? `<li>
+            ? `
+            <li>
               <a href="/login">로그인</a>
             </li>
             <li>
               <a href="/register">회원가입</a>
             </li>`
-            : `<li>
+            : `
+            <li>
+              <span>${username}</span>님, 환영합니다!
+            </li>
+            <li>
               <a href="/info">마이페이지</a>
             </li>
             <li>
