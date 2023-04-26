@@ -16,6 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("views")); //
 
+app.use(express.static("public/images"));
+
 app.use(viewsRouter);
 
 app.use("/api/users", userRouter);
