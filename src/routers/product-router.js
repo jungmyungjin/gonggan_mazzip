@@ -5,6 +5,8 @@ import {
   validateProductListRequest,
   validateProductSchemaAllTypes,
   validateProductSchemaTypes,
+  isValidObjectId,
+  normalizeObjectIdInput,
 } from "../middlewares";
 
 const productRouter = Router();
@@ -66,22 +68,10 @@ productRouter.post(
     {
       const newProducts = req.body.products;
       const resultProducts = await productService.createProducts(newProducts);
-
-      console.log(resultProducts);
       res.status(201).json(resultProducts);
     }
   })
 );
-
-// TODO : 상품 삭제
-// productRouter.delete(
-//   "/delete",
-//   requestHandler(async (req, res, next) => {
-//     {
-//       res.status(201).json(resultProductList);
-//     }
-//   })
-// );
 
 // TODO : 상품 수정
 productRouter.patch(
@@ -91,6 +81,25 @@ productRouter.patch(
     {
       const setProducts = req.body.products;
       const resultProducts = await productService.setProducts(setProducts);
+      res.status(201).json(resultProducts);
+    }
+  })
+);
+
+// TODO : 상품 삭제
+// 유효한 objectId인지 검증필요
+productRouter.delete(
+  "/",
+  normalizeObjectIdInput,
+  isValidObjectId,
+  requestHandler(async (req, res, next) => {
+    {
+      const deleteProductIds = Array.isArray(req.query.id)
+        ? req.query.id
+        : [req.query.id];
+      const resultProducts = await productService.deleteProducts(
+        deleteProductIds
+      );
       res.status(201).json(resultProducts);
     }
   })

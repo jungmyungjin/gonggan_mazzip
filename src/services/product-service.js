@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { productModel } from "../db";
 import { parsePaginationParameters } from "./utils";
 
@@ -137,7 +138,13 @@ class ProductService {
   }
 
   // TODO : 상품 삭제
-  // async deleteProducts() {}
+  async deleteProducts(productIds) {
+    const objIds = productIds.map((id) => new Types.ObjectId(id));
+    const resultDeleteProducts = await this.productModel.deleteMany({
+      _id: { $in: objIds },
+    });
+    return resultDeleteProducts;
+  }
 }
 
 const productService = new ProductService(productModel);

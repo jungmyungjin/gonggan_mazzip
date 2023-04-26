@@ -1,4 +1,5 @@
 import { ProductSchema } from "../db/schemas/product-schema";
+import { Types } from "mongoose";
 
 function validateProductListRequest(req, res, next) {
   const { category, page, perPage } = req.query;
@@ -66,8 +67,29 @@ function validateProductSchemaTypes(req, res, next) {
   next();
 }
 
+function isValidObjectId(req, res, next) {
+  const ids = req.query.id;
+  for (let id of ids) {
+    if (!Types.ObjectId.isValid(id)) {
+      throw new Error("ObjectId 형식이 아닙니다. " + id);
+    }
+  }
+  next();
+}
+
+function normalizeObjectIdInput(req, res, next) {
+  const { id } = req.query;
+  console.log(id);
+  const arrayIds = Array.isArray(req.query.id) ? req.query.id : [req.query.id];
+  req.query.id = arrayIds;
+
+  next();
+}
+
 module.exports = {
   validateProductListRequest,
   validateProductSchemaAllTypes,
   validateProductSchemaTypes,
+  isValidObjectId,
+  normalizeObjectIdInput,
 };

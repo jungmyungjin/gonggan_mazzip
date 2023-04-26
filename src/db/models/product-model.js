@@ -67,12 +67,6 @@ class ProductModel {
     return updateProduct;
   }
 
-  // 관리자가 상품을 한개 수정할 때
-  async updateOne({ filter, update }) {
-    const updateOne = await this.model.updateOne(filter, update);
-    return updateOne;
-  }
-
   // 관리자가 상품을 여러개 수정할 때
   async updateMany({ filter, update }) {
     const updateProduct = await this.model.updateMany(filter, update, {
@@ -83,13 +77,13 @@ class ProductModel {
 
   // 관리자가 상품을 삭제할 때
   async deleteOne(filter) {
-    const deleteProduct = await this.model.deleteOne({ filter });
+    const deleteProduct = await this.model.deleteOne(filter);
     return deleteProduct;
   }
 
   // 관리자가 상품을 여러개 삭제할때
   async deleteMany(filter) {
-    const deleteProduct = await this.model.deleteMany({ filter });
+    const deleteProduct = await this.model.deleteMany(filter);
     return deleteProduct;
   }
 
