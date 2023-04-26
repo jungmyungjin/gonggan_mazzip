@@ -57,7 +57,13 @@ async function getUserInfo() {
     const data = await response.json();
 
     //비로그인 유저 차단
+    if (response.status === 401) return (location.href = "/login");
     if (!response.ok) throw new Error(data.reason);
+    //전화번호 없을시 먼저 전화번호 입력하도록 리다이렉트
+    if (!data.phoneNumber) {
+      alert("먼저 회원 정보에 휴대폰 번호를 업데이트 해주셔야 합니다.");
+      return (location.href = "/info");
+    }
     return data;
   } catch (err) {
     //console.error(err.message);
@@ -71,11 +77,21 @@ async function renderUserData() {
   const ordererName = document.querySelector("#ordererName");
   const ordererEmail = document.querySelector("#ordererEmail");
   const ordererPhone = document.querySelector("#ordererPhone");
+  const receiverName = document.querySelector("#receiverName");
+  const receiverPhone = document.querySelector("#receiverPhone");
+  const postalCode = document.querySelector("input[title=postalCode]");
+  const address1 = document.querySelector("input[title=address1]");
+  const address2 = document.querySelector("input[title=address2]");
   const userInfo = await getUserInfo();
 
   if (ordererName) ordererName.innerText = userInfo.name;
   if (ordererEmail) ordererEmail.innerText = userInfo.email;
   if (ordererPhone) ordererPhone.innerText = userInfo.phoneNumber;
+  if (receiverName) receiverName.value = userInfo.name;
+  if (receiverPhone) receiverPhone.value = userInfo.phoneNumber;
+  if (postalCode) postalCode.value = userInfo.address.postalCode;
+  if (address1) address1.value = userInfo.address.address1;
+  if (address2) address2.value = userInfo.address.address2;
 }
 
 //총액 계산
