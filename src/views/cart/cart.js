@@ -47,7 +47,7 @@ const productHtml = cartItems
             </div>
             <div class="product-total-price">${(
               item.price * item.quantity
-            ).toLocaleString()}</div>
+            ).toLocaleString()} 원</div>
           </div>
           <span class="close-button">
             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
@@ -97,7 +97,7 @@ if (cartItems.length === 0) {
         quantityEl.innerText = newQuantity;
 
         const newTotalPrice = newQuantity * currentPrice;
-        totalPriceEl.innerText = newTotalPrice.toLocaleString();
+        totalPriceEl.innerText = newTotalPrice.toLocaleString() + ' 원';
 
         cartItems[index].quantity = newQuantity;
         cartItems[index].totalPrice = newTotalPrice;

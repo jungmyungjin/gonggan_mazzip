@@ -9,11 +9,19 @@ main {
   padding: 50px 0px;
 }
 
-.product-list {
-  width: 70%;
-  height: auto;
-  padding-right: 50px;
-  box-sizing: border-box;
+/* 장바구니 비었을 때 출력 되는 곳 */
+.empty-cart {
+  margin: auto;
+  padding: 100px 100px;
+  text-align: center;
+}
+
+.empty-cart p {
+  padding-bottom: 80px;
+}
+
+.empty-cart button {
+  margin-bottom: 100px;
 }
 
 .select-all {
@@ -25,6 +33,13 @@ main {
   color: #333;
 }
 
+.product-list {
+  width: 70%;
+  height: auto;
+  padding-right: 50px;
+  box-sizing: border-box;
+}
+
 .product-item {
   position: relative;
   display: flex;
@@ -34,6 +49,24 @@ main {
   padding: 20px;
   box-sizing: border-box;
   border: 1px solid #ddd;
+}
+
+.product-company {
+  color: #888;
+  font-weight: bold;
+  font-size: small;
+  padding-bottom: 10px;
+}
+
+.product-name {
+  color: #333;
+  font-weight: bold;
+  font-size: larger;
+  padding-bottom: 45px;
+}
+
+.product-price {
+  padding-bottom: 10px;
 }
 
 .product-detail {
@@ -55,12 +88,39 @@ main {
   background-color: aliceblue;
 }
 
+.product-total-price {
+  position: absolute;
+  font-weight: bold;
+  font-size: 20px;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+}
+
 .cart-summary {
   width: 30%;
   height: 300px;
+  position: sticky;
+  top: 10px;
+}
+
+.order-summary {
+  margin-top: 36px;
   border: 1px solid #ddd;
   padding: 20px;
   box-sizing: border-box;
+}
+
+.cart-summary .info {
+  margin-top: 10px;
+}
+
+.cart-summary .total {
+  margin-top: 30px;
+}
+
+.purchase button {
+  margin-top: 15px;
 }
 
 .close-button {
