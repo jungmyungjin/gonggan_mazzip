@@ -51,7 +51,6 @@ const orderTemplate = (order) => {
 };
 
 const orderItemTemplate = (orderItem, orderStatus) => {
-  console.log("template", orderItem);
   const {
     _id: orderItemId,
     productId: { _id: productId, imageUrl, company, productName, price },
