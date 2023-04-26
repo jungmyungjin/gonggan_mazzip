@@ -287,6 +287,7 @@ function renderChangeOrder(order, type) {
     changeBtn.innerText = "수정 사항 저장";
     changeBtn.removeEventListener("click", changeOrder);
     changeBtn.addEventListener("click", completeChangeOrder);
+
     //텍스트를 input으로 변경
     changes.forEach((className) => {
       const elements = orderInfo.getElementsByClassName(className);
@@ -297,8 +298,19 @@ function renderChangeOrder(order, type) {
         input.classList = element.classList;
         input.value = value;
         element.replaceWith(input);
+
+        if (className === "postalCode" || className === "address1") {
+          input.readOnly = true;
+        }
       });
     });
+
+    //주소찾기 버튼 추가
+    const button = document.createElement("button");
+    const postalCodeEl = orderInfo.querySelector(".postalCode");
+    button.textContent = "주소찾기";
+    button.classList.add("addressBtn");
+    postalCodeEl.parentNode.insertBefore(button, postalCodeEl.nextSibling);
   }
 
   //배송 정보 수정 완료 후 텍스트로 변경
@@ -307,6 +319,10 @@ function renderChangeOrder(order, type) {
     changeBtn.innerText = "배송 정보 수정";
     changeBtn.removeEventListener("click", completeChangeOrder);
     changeBtn.addEventListener("click", changeOrder);
+
+    //주소 찾기 버튼 제거
+    const addressBtn = orderInfo.querySelector(".addressBtn");
+    addressBtn.remove();
 
     const getTagName = (className) => {
       switch (className) {
