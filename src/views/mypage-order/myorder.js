@@ -109,6 +109,46 @@ const totalTemplate = (totalPrice) => `
   </div>
 `;
 
+//주소 찾기
+function searchAddress(e) {
+  e.preventDefault();
+  const order = e.currentTarget.closest("article.order");
+  const postalCodeInput = order.querySelector("input.postalCode");
+  const address1Input = order.querySelector("input.address1");
+  const address2Input = order.querySelector("input.address2");
+  new daum.Postcode({
+    oncomplete: function (data) {
+      let addr = "";
+      let extraAddr = "";
+
+      if (data.userSelectedType === "R") {
+        addr = data.roadAddress;
+      } else {
+        addr = data.jibunAddress;
+      }
+
+      if (data.userSelectedType === "R") {
+        if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+          extraAddr += data.bname;
+        }
+        if (data.buildingName !== "" && data.apartment === "Y") {
+          extraAddr +=
+            extraAddr !== "" ? ", " + data.buildingName : data.buildingName;
+        }
+        if (extraAddr !== "") {
+          extraAddr = " (" + extraAddr + ")";
+        }
+      } else {
+      }
+
+      postalCodeInput.value = data.zonecode;
+      address1Input.value = `${addr} ${extraAddr}`;
+      address2Input.placeholder = "상세 주소를 입력해 주세요.";
+      address2Input.focus();
+    },
+  }).open();
+}
+
 //주문 내역 불러오기 (API: order)
 async function getOrders() {
   const api = "/api/orders/list/user";
@@ -224,7 +264,7 @@ async function completeChangeOrder(e) {
     renderChangeOrder(order, "text");
   } catch (err) {
     alert("배송 정보 수정에 실패하였습니다.");
-    //console.error(err.message);
+    console.error(err.message);
   }
 }
 
@@ -310,6 +350,7 @@ function renderChangeOrder(order, type) {
     const postalCodeEl = orderInfo.querySelector(".postalCode");
     button.textContent = "주소찾기";
     button.classList.add("addressBtn");
+    button.addEventListener("click", searchAddress);
     postalCodeEl.parentNode.insertBefore(button, postalCodeEl.nextSibling);
   }
 
@@ -322,6 +363,7 @@ function renderChangeOrder(order, type) {
 
     //주소 찾기 버튼 제거
     const addressBtn = orderInfo.querySelector(".addressBtn");
+    addressBtn.removeEventListener("click", searchAddress);
     addressBtn.remove();
 
     const getTagName = (className) => {
@@ -358,6 +400,7 @@ function renderTotal(orderId) {
   orderEl.insertAdjacentHTML("beforeend", totalTemplate(totalPrice));
 }
 
+//주문내역 없음 알림 문구 렌더링
 function renderEmpty() {
   const orderListEl = document.querySelector("#orderList");
   const emptyTemplate = `
