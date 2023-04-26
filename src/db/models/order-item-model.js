@@ -22,6 +22,108 @@ export class OrderItemModel {
     return orderItems;
   }
 
+  async findByType(type, value) {
+    let orderItems = {};
+    if (type === "user") {
+      orderItems = await OrderItem.aggregate([
+        {
+          $lookup: {
+            from: "orders",
+            localField: "orderId",
+            foreignField: "_id",
+            as: "order",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "order.userId",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "productId",
+            foreignField: "_id",
+            as: "product",
+          },
+        },
+        { $unwind: "$order" },
+        { $unwind: "$user" },
+        { $unwind: "$product" },
+        { $match: { "user.name": { $regex: value } } },
+        { $sort: { created_at: -1 } },
+      ]);
+    } else if (type === "order") {
+      orderItems = await OrderItem.aggregate([
+        {
+          $lookup: {
+            from: "orders",
+            localField: "orderId",
+            foreignField: "_id",
+            as: "order",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "order.userId",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "productId",
+            foreignField: "_id",
+            as: "product",
+          },
+        },
+        { $unwind: "$order" },
+        { $unwind: "$user" },
+        { $unwind: "$product" },
+        { $match: { "order.receiver.receiverName": { $regex: value } } },
+        { $sort: { created_at: -1 } },
+      ]);
+    } else if (type === "product") {
+      orderItems = await OrderItem.aggregate([
+        {
+          $lookup: {
+            from: "orders",
+            localField: "orderId",
+            foreignField: "_id",
+            as: "order",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "order.userId",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "productId",
+            foreignField: "_id",
+            as: "product",
+          },
+        },
+        { $unwind: "$order" },
+        { $unwind: "$user" },
+        { $unwind: "$product" },
+        { $match: { "product.productName": { $regex: value } } },
+        { $sort: { created_at: -1 } },
+      ]);
+    }
+    return orderItems;
+  }
+
   async findAll() {
     const orderItems = await OrderItem.find({});
     return orderItems;
@@ -43,6 +145,13 @@ export class OrderItemModel {
     );
 
     return updateOrderItem;
+  }
+
+  async delete(orderItemId) {
+    const deleteOrderItemResult = await OrderItem.findByIdAndDelete(
+      orderItemId
+    );
+    return deleteOrderItemResult;
   }
 }
 

@@ -57,6 +57,25 @@ class OrderItemService {
     productService.increaseProductStock(productId, toUpdate.quantity);
     return updatedOrderItem;
   }
+
+  async getOrderItems(type, value) {
+    const orderItems = await this.orderItemModel.findByType(type, value);
+    if (!orderItems) {
+      usersInfo =
+        "없는 사용자 주문 아이템 정보 입니다. 다시 한 번 확인해 주세요.";
+    }
+    return orderItems;
+  }
+
+  async deleteOrderItem(orderItemId) {
+    const deletedOrderItem = await this.orderItemModel.delete(orderItemId);
+    if (!deletedOrderItem) {
+      throw new Error(
+        `${orderItemId} 주문 아이템의 삭제 처리에 실패하였습니다.`
+      );
+    }
+    return deletedOrderItem;
+  }
 }
 
 const orderItemService = new OrderItemService(orderItemModel);
