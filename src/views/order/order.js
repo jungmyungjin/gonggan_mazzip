@@ -59,6 +59,11 @@ async function getUserInfo() {
     //비로그인 유저 차단
     if (response.status === 401) return (location.href = "/login");
     if (!response.ok) throw new Error(data.reason);
+    //전화번호 없을시 먼저 전화번호 입력하도록 리다이렉트
+    if (!data.phoneNumber) {
+      alert("먼저 회원 정보에 휴대폰 번호를 업데이트 해주셔야 합니다.");
+      return (location.href = "/info");
+    }
     return data;
   } catch (err) {
     //console.error(err.message);
