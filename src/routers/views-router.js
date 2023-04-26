@@ -11,6 +11,7 @@ viewsRouter.use("/myorder", serveStatic("mypage-order"));
 viewsRouter.use("/products/detail", serveStatic("product"));
 viewsRouter.use("/cart", serveStatic("cart"));
 viewsRouter.use("/order", serveStatic("order"));
+viewsRouter.use("/order/complete", serveStatic("order-complete"));
 
 viewsRouter.use("/", serveStatic(""));
 
