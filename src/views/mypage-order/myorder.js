@@ -15,7 +15,7 @@ const orderTemplate = (order) => {
       <ul class="order__info">
         <li>
           <span>주문 일시</span>
-          <p class="receiverName">${time}</p>
+          <p class="orderTime">${time}</p>
         </li>
         <li>
           <span>받는 사람</span>
@@ -28,14 +28,14 @@ const orderTemplate = (order) => {
         <li>
           <span>주소</span>
           <div class="receiverAddress">
-            <span>(${receiver.postalCode})</span>
-            <span>${receiver.address1}</span>
-            <span>${receiver.address2}</span>
+            <span class="postalCode">(${receiver.postalCode})</span>
+            <span class="address1">${receiver.address1}</span>
+            <span class="address2">${receiver.address2}</span>
           </div>
         </li>
         <li>
           <span>배송 요청 사항</span>
-          <p class="receiverPhone">${requestMessage}</p>
+          <p class="request">${requestMessage}</p>
         </li>
         <li>
           <span>주문 현황</span>
@@ -109,7 +109,7 @@ const totalTemplate = (totalPrice) => `
   </div>
 `;
 
-//주문 내역 불러오기
+//주문 내역 불러오기 (API: order)
 async function getOrders() {
   const api = "/api/orders/list/user";
   try {
@@ -129,7 +129,7 @@ async function getOrders() {
   }
 }
 
-//주문 상품 불러오기
+//주문 상품 불러오기 (API: orderItem)
 async function getOrderItems(orderId) {
   const api = `/api/orderItems/list/order/${orderId}`;
   try {
@@ -148,28 +148,7 @@ async function getOrderItems(orderId) {
   }
 }
 
-//주문 내역 렌더링
-function renderOrders(orders) {
-  const template = orders.map(orderTemplate).join("");
-  const orderListEl = document.querySelector("#orderList");
-  orderListEl.insertAdjacentHTML("beforeend", template);
-}
-
-//주문 상품 렌더링
-async function renderOrderItems(order) {
-  const orderItems = await getOrderItems(order._id);
-  const template = orderItems
-    .map((item) => orderItemTemplate(item, order.orderStatus))
-    .join("");
-  const orderEl = document.querySelector(`.order[data-id="${order._id}"]`);
-  const orderItemListEl = orderEl.querySelector(".order__item__list");
-  orderItemListEl.insertAdjacentHTML("beforeend", template);
-
-  addEventListeners();
-  renderTotal(order._id);
-}
-
-//주문 취소
+//상품 주문 취소 (API: orderItem)
 async function cancelOrderItem(e) {
   e.preventDefault();
   if (window.confirm("해당 상품의 주문을 취소하시겠습니까?")) {
@@ -204,16 +183,152 @@ async function cancelOrderItem(e) {
         location.href = "/myorder";
       }
     } catch (err) {
-      alert("주문 취소에 실패하였습니다. 다시 한번 시도해주세요.");
-      //console.error(err.message);
+      alert("주문 취소에 실패하였습니다.");
+      // console.error(err.message);
     }
   }
 }
 
-//이벤트 핸들러 등록(취소 버튼)
+//배송 정보 수정 (API: order)
+async function completeChangeOrder(e) {
+  e.preventDefault();
+  const order = e.currentTarget.closest("article.order");
+  const getValue = (className) => order.querySelector(`.${className}`).value;
+  const data = {
+    orderId: order.dataset.id,
+    receiver: {
+      receiverName: getValue("receiverName"),
+      receiverPhoneNumber: getValue("receiverPhone"),
+      postalCode: getValue("postalCode").replace("(", "").replace(")", ""),
+      address1: getValue("address1"),
+      address2: getValue("address2"),
+    },
+    requestMessage: getValue("request"),
+    orderStatus: order.querySelector(".orderStatus").innerText,
+  };
+
+  try {
+    const JSONdata = JSON.stringify(data);
+    const api = "/api/orders/update";
+    const response = await fetch(api, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSONdata,
+    });
+    const changeData = await response.json();
+    if (!response.ok) throw new Error(changeData.reason);
+    alert("배송 정보 수정이 완료되었습니다.");
+    renderChangeOrder(order, "text");
+  } catch (err) {
+    alert("배송 정보 수정에 실패하였습니다.");
+    //console.error(err.message);
+  }
+}
+
+//배송 정보 수정 버튼 클릭시 작동
+function changeOrder(e) {
+  e.preventDefault();
+  const order = e.currentTarget.closest("article.order");
+  const orderStatus = order.querySelector(".orderStatus").innerText;
+  const isChangeAllowed = orderStatus === "결제 완료";
+  if (!isChangeAllowed)
+    return alert("현재 주문 단계에선 배송 정보를 수정할 수 없습니다.");
+  renderChangeOrder(order, "input");
+}
+
+//이벤트 핸들러 등록(취소 버튼 및 수정 버튼)
 function addEventListeners() {
+  const changeBtns = document.querySelectorAll(".changeBtn");
   const cancelBtns = document.querySelectorAll(".cancelBtn");
   cancelBtns.forEach((btn) => btn.addEventListener("click", cancelOrderItem));
+  changeBtns.forEach((btn) => btn.addEventListener("click", changeOrder));
+}
+
+//주문 내역 렌더링
+function renderOrders(orders) {
+  const template = orders.map(orderTemplate).join("");
+  const orderListEl = document.querySelector("#orderList");
+  orderListEl.insertAdjacentHTML("beforeend", template);
+}
+
+//주문 상품 렌더링
+async function renderOrderItems(order) {
+  const orderItems = await getOrderItems(order._id);
+  const template = orderItems
+    .map((item) => orderItemTemplate(item, order.orderStatus))
+    .join("");
+  const orderEl = document.querySelector(`.order[data-id="${order._id}"]`);
+  const orderItemListEl = orderEl.querySelector(".order__item__list");
+  orderItemListEl.insertAdjacentHTML("beforeend", template);
+
+  addEventListeners();
+  renderTotal(order._id);
+}
+
+//주문 정보 수정 및 수정 완료시 렌더링
+function renderChangeOrder(order, type) {
+  const changeBtn = order.querySelector("button.changeBtn");
+  const orderInfo = order.querySelector(".order__info");
+  const changes = [
+    "receiverName",
+    "receiverPhone",
+    "postalCode",
+    "address1",
+    "address2",
+    "request",
+  ];
+
+  //배송 정보 수정할 수 있게 input으로 변경
+  if (type === "input") {
+    //버튼 동작 변경
+    changeBtn.innerText = "수정 사항 저장";
+    changeBtn.removeEventListener("click", changeOrder);
+    changeBtn.addEventListener("click", completeChangeOrder);
+    //텍스트를 input으로 변경
+    changes.forEach((className) => {
+      const elements = orderInfo.getElementsByClassName(className);
+      Array.from(elements).forEach((element) => {
+        const value = element.innerText;
+        const input = document.createElement("input");
+        input.type = "text";
+        input.classList = element.classList;
+        input.value = value;
+        element.replaceWith(input);
+      });
+    });
+  }
+
+  //배송 정보 수정 완료 후 텍스트로 변경
+  if (type === "text") {
+    //버튼 동작 변경
+    changeBtn.innerText = "배송 정보 수정";
+    changeBtn.removeEventListener("click", completeChangeOrder);
+    changeBtn.addEventListener("click", changeOrder);
+
+    const getTagName = (className) => {
+      switch (className) {
+        case "postalCode":
+        case "address1":
+        case "address2":
+          return "span";
+        default:
+          return "p";
+      }
+    };
+    //input을 텍스트로 변경
+    changes.forEach((className) => {
+      const inputs = orderInfo.getElementsByClassName(className);
+      Array.from(inputs).forEach((input) => {
+        const element = document.createElement(getTagName(className));
+        element.classList = input.classList;
+        element.innerText = input.value;
+        input.replaceWith(element);
+      });
+    });
+  }
 }
 
 //총 지불 금액 렌더링
