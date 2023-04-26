@@ -157,7 +157,15 @@ function completeOrder(orderedItems) {
   localStorage.setItem("cartItems", JSON.stringify(newCartItems));
 
   alert("주문이 완료되었습니다!");
-  location.href = "/";
+
+  //주문 완료 페이지로 데이터 이동
+  const orderId = orderedItems[0].orderId;
+  const dataToStore = {
+    orderId,
+    hasSeenOrderCompletePage: false,
+  };
+  sessionStorage.setItem("ordered", JSON.stringify(dataToStore));
+  location.href = `/order/complete?orderId=${orderId}`;
 }
 
 //주문 생성
