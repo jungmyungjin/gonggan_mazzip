@@ -379,7 +379,7 @@ const products = [
     company: "보랄",
     price: 76900,
     stock: 60,
-    imageUrl: "/electronics-6.avif",
+    imageUrl: "/electronics-7.avif",
     category: "electronics",
     description:
       "에어프라이어에 오븐 기능을 더해 간편하고 다양한 요리, 맛있는 요리가 가능합니다.",
@@ -389,7 +389,7 @@ const products = [
     company: "린클",
     price: 698000,
     stock: 40,
-    imageUrl: "/electronics-7.avif",
+    imageUrl: "/electronics-6.avif",
     category: "electronics",
     description: "버리지 말고 린클하세요",
   },
@@ -611,7 +611,7 @@ const products = [
   {
     productName: "충전식 LED 크리스탈 인테리어 무드등 단스탠드 조명",
     company: "캥거",
-    price: 500,
+    price: 5000,
     stock: 86,
     imageUrl: "/lightings-4.avif",
     category: "lightings",
@@ -629,8 +629,8 @@ const products = [
   {
     productName: "람판 단스탠드 무드등",
     company: "이케아",
-    price: 69,
-    stock: 11500,
+    price: 11500,
+    stock: 69,
     imageUrl: "/lightings-6.webp",
     category: "lightings",
     description: "IKEA를 담다 삶의 질을 높이다",
