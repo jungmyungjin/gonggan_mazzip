@@ -68,7 +68,7 @@ const loginFunc = async (e) => {
 
     const userData = await userResponse.json();
 
-    if (userData.role === 'admin-user') {
+    if (userData.role === 'admin') {
       window.location.href = '/admin';
     } else {
       window.location.href = '/';
