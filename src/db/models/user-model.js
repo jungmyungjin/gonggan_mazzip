@@ -1,6 +1,5 @@
 import { model } from "mongoose";
 import { UserSchema } from "../schemas/user-schema";
-import { use } from "passport";
 
 const User = model("users", UserSchema);
 
