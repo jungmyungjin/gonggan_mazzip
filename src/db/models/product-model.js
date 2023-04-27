@@ -15,23 +15,23 @@ class ProductModel {
   async createDummyData() {
     this.model.findOne().then((product) => {
       if (product) {
-        console.log("🌿 몽고디비 더미데이터가 이미 존재합니다");
-        console.log("🌿 몽고디비 더미데이터 생성 작업을 건너 뜁니다.");
+        console.log("🌿 몽고디비 상품 데이터가 이미 존재합니다");
+        console.log("🌿 몽고디비 상품 데이터 생성 작업을 건너 뜁니다.");
         return;
       }
-      console.log("🌿 몽고디비 더미데이터가 존재하지 않습니다.");
-      console.log("🌿 몽고디비 더미데이터 생성 작업 시작");
+      console.log("🌿 몽고디비 상품 데이터가 존재하지 않습니다.");
+      console.log("🌿 몽고디비 상품 데이터 생성 작업 시작");
       this.model
         .create(sampleProduct)
         .then(() => {
-          console.log("🌿 몽고디비에 더미데이터가 채워졌습니다.");
+          console.log("🌿 몽고디비에 상품 데이터가 채워졌습니다.");
         })
         .catch((err) => {
-          console.log("🌿 몽고디비에 더미데이터 채우기에 실패하였습니다... ");
+          console.log("🌿 몽고디비에 상품 데이터 채우기가 실패하였습니다... ");
           console.log(err);
         })
         .finally(() => {
-          console.log("🌿 몽고디비 createDummyData 작업 완료");
+          console.log("🌿 몽고디비 데이터 작업 완료");
         });
     });
   }
