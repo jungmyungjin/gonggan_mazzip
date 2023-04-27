@@ -39,7 +39,9 @@ const productHtml = cartItems
           });"></div>
           <div class="product-detail">
             <div class="product-company">${item.company}</div>
-            <div class="product-name">${item.productName}</div>
+            <div class="product-name"><a href="/products/detail/?productId=${
+              item.productId
+            }">${item.productName}</a></div>
             <div class="product-price">${item.price.toLocaleString()} 원</div>
             <div class="product-quantity">
               <button type="button" class="minusBtn">-</button>
