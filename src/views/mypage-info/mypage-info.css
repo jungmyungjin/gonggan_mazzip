@@ -121,3 +121,8 @@ input[type='submit']:hover {
 #userDelete:hover {
   background-color: rgb(254, 165, 165);
 }
+
+#email,
+#name {
+  background-color: #ededed;
+}

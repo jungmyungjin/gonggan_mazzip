@@ -39,7 +39,9 @@ const productHtml = cartItems
           });"></div>
           <div class="product-detail">
             <div class="product-company">${item.company}</div>
-            <div class="product-name">${item.productName}</div>
+            <div class="product-name"><a href="/products/detail/?productId=${
+              item.productId
+            }">${item.productName}</a></div>
             <div class="product-price">${item.price.toLocaleString()} 원</div>
             <div class="product-quantity">
               <button type="button" class="minusBtn">-</button>
@@ -140,7 +142,7 @@ if (cartItems.length === 0) {
     });
   });
   // 삭제 버튼 이벤트 추가
-  document.querySelectorAll('.product-item').forEach((item, index) => {
+  document.querySelectorAll('.product-item').forEach((item) => {
     const closeButton = item.querySelector('.close-button');
 
     closeButton.addEventListener('click', () => {
@@ -148,6 +150,10 @@ if (cartItems.length === 0) {
       if (confirmed) {
         // 상품 삭제
         productList.removeChild(item);
+
+        // 상품 인덱스 다시 계산
+        const index = [...productList.children].indexOf(item);
+
         cartItems.splice(index, 1);
 
         // 로컬 스토리지 업데이트
