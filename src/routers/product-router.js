@@ -63,6 +63,7 @@ productRouter.post(
 // 상품 추가
 productRouter.post(
   "/",
+  adminOnly,
   validateProductSchemaAllTypes,
   requestHandler(async (req, res, next) => {
     {
@@ -76,6 +77,7 @@ productRouter.post(
 // TODO : 상품 수정
 productRouter.patch(
   "/",
+  adminOnly,
   validateProductSchemaTypes,
   requestHandler(async (req, res, next) => {
     {
@@ -90,6 +92,7 @@ productRouter.patch(
 // 유효한 objectId인지 검증필요
 productRouter.delete(
   "/",
+  adminOnly,
   normalizeObjectIdInput,
   isValidObjectId,
   requestHandler(async (req, res, next) => {
