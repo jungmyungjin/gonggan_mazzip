@@ -25,6 +25,10 @@ a {
 }
 /* RESET CSS : End */
 
+.hidden {
+  display: none !important;
+}
+
 /* header CSS : Start */
 .header__container {
   width: 100%;
