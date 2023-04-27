@@ -57,7 +57,22 @@ const loginFunc = async (e) => {
 
     const data = await response.json();
     sessionStorage.setItem('token', data);
-    window.location.href = '/';
+
+    // 로그인한 유저 정보를 가져와 role이 admin인지 확인
+    const userResponse = await fetch('/api/users/info', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${data}`,
+      },
+    });
+
+    const userData = await userResponse.json();
+
+    if (userData.role === 'admin-user') {
+      window.location.href = '/admin';
+    } else {
+      window.location.href = '/';
+    }
   } catch (error) {
     errMessage.innerHTML = '로그인 과정에서 문제가 발생했습니다.';
   }
