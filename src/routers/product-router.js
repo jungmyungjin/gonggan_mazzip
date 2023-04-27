@@ -7,6 +7,7 @@ import {
   validateProductSchemaTypes,
   isValidObjectId,
   normalizeObjectIdInput,
+  adminOnly,
 } from "../middlewares";
 
 const productRouter = Router();
