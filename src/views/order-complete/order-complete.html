@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>공간맛집</title>
+    <link rel="stylesheet" href="/common.css" />
+    <link rel="stylesheet" href="/order-complete/order-complete.css" />
+    <script type="module" defer src="/common.js"></script>
+    <script
+      type="module"
+      defer
+      src="/order-complete/order-complete.js"
+    ></script>
+  </head>
+  <body>
+    <div class="orderComplete__container">
+      <main id="order">
+        <h2>ORDER COMPLETE</h2>
+        <div class="order">
+          <h3>주문이 완료되었습니다.</h3>
+          <ul class="order__info">
+            <li>
+              <span>주문 일시</span>
+              <p class="orderTime">${time}</p>
+            </li>
+            <li>
+              <span>받는 사람</span>
+              <p class="receiverName">${receiver.receiverName}</p>
+            </li>
+            <li>
+              <span>전화번호</span>
+              <p class="receiverPhone">${receiver.receiverPhoneNumber}</p>
+            </li>
+            <li>
+              <span>주소</span>
+              <div class="receiverAddress">
+                <span class="postalCode">(${receiver.postalCode})</span>
+                <span class="address1">${receiver.address1}</span>
+                <span class="address2">${receiver.address2}</span>
+              </div>
+            </li>
+            <li>
+              <span>배송 요청 사항</span>
+              <p class="request">${requestMessage}</p>
+            </li>
+          </ul>
+          <ul class="order__item__list"></ul>
+          <div class="order__total"></div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
