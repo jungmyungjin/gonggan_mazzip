@@ -40,7 +40,7 @@ async function renderData() {
               ${product.productName}
             </a>
           </h3>
-          <p class="product__price">${product.price}원</p>
+          <p class="product__price">${product.price.toLocaleString()}원</p>
         </div>
       </article>
     `;

@@ -4,6 +4,7 @@ main.product__container {
   box-sizing: border-box;
   padding: 50px 20px;
   height: auto;
+  min-height: calc(100vh - 182px);
   margin: 0 auto;
 }
 
