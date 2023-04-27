@@ -1,0 +1,74 @@
+/* 간단한 스타일 지정 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.form-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 50rem;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+}
+
+.form-container h2 {
+  margin-top: 0;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container label {
+  margin-top: 1rem;
+}
+
+.form-container input,
+.form-container textarea {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+.form-container button {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #3e8e41;
+}
+
+#productTable {
+  margin: 2rem auto;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#productTable th,
+#productTable td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+#productTable th {
+  background-color: #f5f5f5;
+}
