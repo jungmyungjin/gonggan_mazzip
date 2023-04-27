@@ -1,5 +1,7 @@
 .order__container {
   width: 1200px;
+  height: auto;
+  min-height: calc(100vh - 182px);
   margin: 0 auto;
   font-family: var(--main-font);
   padding: 30px 50px 50px 50px;
