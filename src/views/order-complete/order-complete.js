@@ -38,9 +38,8 @@ const orderItemTemplate = (orderItem) => {
 };
 
 //접근 차단
-function preventAccess(type = 0) {
-  const msg = type === 0 ? "부적절한 접근입니다." : "페이지가 만료되었습니다.";
-  alert(msg);
+function preventAccess() {
+  alert("부적절한 접근입니다.");
   location.href = "/";
 }
 
@@ -59,7 +58,8 @@ async function getOrder(orderId) {
     return data;
   } catch (err) {
     alert("주문 완료 내역을 불러오기에 실패하였습니다.");
-    console.error(err.message);
+    location.href = "/";
+    //console.error(err.message);
   }
 }
 
@@ -112,11 +112,6 @@ async function renderData(orderId) {
   renderOrder(orderItems);
   renderOrderItems(orderItems);
   renderTotal();
-
-  //페이지 만료
-  const orderData = JSON.parse(sessionStorage.getItem("ordered"));
-  const updateOrderData = { ...orderData, hasSeenOrderCompletePage: true };
-  sessionStorage.setItem("ordered", JSON.stringify(updateOrderData));
 }
 
 //접근 자격 확인
@@ -125,18 +120,8 @@ async function checkAccessibility() {
   const orderId = params.get("orderId");
   //로그인하지 않은 경우 차단
   if (!token) return (location.href = "/login");
-
   //잘못된 url로 접근시 차단
   if (!orderId) return preventAccess(0);
-
-  //주문하지 않고 url 접근시 차단
-  const orderData = JSON.parse(sessionStorage.getItem("ordered"));
-  if (!orderData || orderData.orderId !== orderId) return preventAccess(0);
-
-  //이미 봤던 페이지를 다시 보려고 하는 경우 차단
-  const hasSeenPage = orderData.hasSeenOrderCompletePage;
-  if (hasSeenPage) return preventAccess(1);
-
   await renderData(orderId);
 }
 
