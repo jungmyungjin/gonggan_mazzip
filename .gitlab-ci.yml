@@ -1,0 +1,8 @@
+deploy:
+  stage: deploy
+  script:
+    - ssh elice@34.64.153.45 "cd /home/elice/gonggan_mazzip && git pull"
+    - 'echo "$SUDO_PASSWORD" | sudo -S make deploy'
+  only:
+    - dev
+    - feature-BE-cicd
