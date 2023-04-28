@@ -17,9 +17,12 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="/admin/admin.css" />
-    <script src="admin.js" type="module" defer></script>
+    <script src="/admin/admin.js" type="module" defer></script>
   </head>
   <body>
+    <div class="logout">
+      <button type="button" id="logoutBtn">로그아웃</button>
+    </div>
     <!-- 관리지만 가능한 웹페이지 관리 관련 목록 -->
     <section class="section">
       <div class="container">
@@ -28,7 +31,7 @@
         </div>
         <div class="menu-container">
           <!-- 주문관리 -->
-          <a class="menu-card" href="/admin-orders">
+          <a class="menu-card" id="T_TSorry">
             <div class="menu-icon">
               <span class="icon has-text-info">
                 <i class="fa-solid fa-credit-card"></i>
@@ -41,36 +44,6 @@
               </p>
             </div>
           </a>
-
-          <!-- 회원관리 -->
-          <!-- <a class="menu-card" href="/admin/users">
-            <div class="menu-icon">
-              <span class="icon has-text-info">
-                <i class="fa-solid fa-address-book"></i>
-              </span>
-            </div>
-            <div class="menu-body">
-              <p class="title is-3">회원관리</p>
-              <p class="subtitle is-5">
-                모든 회원 정보를 확인 및 관리할 수 있습니다.
-              </p>
-            </div>
-          </a> -->
-
-          <!-- 카테고리 추가하기 -->
-          <!-- <a class="menu-card" href="/category/add">
-            <div class="menu-icon">
-              <span class="icon has-text-info">
-                <i class="fa-solid fa-table-list"></i>
-              </span>
-            </div>
-            <div class="menu-body">
-              <p class="title is-3">카테고리 추가</p>
-              <p class="subtitle is-5">
-                제품이 속할 수 있는, 카테고리 정보를 추가할 수 있습니다.
-              </p>
-            </div>
-          </a> -->
 
           <!-- 제품 추가하기 -->
           <a class="menu-card" href="/admin-products">

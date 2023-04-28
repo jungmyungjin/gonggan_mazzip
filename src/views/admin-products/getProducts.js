@@ -1,5 +1,40 @@
 const productTable = document.querySelector('#productTable');
 
+const checkAdminRole = async () => {
+  const token = sessionStorage.getItem('token');
+
+  if (!token) {
+    alert('권한이 없습니다. 메인 페이지로 이동합니다.');
+    window.location.href = '/';
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/users/info', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      alert('권한 확인 중 오류가 발생했습니다. 메인 페이지로 이동합니다.');
+      window.location.href = '/';
+      return;
+    }
+
+    const userData = await response.json();
+
+    if (userData.role !== 'admin') {
+      alert('권한이 없습니다. 메인 페이지로 이동합니다.');
+      window.location.href = '/';
+    }
+  } catch (error) {
+    alert('권한 확인 중 오류가 발생했습니다. 메인 페이지로 이동합니다.');
+    window.location.href = '/';
+  }
+};
+
 async function fetchProducts() {
   try {
     const response = await fetch('/api/products');
@@ -61,5 +96,7 @@ async function displayProducts() {
     delCell.appendChild(delBtn);
   });
 }
+// 페이지가 로드될 때 권한 확인
+checkAdminRole();
 
 displayProducts();
