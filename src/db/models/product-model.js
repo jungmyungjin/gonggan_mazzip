@@ -12,7 +12,7 @@ class ProductModel {
     return product;
   }
 
-  async createDummyData() {
+  async createProductData() {
     this.model.findOne().then((product) => {
       if (product) {
         console.log("🌿 몽고디비 상품 데이터가 이미 존재합니다");
