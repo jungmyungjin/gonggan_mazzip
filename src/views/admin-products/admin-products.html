@@ -9,16 +9,21 @@
     <script src="/admin-products/delProducts.js" type="module" defer></script>
     <script src="/admin-products/editProducts.js" type="module" defer></script>
     <link rel="stylesheet" href="/admin-products/admin-products.css" />
-
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
     <title>상품 관리 페이지</title>
   </head>
 
   <body>
-    <div class="back">
-      <button type="button" id="backBtn">관리자 페이지로 가기</button>
-    </div>
-    <div class="logout">
-      <button type="button" id="logoutBtn">로그아웃</button>
+    <div class="buttons">
+      <button type="button" class="button is-info" id="backBtn">
+        관리자 페이지로 가기
+      </button>
+      <button type="button" class="button is-danger" id="logoutBtn">
+        로그아웃
+      </button>
     </div>
     <h1>상품 관리</h1>
     <div class="form-container">
