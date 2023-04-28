@@ -1,4 +1,5 @@
 import { model } from "mongoose";
+import bcrypt from "bcryptjs";
 import { UserSchema } from "../schemas/user-schema";
 import fs from "fs";
 import path from "path";
@@ -56,7 +57,14 @@ export class UserModel {
 
     // 파일 읽기
     const jsonString = fs.readFileSync(filePath, "utf-8");
-    const useJsonObj = JSON.parse(jsonString);
+    const userJsonObj = JSON.parse(jsonString);
+
+    for (let user of userJsonObj) {
+      console.log("password " + user.password);
+      const newPasswordHash = await bcrypt.hash(user.password, 10);
+      user.password = newPasswordHash;
+    }
+
     User.findOne().then((user) => {
       if (user) {
         console.log("👤 Test 사용자가 이미 존재합니다.");
@@ -65,7 +73,7 @@ export class UserModel {
       }
       console.log("👤 Test 사용자가 존재하지 않습니다.");
       console.log("👤 Test 사용자 생성 작업 시작");
-      User.create(useJsonObj)
+      User.create(userJsonObj)
         .then(() => {
           console.log("👤 Test 사용자가 추가되었습니다.");
         })
