@@ -13,7 +13,12 @@
   border-bottom: #ddd 1px solid;
   padding-bottom: 0.7rem;
 }
-
+.logout {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  padding-right: 200px;
+}
 /* 계정관리 관련 메뉴 */
 .menu-container {
   display: grid;
