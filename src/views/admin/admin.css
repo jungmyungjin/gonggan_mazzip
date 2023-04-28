@@ -13,7 +13,7 @@
   border-bottom: #ddd 1px solid;
   padding-bottom: 0.7rem;
 }
-.logout {
+.buttons {
   display: flex;
   justify-content: flex-end;
   padding-top: 10px;
