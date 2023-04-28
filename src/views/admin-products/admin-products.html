@@ -18,25 +18,32 @@
     <div class="form-container">
       <form id="addProductForm">
         <h2>상품 추가</h2>
-        <label for="productName">상품명:</label>
+        <label for="productName">상품명</label>
         <input type="text" id="productName" name="productName" required />
 
-        <label for="company">회사:</label>
+        <label for="company">회사</label>
         <input type="text" id="company" name="company" required />
 
-        <label for="price">가격:</label>
+        <label for="price">가격</label>
         <input type="number" id="price" name="price" min="0" required />
 
-        <label for="stock">재고:</label>
+        <label for="stock">재고</label>
         <input type="number" id="stock" name="stock" min="0" required />
 
-        <label for="imageUrl">이미지 URL:</label>
+        <label for="imageUrl">이미지 URL</label>
         <input id="imageUrl" name="imageUrl" required />
 
-        <label for="category">카테고리:</label>
-        <input type="text" id="category" name="category" required />
+        <label for="category">카테고리</label>
+        <select id="category" name="category" required>
+          <option value="">카테고리 선택</option>
+          <option value="furniture">가구</option>
+          <option value="fabric">패브릭</option>
+          <option value="electronics">전자제품</option>
+          <option value="cooking">요리도구</option>
+          <option value="lightings">조명</option>
+        </select>
 
-        <label for="description">설명:</label>
+        <label for="description">설명</label>
         <textarea id="description" name="description"></textarea>
 
         <button type="submit">추가</button>
@@ -44,24 +51,31 @@
 
       <form id="editProductForm">
         <h2>상품 수정</h2>
-        <label for="productName">상품명:</label>
+        <label for="productName">상품명</label>
         <input type="text" id="productName" name="productName" required />
 
-        <label for="company">회사:</label>
+        <label for="company">회사</label>
         <input type="text" id="company" name="company" required />
 
-        <label for="price">가격:</label>
+        <label for="price">가격</label>
         <input type="number" id="price" name="price" min="0" required />
 
-        <label for="stock">재고:</label>
+        <label for="stock">재고</label>
         <input type="number" id="stock" name="stock" min="0" required />
 
-        <label for="imageUrl">이미지 URL:</label>
+        <label for="imageUrl">이미지 URL</label>
         <input id="imageUrl" name="imageUrl" required />
 
-        <label for="category">카테고리:</label>
-        <input type="text" id="category" name="category" required />
-        <label for="description">설명:</label>
+        <label for="category">카테고리</label>
+        <select id="category" name="category" required>
+          <option value="">카테고리 선택</option>
+          <option value="furniture">가구</option>
+          <option value="fabric">패브릭</option>
+          <option value="electronics">전자제품</option>
+          <option value="cooking">요리도구</option>
+          <option value="lightings">조명</option>
+        </select>
+        <label for="description">설명</label>
         <textarea id="description" name="description"></textarea>
 
         <button type="submit">수정</button>

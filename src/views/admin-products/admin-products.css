@@ -30,12 +30,12 @@ h2 {
 
 form {
   display: flex;
-  ex: #ffffff;
   flex-wrap: wrap;
-  /* flex-direction: column; */
   padding: 20px;
   border-radius: 10px;
+  border: 1px solid black;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
   width: 48%;
 }
 #addProductForm {
@@ -50,7 +50,8 @@ form label {
 }
 
 form input,
-form textarea {
+form textarea,
+form select {
   width: 80%;
   padding: 5px;
   margin-bottom: 10px;
