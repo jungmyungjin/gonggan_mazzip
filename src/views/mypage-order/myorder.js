@@ -281,9 +281,21 @@ function changeOrder(e) {
   e.preventDefault();
   const order = e.currentTarget.closest("article.order");
   const orderStatus = order.querySelector(".orderStatus").innerText;
-  const isChangeAllowed = orderStatus === "결제 완료";
-  if (!isChangeAllowed)
+  const orderItems = order.querySelectorAll(".order__item");
+  const checkOrderStatus = orderStatus === "결제 완료";
+  const AllItemsCancelled = [...orderItems].every((item) => {
+    const itemStatus = item.querySelector(".status").innerText;
+    return itemStatus === "취소 완료";
+  });
+  const checkItemStatus = !AllItemsCancelled;
+
+  //주문 상태가 결제 완료가 아닐 경우
+  if (!checkOrderStatus)
     return alert("현재 주문 단계에선 배송 정보를 수정할 수 없습니다.");
+
+  //모든 주문 상품의 상태가 취소 완료일 경우
+  if (!checkItemStatus)
+    return alert("모든 상품이 주문 취소되어 배송 정보를 수정할 수 없습니다.");
   renderChangeOrder(order, "input");
 }
 
