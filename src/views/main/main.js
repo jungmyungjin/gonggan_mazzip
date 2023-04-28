@@ -1,7 +1,7 @@
 const productEl = document.querySelector(".product__container");
 
 let page = 1;
-const perPage = 8;
+let perPage = null;
 let isLoading = false;
 
 const product = (product) => `
@@ -22,6 +22,18 @@ const product = (product) => `
   </div>
 </article>
 `;
+
+//화면에 보여줄 상품 개수 계산 (페이지네이션)
+function calculatePerPage() {
+  const windowHeight = window.innerHeight;
+  const beforeProductHeight = 550;
+  const articleHeight = 360;
+  const articleRow = () => {
+    const row = (windowHeight - beforeProductHeight) / articleHeight;
+    return row <= 0 ? 1 : Math.ceil(row);
+  };
+  perPage = articleRow() * 4;
+}
 
 //상품 목록 가져오기
 async function getProducts(page = 1, perPage = 8) {
@@ -71,7 +83,7 @@ async function infiniteScroll() {
 //초기 데이터 렌더링
 async function renderData() {
   isLoading = true;
-  const products = await getProducts();
+  const products = await getProducts(page, perPage);
   if (!products || products.length === 0)
     return createErrMsg("상품이 존재하지 않습니다.");
   const template = products.map(product).join("");
@@ -79,5 +91,6 @@ async function renderData() {
   isLoading = false;
 }
 
+calculatePerPage();
 await renderData();
 window.addEventListener("scroll", infiniteScroll);
