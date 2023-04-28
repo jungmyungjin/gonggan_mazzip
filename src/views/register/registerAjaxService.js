@@ -41,7 +41,7 @@ function registerUser() {
   }
 
   // 비밀번호와 비밀번호 확인 값이 일치하는지 확인
-  if (checkPasswords(password, confirm_password) === false) {
+  if (!checkPasswords(password, confirm_password)) {
     return;
   }
 
