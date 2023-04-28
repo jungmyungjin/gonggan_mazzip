@@ -1,7 +1,7 @@
 const url = '/api/users/register';
 
 // 비밀번호와 비밀번호 확인 값이 일치하는지 확인
-function checkPasswords(password, confirm_password) {
+function checkPassword(password, confirm_password) {
   return password === confirm_password;
 }
 
@@ -35,13 +35,13 @@ function registerUser() {
     return;
   }
 
-  // 비밀번호와 비밀번호 확인 값이 일치하는지 확인
-  if (checkPasswords(password, confirm_password)) {
+  // 비밀번호 4자리 이상 16자리 이하인지 확인
+  if (!passwordValidLength) {
     return;
   }
 
-  // 비밀번호 4자리 이상 16자리 이하인지 확인
-  if (!passwordValidLength) {
+  // 비밀번호와 비밀번호 확인 값이 일치하는지 확인
+  if (!checkPassword(password, confirm_password)) {
     return;
   }
 
