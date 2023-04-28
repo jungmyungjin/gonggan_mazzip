@@ -174,3 +174,24 @@ main > h2 {
   font-size: 24px;
   color: var(--sub-2-color);
 }
+
+.link {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.link a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 45px;
+  background-color: var(--main-color);
+  border-radius: 5px;
+  margin: 0px 10px;
+  color: #fff;
+  font-size: 14px;
+}
