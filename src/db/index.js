@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { productModel } from "./models/product-model";
+import { userModel } from "./models/user-model";
 
 const DB_URL =
   process.env.MONGODB_URL ||
@@ -10,7 +11,8 @@ const db = mongoose.connection;
 
 db.on("connected", () => {
   console.log("정상적으로 MongoDB 서버에 연결되었습니다.  " + DB_URL);
-  productModel.createDummyData();
+  productModel.createProductData();
+  userModel.createDefaultData();
 });
 
 db.on("error", (error) =>
