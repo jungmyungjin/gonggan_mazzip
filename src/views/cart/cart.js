@@ -142,7 +142,7 @@ if (cartItems.length === 0) {
     });
   });
   // 삭제 버튼 이벤트 추가
-  document.querySelectorAll('.product-item').forEach((item) => {
+  document.querySelectorAll('.product-item').forEach((item, index) => {
     const closeButton = item.querySelector('.close-button');
 
     closeButton.addEventListener('click', () => {
@@ -151,9 +151,7 @@ if (cartItems.length === 0) {
         // 상품 삭제
         productList.removeChild(item);
 
-        // 상품 인덱스 다시 계산
-        const index = [...productList.children].indexOf(item);
-
+        // 상품 인덱스를 직접 사용
         cartItems.splice(index, 1);
 
         // 로컬 스토리지 업데이트
