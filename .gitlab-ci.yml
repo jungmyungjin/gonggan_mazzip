@@ -7,8 +7,8 @@ deploy:
     - chmod 700 ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    # - ssh-keyscan 34.64.153.45 >> ~/.ssh/known_hosts
+    - ssh-keygen -R 34.64.153.45 # 해당 호스트 키 삭제
+    - ssh-keyscan 34.64.153.45 >> ~/.ssh/known_hosts # 새로운 호스트 키 추가
 
   script:
     - ssh elice@34.64.153.45 'echo "hello deploy!"'
