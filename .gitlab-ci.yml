@@ -6,12 +6,12 @@ deploy:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    - cat ~/.ssh/id_rsa
+    - cat /root/.ssh/known_hosts
     - echo "$SSH_PRIVATE_KEY"
-    - chmod 600 ~/.ssh/id_rsa
-    - touch ~/.ssh/known_hosts
+    - chmod 600 /root/.ssh/known_hosts
+    - touch /root/.ssh/known_hosts
     - ssh-keygen -R 34.64.153.45 || true
-    - ssh-keyscan -H 34.64.153.45 >> ~/.ssh/known_hosts # 새로운 호스트 키 추가
+    - ssh-keyscan -H 34.64.153.45 >> /root/.ssh/known_hosts # 새로운 호스트 키 추가
 
   script:
     - ssh elice@34.64.153.45 'echo "hello deploy!"'
