@@ -49,18 +49,23 @@ function validateProductSchemaTypes(req, res, next) {
   for (let product of newProducts) {
     for (let types in product) {
       if (
-        !(
-          types === "productId" ||
-          types === "productName" ||
-          types === "company" ||
-          types === "price" ||
-          types === "stock" ||
-          types === "imageUrl" ||
-          types === "category" ||
-          types === "description"
-        )
+        ![
+          "productId",
+          "productName",
+          "company",
+          "price",
+          "stock",
+          "imageUrl",
+          "category",
+          "description",
+        ].includes(types)
       ) {
-        throw new Error("존재하지 않는 상품 타입이 있습니다. " + types);
+        throw new Error(
+          "존재하지 않는 상품 정보의 타입이 있습니다." +
+            "(productId : " +
+            product.productId +
+            ")"
+        );
       }
     }
   }
