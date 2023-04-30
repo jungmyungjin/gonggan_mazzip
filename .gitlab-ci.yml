@@ -6,6 +6,8 @@ deploy:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - cat ~/.ssh/id_rsa
+    - echo "$SSH_PRIVATE_KEY"
     - chmod 600 ~/.ssh/id_rsa
     - touch ~/.ssh/known_hosts
     - ssh-keygen -R 34.64.153.45 || true
