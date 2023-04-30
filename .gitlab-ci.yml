@@ -9,7 +9,7 @@ deploy:
     - chmod 600 ~/.ssh/id_rsa
     - touch ~/.ssh/known_hosts
     - ssh-keygen -R 34.64.153.45 || true
-    - ssh-keyscan 34.64.153.45 >> ~/.ssh/known_hosts # 새로운 호스트 키 추가
+    - ssh-keyscan -H 34.64.153.45 >> ~/.ssh/known_hosts # 새로운 호스트 키 추가
 
   script:
     - ssh elice@34.64.153.45 'echo "hello deploy!"'
