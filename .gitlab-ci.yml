@@ -5,6 +5,8 @@ deploy:
     - apk add --no-cache openssh-client
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
     - echo "34.64.153.45 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIASruNcrTObNMz0z2zNrUeFwBNx+7Y5wLjwmXUIuA7Tc" >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
