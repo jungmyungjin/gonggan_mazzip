@@ -5,14 +5,17 @@ deploy:
     - apk add --no-cache openssh-client
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
+    - echo "$SSH_PRIVATE_KEY"
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
     - chmod 600 ~/.ssh/id_ed25519
     - echo "34.64.153.45 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIASruNcrTObNMz0z2zNrUeFwBNx+7Y5wLjwmXUIuA7Tc" >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
   script:
-    - ssh elice@34.64.153.45 "cd /home/elice/gonggan_mazzip && git pull"
-    - 'echo "$SUDO_PASSWORD" | sudo -S make re'
+    - ssh elice@34.64.153.45
+    - echo "hello deploy!"
+    # - ssh elice@34.64.153.45 "cd /home/elice/gonggan_mazzip && git pull"
+    # - 'echo "$SUDO_PASSWORD" | sudo -S make re'
   only:
     - dev
     - feature-BE-cicd
