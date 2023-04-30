@@ -7,11 +7,7 @@ deploy:
     - chmod 700 ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - touch ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-    - echo "34.64.153.45 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCz722yRE/ubT6e4OXIMRHnp4PD54oxQ0j/IgSpDF+H/zcFjIEdHrdfFJaJSkHCzj8f3R+hpI4mkGDsfAlOE+8oyl8xdTduz9/02hLIBCniSyAx/j5rxnHDb2LabVvms9cG2YM710jdMzvI440OTcoNPp6AcqAjOXkJiaFUy6z4aNAwTjHSY03WDNAaBVPyLtyA8qEfwg+OxjFzClrv0H/MlHfMAJxC3MXlOhTftMRxP16yjXGRVz9qu1YfSxRF94lVBstgsGM2QYoKV4o3g9EWWnaqFx2osQoCm951Bph5hBNf7ckTBkMMzpcB/nDmYzidl9ARPcC8+un/qTJAovwznyp1W5gDWF+dv3JbTMlmUYnaVIR2lj4E2RKlnGxAsmD4YRdrzM9kS/RYW2XUdQ+IuHNcMcpazl/bc44vf+VzxlTZVvC1N0lVnLUGY/db4lATq24K37FAQO3o7jv/AiaR74v8mnKq3UFTkU4R6zAFrGvi/dSFlC/HjerwSsoCo2E= elice@team18" >> ~/.ssh/known_hosts
-    - ssh-keygen -R 34.64.153.45
-    - ssh-keyscan -t rsa 34.64.153.45 >> ~/.ssh/known_hosts
+    - ssh-keyscan 34.64.153.45 >> ~/.ssh/known_hosts
 
   script:
     - ssh elice@34.64.153.45 'echo "hello deploy!"'
