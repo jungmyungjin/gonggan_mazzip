@@ -20,8 +20,6 @@
 
 ---
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/91d72aa5-2340-4e4e-b215-d6d7fe2bef5b/Untitled.png)
-
 ### 사용자(User) 관련 기능
 
 <aside>
@@ -263,7 +261,7 @@ receiver(receiverName, receiverPhoneNumber, postalCode, address1, address2, ), r
 ```powershell
 git clone 
 npm install
-npm start
+make
 ```
 
 ## 👥 팀원 및 역할 소개
